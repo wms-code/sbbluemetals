@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapAccountRoutes();
+
         $this->mapAdminRoutes();
 
         //
@@ -57,7 +59,24 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware(['web'])
              ->namespace($this->namespace)
              ->group(base_path('routes/admin.php'));
+    }    
+    
+    /**
+     * Define the "account" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAccountRoutes()
+    {
+        Route::prefix('account')
+             ->middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/account.php'));
     }
+
+
 
 
 
