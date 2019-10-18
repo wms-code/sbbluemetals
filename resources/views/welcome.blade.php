@@ -70,16 +70,16 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ url('admin/login') }}">Admin Login</a>
+                        <a href="{{ url('admin') }}">Admin Login</a>
 
-                       
+                        
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to Body Glove
+                    Welcome to BODYGLOVE
                 </div>
 
                
