@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateColourTable extends Migration
+class CreateFabricTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateColourTable extends Migration
      */
     public function up()
     {
-        Schema::create('mascolour', function (Blueprint $table) {
+        Schema::create('masfabric', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('colour_name', 100)->unique();  
+            $table->string('fabric_name', 100)->unique();  
             $table->boolean('active')->default(1)->change();
             $table->timestampsTz();
              
@@ -34,6 +34,6 @@ class CreateColourTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mascolour');
+        Schema::dropIfExists('masfabric');
     }
 }
