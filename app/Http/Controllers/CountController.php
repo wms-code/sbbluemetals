@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\count;
+use App\Count;
 use Illuminate\Http\Request;
 
 class CountController extends Controller
@@ -41,10 +41,10 @@ class CountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\count  $count
+     * @param  \App\Count  $count
      * @return \Illuminate\Http\Response
      */
-    public function show(count $count)
+    public function show(Count $count)
     {
         //
     }
@@ -52,10 +52,10 @@ class CountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\count  $count
+     * @param  \App\Count  $count
      * @return \Illuminate\Http\Response
      */
-    public function edit(count $count)
+    public function edit(Count $count)
     {
         //
     }
@@ -64,10 +64,10 @@ class CountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\count  $count
+     * @param  \App\Count  $count
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, count $count)
+    public function update(Request $request, Count $count)
     {
         //
     }
@@ -75,10 +75,10 @@ class CountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\count  $count
+     * @param  \App\Count  $count
      * @return \Illuminate\Http\Response
      */
-    public function destroy(count $count)
+    public function destroy(Count $count)
     {
         //
     }
