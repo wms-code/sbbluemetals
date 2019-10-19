@@ -13,11 +13,12 @@ class CreateFabricTable extends Migration
      */
     public function up()
     {
-        Schema::create('masfabric', function (Blueprint $table) {
+        Schema::create('fabric', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('fabric_name', 100)->unique();  
-            $table->boolean('active')->default(1)->change();
-            $table->timestampsTz();
+            $table->string('name', 100)->unique();  
+            $table->boolean('status')->default(1)->change();
+            $table->timestampTz('created_at')->nullable();  
+            $table->timestampTz('updated_at')->nullable();  
              
              /**
       
@@ -34,6 +35,6 @@ class CreateFabricTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('masfabric');
+        Schema::dropIfExists('fabric');
     }
 }

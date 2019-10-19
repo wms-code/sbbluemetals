@@ -13,11 +13,12 @@ class CreateCountTable extends Migration
      */
     public function up()
     {
-        Schema::create('mascount', function (Blueprint $table) {
+        Schema::create('count', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('count_name', 100)->unique();  
-            $table->boolean('active')->default(1)->change();
-            $table->timestampsTz();
+            $table->string('name', 100)->unique();  
+            $table->boolean('status')->default(1)->change();
+            $table->timestampTz('created_at')->nullable();  
+            $table->timestampTz('updated_at')->nullable();  
              
              /**
       
@@ -34,6 +35,6 @@ class CreateCountTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mascount');
+        Schema::dropIfExists('count');
     }
 }
