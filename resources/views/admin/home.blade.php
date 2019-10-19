@@ -1,37 +1,21 @@
-@extends('admin.layouts.main') 
-@section('content')
+@extends('layouts.admin')
 
-    <!-- Main content -->
-    <section class="content">
+@section('pagetitle','Dashboard')
+    
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">{{ ucfirst(config('admin.prefix')) }} Dashboard</h3>
+@section('breadcrumb')
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+@endsection
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-        @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+@section('content')               
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-block">
+                       Welcome
                     </div>
-                    @endif You are logged in to {{ config('admin.prefix') }} side!
+                </div>
+            </div>
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->
-
-    </section>
-
 @endsection
