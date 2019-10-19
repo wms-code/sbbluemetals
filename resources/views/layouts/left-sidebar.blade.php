@@ -5,15 +5,12 @@
             <nav class="sidebar-nav">
                 <ul id="sidebarnav"> 
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">MASTER</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">KNITTED FABRIC</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('accounts')}}">Accounts</a></li>
-                            <li><a href="{{ url('items')}}">Items</a></li>
-                            <li><a href="{{ url('itemsgroup')}}">Items-Group</a></li>
-                            <li><a href="{{ url('unit')}}">Unit</a></li>
-                            <li><a href="{{ url('setpartyrate')}}">Set Party Rate</a></li>
-                            <li><a href="{{ url('setgsm')}}">Set GSM</a></li>
-                            <li><a href="{{ url('company')}}">Company</a></li>
+                            <li><a href="{{ url('accounts')}}">FABRIC INWARD(PURCHASE)</a></li>
+                            <li><a href="{{ url('items')}}">CUTTING OUTWARD</a></li>
+                            <li><a href="{{ url('itemsgroup')}}">CUTTING-PRODUCTION</a></li>
+                       
                         </ul>
                     </li>
                     <li>
@@ -82,6 +79,16 @@
                             <li><a href="#">Debit Note Entry</a></li> 
                             <li><a href="#">Credit Note Entry</a></li>       
                             <li><a href="#">Ledger</a></li>                                
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{ url('colour')}}">COLOUR</a></li>
+                            <li><a href="{{ url('fabric')}}">FABIRC</a></li>
+                            <li><a href="{{ url('count')}}">COUNTS</a></li>
+                            <li><a href="{{ url('unit')}}">Unit</a></li>
+                            <li><a href="{{ url('stockpoint')}}">STOCK POINT & RACK</a></li> 
                         </ul>
                     </li>
                 </ul>
