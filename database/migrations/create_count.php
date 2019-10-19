@@ -13,7 +13,7 @@ class CreateCountTable extends Migration
      */
     public function up()
     {
-        Schema::create('count', function (Blueprint $table) {
+        Schema::create('counts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100)->unique();  
             $table->boolean('status')->default(1)->change();
@@ -35,6 +35,6 @@ class CreateCountTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('count');
+        Schema::dropIfExists('counts');
     }
 }
