@@ -14,7 +14,8 @@ class ColourController extends Controller
      */
     public function index()
     {
-        //
+        $colours= ItemsGroup::orderBy('name','asc')->paginate(5);
+        return view('colours.list',compact('colours'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ColourController extends Controller
      */
     public function create()
     {
-        //
+        return view('colours.create');
     }
 
     /**
@@ -35,7 +36,10 @@ class ColourController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Colours::add($request->all());
+        $msg = [
+          'message' => 'Colour created successfully!' ];
+        return  redirect('colour')->with($msg);
     }
 
     /**
@@ -46,7 +50,7 @@ class ColourController extends Controller
      */
     public function show(Colour $colour)
     {
-        //
+      
     }
 
     /**
@@ -57,7 +61,7 @@ class ColourController extends Controller
      */
     public function edit(Colour $colour)
     {
-        //
+        return  view('colours.edit', $colours);
     }
 
     /**
@@ -67,9 +71,12 @@ class ColourController extends Controller
      * @param  \App\Colour  $colour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Colour $colour)
+    public function update(Request $request, $id)
     {
-        //
+        Colours::where('id', $id)
+                    ->update(['name'=>$request->name ]);       
+        $msg =['message' => 'Colours Updated successfully!'];
+       return  redirect('colours')->with($msg);
     }
 
     /**
@@ -78,8 +85,11 @@ class ColourController extends Controller
      * @param  \App\Colour  $colour
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Colour $colour)
+    public function destroy($id)
     {
-        //
+        Colours::where('id', $id)->delete();
+        $msg =['message' => 'Colour Deleted successfully!',
+        'type' => 'warning'];
+        return  redirect('colours')->with($msg);
     }
 }
