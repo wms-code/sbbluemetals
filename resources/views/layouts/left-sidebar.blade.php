@@ -84,11 +84,11 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('colour')}}">COLOUR</a></li>
-                            <li><a href="{{ url('fabric')}}">FABIRC</a></li>
-                            <li><a href="{{ url('count')}}">COUNTS</a></li>
-                            <li><a href="{{ url('unit')}}">Unit</a></li>
-                            <li><a href="{{ url('stockpoint')}}">STOCK POINT & RACK</a></li> 
+                            <li><a href="{{ url('colours')}}">COLOURS</a></li>
+                            <li><a href="{{ url('fabrics')}}">FABIRC</a></li>
+                            <li><a href="{{ url('counts')}}">COUNTS</a></li>
+                            <li><a href="{{ url('units')}}">Unit</a></li>
+                            <li><a href="{{ url('stockpoints')}}">STOCK POINT & RACK</a></li> 
                         </ul>
                     </li>
                 </ul>

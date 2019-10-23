@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Colour')
+@section('pagetitle','Colours')
     
 
 
@@ -32,7 +32,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($colour as $d)
+                                            @foreach ($colours as $d)
                                             <tr>
                                                 
                                                 <td>{{$d->name}}</td>                                               
