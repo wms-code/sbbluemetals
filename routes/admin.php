@@ -8,6 +8,8 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::POST('/logout', 'LoginController@logout')->name('admin.logout');
 
     Route::resource('company', 'CompanyController');
+    //Master
+    Route::resource('/colour', 'ColourController');
 
     // Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');

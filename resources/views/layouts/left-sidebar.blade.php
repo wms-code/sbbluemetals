@@ -84,7 +84,7 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('colours')}}">COLOURS</a></li>
+                            <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
                             <li><a href="{{ url('fabrics')}}">FABIRC</a></li>
                             <li><a href="{{ url('counts')}}">COUNTS</a></li>
                             <li><a href="{{ url('units')}}">Unit</a></li>

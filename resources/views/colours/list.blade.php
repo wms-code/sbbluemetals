@@ -37,7 +37,7 @@
                                                 
                                                 <td>{{$d->name}}</td>                                               
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('itemsgroup') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('colour') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
                                                             <form action="{{ url('/colour') }}/{{$d->id}}" method="post">
                                                                 @csrf
@@ -51,7 +51,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $itemsGroup->links() }}
+                                    {{ $colours->links() }}
                                 </div>
                             </div>
                         </div>
