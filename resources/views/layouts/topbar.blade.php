@@ -253,13 +253,8 @@
                                     <div class="dw-user-box">
                                         <div class="u-img"><img src="{{ url('assets')}}/images/users/1.jpg" alt="user"></div>
                                         <div class="u-text">
-<<<<<<< HEAD
                                             <h4>admin</h4>
                                             <p class="text-muted">admin@app.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-=======
-                                            <h4> {{ Auth::user()->name }}</h4>
-                                            <p class="text-muted"> {{ Auth::user()->email }}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
->>>>>>> 2cd833987121df78732a2b9284c54c3fa9f9bc71
                                     </div>
                                 </li>
                                 <li role="separator" class="divider"></li>

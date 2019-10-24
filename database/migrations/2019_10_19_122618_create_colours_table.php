@@ -13,10 +13,11 @@ class CreateColoursTable extends Migration
      */
     public function up()
     {
+       
         Schema::create('colours', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->timestamps();
+            $table->string('name', 100)->unique();
+          //  $table->timestamps();
         });
     }
 

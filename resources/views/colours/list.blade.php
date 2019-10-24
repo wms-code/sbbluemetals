@@ -15,7 +15,7 @@
                                                 <h4 class="card-title">Colour Name List </h4>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('colour/create') }}">Add New</a></div>
+                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/colour/create') }}">Add New</a></div>
                                                 
                                             </div>
                                           </div>
@@ -37,9 +37,9 @@
                                                 
                                                 <td>{{$d->name}}</td>                                               
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('colour') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                    <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
-                                                            <form action="{{ url('/colour') }}/{{$d->id}}" method="post">
+                                                    <a href="{{ url('admin/colour') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
+                                                            <form action="{{ url('admin/colour') }}/{{$d->id}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>

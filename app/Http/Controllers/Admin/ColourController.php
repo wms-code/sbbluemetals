@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
  
-use App\Colour;
+use App\Model\Colour;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 class ColourController extends Controller
@@ -42,7 +41,7 @@ class ColourController extends Controller
         Colour::add($request->all());
           $msg = [
             'message' => 'Colour created successfully!' ];
-          return  redirect('colours')->with($msg);
+          return  redirect('admin/colour')->with($msg);
      
     }
 
@@ -63,9 +62,13 @@ class ColourController extends Controller
      * @param  \App\Colours  $colours
      * @return \Illuminate\Http\Response
      */
-    public function edit(Colours $colours)
+    public function edit(Colour $colour)
     {
-        return  view('colours.edit', $itemsgroup);
+        //return  $colour;
+      //  return  view('colours', $colour);
+      //echo 'test';
+       //$colours=Colours::where('id',$colours);
+       return  view('colours.edit',compact('colour'));
     }
 
     /**
@@ -77,10 +80,10 @@ class ColourController extends Controller
      */
     public function update(Request $request)
     {
-        Colour::where('id', $id)
+        Colour::where('id', $request->id)
         ->update(['name'=>$request->name ]);       
         $msg =['message' => 'Colour Updated successfully!'];
-          return  redirect('colours')->with($msg);
+          return  redirect('admin/colour')->with($msg);
     }
 
     /**
@@ -89,11 +92,12 @@ class ColourController extends Controller
      * @param  \App\Colours  $colours
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Colours $colours)
+    public function destroy(Colour $colour)
     {
-        Colour::where('id', $id)->delete();
+       // Colour::where('id', $colour->id)->delete();
+         $colour->delete();
         $msg =['message' => 'Colour Deleted successfully!',
         'type' => 'warning'];
-        return  redirect('colours')->with($msg);
+        return  redirect('admin/colour')->with($msg);
     }
 }

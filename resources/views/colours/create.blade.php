@@ -14,7 +14,7 @@
                         <h4 class="m-b-0 text-white">New </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('colour') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/colour') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -33,8 +33,9 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="offset-sm-3 col-md-7">
-                                                <a href="{{ url('colour') }}" class="btn btn-inverse">Cancel</a>
+                                               
                                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                                <a href="{{ url('admin/colour') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
 
