@@ -19,9 +19,17 @@
                         <br>
                         @csrf
                         @method('put')
+                        <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Colour ID</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="id" readonly value="{{ $colour->id }}" class="form-control">
+                                   
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Colour Name</label>
                                 <div class="col-md-6">
+                                    
                                     <input type="text" name="name" maxlength="50" value="{{ $colour->name }}" class="form-control">
                                 </div>
                             </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
  
 use App\Model\Colour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule; 
 class ColourController extends Controller
 {
     /**
@@ -36,8 +38,17 @@ class ColourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+           'name' => 'required|name|max:255|unique:colours',
+           ]);
+    }
     public function store(Request $request)
     {
+        //'email' => "unique:users,email,{$userId}"
+        
         Colour::add($request->all());
           $msg = [
             'message' => 'Colour created successfully!' ];
@@ -80,10 +91,11 @@ class ColourController extends Controller
      */
     public function update(Request $request)
     {
+        //return  $request;
         Colour::where('id', $request->id)
         ->update(['name'=>$request->name ]);       
         $msg =['message' => 'Colour Updated successfully!'];
-          return  redirect('admin/colour')->with($msg);
+         return  redirect('admin/colour')->with($msg);
     }
 
     /**
