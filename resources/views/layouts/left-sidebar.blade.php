@@ -31,12 +31,10 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{ url('admin/accounts')}}">Accounts</a></li>
                             <li>
-                                <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
+                                <a class="has-arrow" href="#" aria-expanded="false">Menu 1.2</a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="#">item 1.3.1</a></li>
-                                    <li><a href="#">item 1.3.2</a></li>
-                                    <li><a href="#">item 1.3.3</a></li>
-                                    <li><a href="#">item 1.3.4</a></li>
+                                    <li><a href="#">item 1</a></li>
+                                    <li><a href="#">item 2</a></li>
                                 </ul>
                             </li>
                            

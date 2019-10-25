@@ -9,18 +9,5 @@ class Unit extends Model
     
     protected $table='units';
     protected $guarded=['active'];
-    protected function add($rec)
-    {
-       if(isset($rec['name']))
-       {
-           
-           $data['name']=$rec['name'];
-           return $this->create($data);
-       }else
-       { 
-           return false;
-       }
-
-      
-    }
+  
 }

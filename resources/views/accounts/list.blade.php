@@ -23,7 +23,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                         <div class="float-right">
-                                                            <a class="btn btn-sm  btn-primary" href="{{ url('accounts/create') }}">Add New</a></div>
+                                                            <a class="btn btn-sm  btn-primary" href="{{ url('admin/accounts/create') }}">Add New</a></div>
                                                     
                                                 </div>
                                               </div>
@@ -31,8 +31,7 @@
                                         <div class="table-responsive  m-t-40">
                                             <table id="myTable" class="table table-bordered table-striped">
                                                 <thead>
-                                                    <tr>
-                                                         
+                                                    <tr>                                                         
                                                         <th>Accounts Name</th>
                                                         <th>Accounts Group</th>                                                        
                                                         <th>Address</th>
