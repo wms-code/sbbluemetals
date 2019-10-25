@@ -4,10 +4,10 @@ namespace App\Model;
 use App\Http\Controllers\Admin;
 use Illuminate\Database\Eloquent\Model;
 
-class Count extends Model
+class Unit extends Model
 {
-     
-    protected $table='counts';
+    
+    protected $table='units';
     protected $guarded=['active'];
     protected function add($rec)
     {

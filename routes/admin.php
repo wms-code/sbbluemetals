@@ -12,6 +12,8 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::resource('colour', 'ColourController');
     Route::resource('fabric', 'FabricController');
     Route::resource('count', 'CountController');
+    Route::resource('unit', 'UnitController');
+    Route::resource('stockpoint', 'StockpointController');
     //Route::resource('admin/colour', 'ColourController');
 
    
