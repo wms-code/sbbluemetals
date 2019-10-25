@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountsGroup extends Model
 {
-    //
-
-
     protected function accountscategory()
     {
         return $this->select('id','name') 

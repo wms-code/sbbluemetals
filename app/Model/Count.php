@@ -5,8 +5,7 @@ use App\Http\Controllers\Admin;
 use Illuminate\Database\Eloquent\Model;
 
 class Count extends Model
-{
-     
+{  
     protected $table='counts';
     protected $guarded=['active'];
    
