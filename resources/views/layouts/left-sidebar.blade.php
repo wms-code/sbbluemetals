@@ -17,6 +17,7 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
                         <ul aria-expanded="false" class="collapse">
+                               
                             <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
                             <li><a href="{{ url('admin/fabric')}}">FABRIC</a></li>
                             <li><a href="{{ url('admin/count')}}">COUNTS</a></li>
@@ -24,6 +25,25 @@
                             <li><a href="{{ url('admin/stockpoint')}}">STOCK POINT & RACK</a></li> 
                         </ul>
                     </li>
+
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Others</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{ url('admin/accounts')}}">Accounts</a></li>
+                            <li>
+                                <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="#">item 1.3.1</a></li>
+                                    <li><a href="#">item 1.3.2</a></li>
+                                    <li><a href="#">item 1.3.3</a></li>
+                                    <li><a href="#">item 1.3.4</a></li>
+                                </ul>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    
+                   
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">TRANSACTIONS</span></a>
                         <ul aria-expanded="false" class="collapse">

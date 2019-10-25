@@ -15,7 +15,7 @@ class CreateKnittedFabInwardsTable extends Migration
     {
         Schema::create('knitted_fab_inwards', function (Blueprint $table) {
             $table->string('inward_number', 20)->primary();
-            $table->date('inward_date')->nullable()->default(new DateTime());  
+            $table->dateTime('inward_date')->nullable()->useCurrent();
             $table->integer('party_code')->unsigned();
             $table->string('reference', 200)->nullable();
             $table->string('remarks', 200)->nullable();
@@ -28,16 +28,15 @@ class CreateKnittedFabInwardsTable extends Migration
             $table->double('net_value',4,2)->nullable();  
             $table->timestamps();
 
-          /*  $table->foreign('stock_point_id')
-                ->references('id')->on('accounts')
-                ->onDelete('cascade'); */
-  
+            /*  $table->foreign('stock_point_id')
+                  ->references('id')->on('accounts')
+                  ->onDelete('cascade'); */
         });
 
         Schema::create('knitted_fab_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('knitted_fab_inward_number', 20);
-            $table->date('inward_date')->nullable()->default(new DateTime());  
+            $table->dateTime('inward_date')->nullable()->useCurrent();  
             $table->integer('indx')->unsigned();
             $table->integer('party_code')->unsigned();
             $table->tinyInteger('fabric_id')->nullable();
@@ -55,6 +54,7 @@ class CreateKnittedFabInwardsTable extends Migration
                      ->onDelete('cascade');
         });
     }
+     
 
     /**
      * Reverse the migrations.
