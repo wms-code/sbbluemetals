@@ -10,24 +10,20 @@ class ColourController extends Controller
     {
         $colours= Colour::orderBy('name','asc')->paginate(5);
         return view('colours.list',compact('colours'));
-     
     }
 
     public function create()
     {
-        return view('colours.create');
-         
+        return view('colours.create');   
     }
+
     public function store(Request $request)
     {        
         $request->validate([
-            'name' => 'required|name|max:255|unique:colours',
-        ]);        
+            'name' => 'required|name|max:255|unique:colours' ]);        
         Colour::create($request->all());
-          $msg = [
-            'message' => 'Colour created successfully!' ];
-          return  redirect('admin/colour')->with($msg);
-     
+        $msg = [ 'message' => 'Colour created successfully!' ];
+        return  redirect('admin/colour')->with($msg);
     }
 
     public function edit(Colour $colour)
