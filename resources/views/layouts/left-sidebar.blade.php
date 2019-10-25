@@ -13,6 +13,17 @@
                        
                         </ul>
                     </li>
+                    
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
+                            <li><a href="{{ url('admin/fabric')}}">FABRIC</a></li>
+                            <li><a href="{{ url('admin/count')}}">COUNTS</a></li>
+                            <li><a href="{{ url('admin/unit')}}">Unit</a></li>
+                            <li><a href="{{ url('admin/stockpoint')}}">STOCK POINT & RACK</a></li> 
+                        </ul>
+                    </li>
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">TRANSACTIONS</span></a>
                         <ul aria-expanded="false" class="collapse">
@@ -21,18 +32,7 @@
                             <li><a href="#">Quatation</a></li>                           
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">ACCOUNTS</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Payment Entry</a></li>
-                            <li><a href="#">Receipt Entry</a></li>
-                            <li><a href="#">Contra Entry</a></li>     
-                            <li><a href="#">Journal Entry</a></li>  
-                            <li><a href="#">Debit Note Entry</a></li> 
-                            <li><a href="#">Credit Note Entry</a></li>       
-                            <li><a href="#">Ledger</a></li>                                
-                        </ul>
-                    </li>
+                     
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">PURCHASE</span></a>
                         <ul aria-expanded="false" class="collapse">
@@ -45,52 +45,9 @@
                             <li><a href="#">Ledger</a></li>                                
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">EMPLOYEE</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Payment Entry</a></li>
-                            <li><a href="#">Receipt Entry</a></li>
-                            <li><a href="#">Contra Entry</a></li>     
-                            <li><a href="#">Journal Entry</a></li>  
-                            <li><a href="#">Debit Note Entry</a></li> 
-                            <li><a href="#">Credit Note Entry</a></li>       
-                            <li><a href="#">Ledger</a></li>                                
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">REPORTS</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Payment Entry</a></li>
-                            <li><a href="#">Receipt Entry</a></li>
-                            <li><a href="#">Contra Entry</a></li>     
-                            <li><a href="#">Journal Entry</a></li>  
-                            <li><a href="#">Debit Note Entry</a></li> 
-                            <li><a href="#">Credit Note Entry</a></li>       
-                            <li><a href="#">Ledger</a></li>                                
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETUP</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Payment Entry</a></li>
-                            <li><a href="#">Receipt Entry</a></li>
-                            <li><a href="#">Contra Entry</a></li>     
-                            <li><a href="#">Journal Entry</a></li>  
-                            <li><a href="#">Debit Note Entry</a></li> 
-                            <li><a href="#">Credit Note Entry</a></li>       
-                            <li><a href="#">Ledger</a></li>                                
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
-                            <li><a href="{{ url('fabrics')}}">FABIRC</a></li>
-                            <li><a href="{{ url('counts')}}">COUNTS</a></li>
-                            <li><a href="{{ url('units')}}">Unit</a></li>
-                            <li><a href="{{ url('stockpoints')}}">STOCK POINT & RACK</a></li> 
-                        </ul>
-                    </li>
+                    
+ 
+                    
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->

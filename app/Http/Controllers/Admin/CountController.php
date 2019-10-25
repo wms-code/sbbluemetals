@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
  
-use App\Model\Colour;
+use App\Model\Count;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule; 
-class ColourController extends Controller
+class CountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ColourController extends Controller
      */
     public function index()
     {
-        $colours= Colour::orderBy('name','asc')->paginate(5);
-        return view('colours.list',compact('colours'));
+        $counts= Count::orderBy('name','asc')->paginate(5);
+        return view('counts.list',compact('counts'));
      
     }
 
@@ -28,7 +28,7 @@ class ColourController extends Controller
      */
     public function create()
     {
-        return view('colours.create');
+        return view('counts.create');
          
     }
 
@@ -42,17 +42,17 @@ class ColourController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-           'name' => 'required|name|max:255|unique:colours',
+           'name' => 'required|name|max:255|unique:counts',
            ]);
     }
     public function store(Request $request)
     {
         //'email' => "unique:users,email,{$userId}"
         
-        Colour::add($request->all());
+        Count::add($request->all());
           $msg = [
-            'message' => 'Colour created successfully!' ];
-          return  redirect('admin/colour')->with($msg);
+            'message' => 'Count created successfully!' ];
+          return  redirect('admin/count')->with($msg);
      
     }
 
@@ -62,7 +62,7 @@ class ColourController extends Controller
      * @param  \App\Colours  $colours
      * @return \Illuminate\Http\Response
      */
-    public function show(Colours $colours)
+    public function show(Count $counts)
     {
         //
     }
@@ -73,13 +73,13 @@ class ColourController extends Controller
      * @param  \App\Colours  $colours
      * @return \Illuminate\Http\Response
      */
-    public function edit(Colour $colour)
+    public function edit(Count $count)
     {
         //return  $colour;
       //  return  view('colours', $colour);
       //echo 'test';
        //$colours=Colours::where('id',$colours);
-       return  view('colours.edit',compact('colour'));
+       return  view('counts.edit',compact('count'));
     }
 
     /**
@@ -92,10 +92,10 @@ class ColourController extends Controller
     public function update(Request $request)
     {
         //return  $request;
-        Colour::where('id', $request->id)
+        Count::where('id', $request->id)
         ->update(['name'=>$request->name ]);       
-        $msg =['message' => 'Colour Updated successfully!'];
-         return  redirect('admin/colour')->with($msg);
+        $msg =['message' => 'Counts Updated successfully!'];
+         return  redirect('admin/count')->with($msg);
     }
 
     /**
@@ -104,7 +104,7 @@ class ColourController extends Controller
      * @param  \App\Colours  $colours
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Colour $colour)
+    public function destroy(Count $counts)
     {
        // Colour::where('id', $colour->id)->delete();
        //  $colour->delete();
@@ -112,6 +112,6 @@ class ColourController extends Controller
         $msg =['message' => 'Unable to Delete!',
         'type' => 'warning'];
 
-        return  redirect('admin/colour')->with($msg);
+        return  redirect('admin/counts')->with($msg);
     }
 }

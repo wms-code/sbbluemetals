@@ -10,9 +10,11 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::resource('company', 'CompanyController');
     //Master
     Route::resource('colour', 'ColourController');
+    Route::resource('fabric', 'FabricController');
+    Route::resource('count', 'CountController');
     //Route::resource('admin/colour', 'ColourController');
 
-
+   
     // Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::GET('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
