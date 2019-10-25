@@ -2,19 +2,22 @@
 
 Route::group(['namespace' => 'Admin'], function() {
     Route::GET('/home', 'AdminController@index')->name('admin.home');
+
     // Login and Logout
     Route::GET('/', 'LoginController@showLoginForm')->name('admin.login');
     Route::POST('/', 'LoginController@login');
     Route::POST('/logout', 'LoginController@logout')->name('admin.logout');
-
     Route::resource('company', 'CompanyController');
+
     //Master
-    Route::resource('colour', 'ColourController');
-    Route::resource('fabric', 'FabricController');
-    Route::resource('count', 'CountController');
-    Route::resource('unit', 'UnitController');
-    Route::resource('stockpoint', 'StockpointController');
-    //Route::resource('admin/colour', 'ColourController');
+    Route::group(['namespace' => 'Settings'], function() {
+        Route::resource('colour', 'ColourController');
+        Route::resource('fabric', 'FabricController');
+        Route::resource('count', 'CountController');
+        Route::resource('unit', 'UnitController');
+        Route::resource('stockpoint', 'StockpointController');
+        //Route::resource('admin/colour', 'ColourController');
+    });
 
    
     // Password Resets

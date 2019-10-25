@@ -1,14 +1,13 @@
 <?php
-
- 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Settings;
  
 use Illuminate\Http\Request;
-use App\Model\Fabric; 
+use App\Model\Stockpoint; 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule; 
-class FabricController extends Controller
+
+class StockpointController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class FabricController extends Controller
      */
     public function index()
     {
-        $fabrics= Fabric::orderBy('name','asc')->paginate(5);
-        return view('fabrics.list',compact('fabrics'));
+        $stockpoints= Stockpoint::orderBy('name','asc')->paginate(5);
+        return view('stockpoints.list',compact('stockpoints'));
     }
 
     /**
@@ -28,7 +27,7 @@ class FabricController extends Controller
      */
     public function create()
     {
-        return view('fabrics.create');
+        return view('stockpoints.create');
     }
 
     /**
@@ -39,10 +38,10 @@ class FabricController extends Controller
      */
     public function store(Request $request)
     {
-        Fabric::add($request->all());
+        Stockpoint::add($request->all());
         $msg = [
-          'message' => 'Fabric created successfully!' ];
-        return  redirect('admin/fabric')->with($msg);
+          'message' => 'Stock point created successfully!' ];
+        return  redirect('admin/stockpoint')->with($msg);
     }
 
     /**
@@ -51,7 +50,7 @@ class FabricController extends Controller
      * @param  \App\Fabric  $fabric
      * @return \Illuminate\Http\Response
      */
-    public function show(Fabric $fabric)
+    public function show(Unit $unit)
     {
         //
     }
@@ -62,9 +61,9 @@ class FabricController extends Controller
      * @param  \App\Fabric  $fabric
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fabric $fabric)
+    public function edit(Stockpoint $stockpoint)
     {
-        return  view('fabrics.edit',compact('fabric'));
+        return  view('stockpoints.edit',compact('stockpoint'));
     }
 
     /**
@@ -76,10 +75,10 @@ class FabricController extends Controller
      */
     public function update(Request $request)
     {
-        Fabric::where('id', $request->id)
+        Stockpoint::where('id', $request->id)
         ->update(['name'=>$request->name ]);       
-        $msg =['message' => 'Fabric Updated successfully!'];
-         return  redirect('admin/fabric')->with($msg);
+        $msg =['message' => 'Stock point  Updated successfully!'];
+         return  redirect('admin/stockpoint')->with($msg);
     }
 
     /**
@@ -88,7 +87,7 @@ class FabricController extends Controller
      * @param  \App\Fabric  $fabric
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fabric $fabric)
+    public function destroy(Stockpoint $stockpoint)
     {
        // $fabric->delete();
        // $msg =['message' => 'Fabric Deleted successfully!',
@@ -96,6 +95,6 @@ class FabricController extends Controller
 
        $msg =['message' => 'Unable to Delete!',
        'type' => 'warning'];
-        return  redirect('admin/fabric')->with($msg);
+        return  redirect('admin/stockpoint')->with($msg);
     }
 }

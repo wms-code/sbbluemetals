@@ -1,7 +1,5 @@
 <?php
-
- 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Settings;
  
 use Illuminate\Http\Request;
 use App\Model\Unit; 

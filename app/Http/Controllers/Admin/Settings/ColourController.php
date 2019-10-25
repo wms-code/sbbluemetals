@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Settings;
  
 use App\Model\Colour;
 use Illuminate\Http\Request;
