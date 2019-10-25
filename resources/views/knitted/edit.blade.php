@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Edit Colour')
+@section('pagetitle','Edit Fabrics')
     
 
 
@@ -14,15 +14,23 @@
                     <h4 class="m-b-0 text-white">Edit </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('colour') }}/{{ $Group_Code }}" method="post" class="form-horizontal form-bordered">
+                    <form action="{{ url('admin/fabric') }}/{{ $fabric->id }}" method="post" class="form-horizontal form-bordered">
                         <div class="form-body">
                         <br>
                         @csrf
                         @method('put')
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Colour Name</label>
+                        <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Fabric ID</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" maxlength="50" value="{{ $name }}" class="form-control">
+                                    <input type="text" name="id" readonly value="{{ $fabric->id }}" class="form-control">
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Fabric Name</label>
+                                <div class="col-md-6">
+                                    
+                                    <input type="text" name="name" maxlength="50" value="{{ $fabric->name }}" class="form-control">
                                 </div>
                             </div>
                             
@@ -39,8 +47,9 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="offset-sm-3 col-md-7">
-                                            <a href="{{ url('colour') }}" class="btn btn-inverse">Cancel</a>
+                                            
                                             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                            <a href="{{ url('admin/fabric') }}" class="btn btn-inverse">Cancel</a>
                                         </div>
                                     </div>
 

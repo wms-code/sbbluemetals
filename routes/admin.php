@@ -19,6 +19,8 @@ Route::group(['namespace' => 'Admin'], function() {
         //Route::resource('admin/colour', 'ColourController');
     });
 
+    Route::resource('knittedfabric', 'KnittedFabInwardController');
+
    
     // Password Resets
     Route::POST('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');

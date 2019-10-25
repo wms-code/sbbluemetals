@@ -7,7 +7,7 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">KNITTED FABRIC</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('accounts')}}">FABRIC INWARD(PURCHASE)</a></li>
+                            <li><a href="{{ url('admin/knittedfabric')}}">FABRIC INWARD(PURCHASE)</a></li>
                             <li><a href="{{ url('items')}}">CUTTING OUTWARD</a></li>
                             <li><a href="{{ url('itemsgroup')}}">CUTTING-PRODUCTION</a></li>
                        
