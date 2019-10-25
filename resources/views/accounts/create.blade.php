@@ -54,7 +54,8 @@
                                         <label class="control-label text-right col-md-3">Report Group</label>
                                         <div class="col-md-7">
                                             <select name="accounts_report_id" class="form-control">
-                                                @foreach ($accounts as $unit)                                                
+                                                <option value=""> -- </option>                                                
+                                                @foreach ($accounts as $unit)
                                                 <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
                                             </select>
@@ -75,16 +76,16 @@
                                 </div>
 
                                 <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Address 1</label>
+                                        <label class="control-label text-right col-md-3">Address</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="address1" maxlength="50" class="form-control">
+                                            <input type="text" name="address" maxlength="50" class="form-control">
                                         </div>
                                 </div>
 
                                     <div class="form-group row">
-                                            <label class="control-label text-right col-md-3">Address 2</label>
+                                            <label class="control-label text-right col-md-3">Address 1</label>
                                             <div class="col-md-6">
-                                                <input type="text" name="address2" maxlength="50" class="form-control">
+                                                <input type="text" name="address1" maxlength="50" class="form-control">
                                             </div>
                                         </div>
                                 

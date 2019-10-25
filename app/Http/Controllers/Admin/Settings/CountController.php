@@ -11,21 +11,18 @@ class CountController extends Controller
     public function index()
     {
         $counts= Count::orderBy('name','asc')->paginate(5);
-        return view('counts.list',compact('counts'));
-     
+        return view('counts.list',compact('counts'));     
     }
 
     public function create()
     {
-        return view('counts.create');
-         
+        return view('counts.create');         
     }
 
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|name|max:255|unique:counts', ]);
+        $request->validate([ 'name' => 'required|name|max:255|unique:counts', ]);
         Count::create($request->all());
         $msg = ['message' => 'Count created successfully!' ];
         return  redirect('admin/count')->with($msg);
@@ -47,7 +44,7 @@ class CountController extends Controller
 
     
     public function destroy(Count $counts)
-    {
+    {   
         $msg =['message' => 'Unable to Delete!',
         'type' => 'warning'];
         return  redirect('admin/counts')->with($msg);
