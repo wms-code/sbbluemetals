@@ -1,7 +1,5 @@
 <?php
-
-namespace App\Http\Controllers\Admin\Settings;
- 
+namespace App\Http\Controllers\Admin\Settings; 
 use App\Model\Count;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
