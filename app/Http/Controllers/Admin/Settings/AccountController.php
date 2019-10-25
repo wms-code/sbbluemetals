@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Settings;
-
 use Illuminate\Http\Request;
 use App\Model\Account;
 use App\Model\AccountsGroup;
@@ -32,26 +30,18 @@ class AccountController extends Controller
         return  redirect('admin/accounts')->with($msg);
     }
 
-
     public function edit($id)
     {
-        //
+        
     }
 
- 
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        
     }
 }

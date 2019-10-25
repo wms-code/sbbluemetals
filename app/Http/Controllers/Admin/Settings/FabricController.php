@@ -1,24 +1,20 @@
 <?php 
-namespace App\Http\Controllers\Admin\Settings;
- 
+namespace App\Http\Controllers\Admin\Settings; 
 use Illuminate\Http\Request;
 use App\Model\Fabric; 
 use Illuminate\Routing\Controller;
 class FabricController extends Controller
 {
-
     public function index()
     {
         $fabrics= Fabric::orderBy('name','asc')->paginate(5);
         return view('fabrics.list',compact('fabrics'));
     }
 
-
     public function create()
     {
         return view('fabrics.create');
     }
-
 
     public function store(Request $request)
     {
@@ -33,7 +29,6 @@ class FabricController extends Controller
         return  view('fabrics.edit',compact('fabric'));
     }
 
-  
     public function update(Request $request)
     {
         Fabric::where('id', $request->id)
@@ -41,8 +36,7 @@ class FabricController extends Controller
         $msg =['message' => 'Fabric Updated successfully!'];
          return  redirect('admin/fabric')->with($msg);
     }
-
-
+    
     public function destroy(Fabric $fabric)
     {
        // $fabric->delete();

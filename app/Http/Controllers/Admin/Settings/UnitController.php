@@ -3,9 +3,7 @@ namespace App\Http\Controllers\Admin\Settings;
  
 use Illuminate\Http\Request;
 use App\Model\Unit; 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\Rule; 
 class UnitController extends Controller
 {
 
