@@ -17,10 +17,12 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
         Route::resource('accounts', 'AccountController');
+        Route::resource('knittedfabric', 'KnittedFabInwardController');
+        Route::get('searchajax', ['as'=>'searchajax','uses'=>'KnittedFabInwardController@searchResponse']);
         //Route::resource('admin/colour', 'ColourController');
     });
 
-    Route::resource('knittedfabric', 'KnittedFabInwardController');
+ 
 
    
     // Password Resets

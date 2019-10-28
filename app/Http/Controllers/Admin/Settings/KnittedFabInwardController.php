@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Settings;
 
 use Illuminate\Http\Request;
 use App\Model\KnittedFabInward;
@@ -15,14 +15,32 @@ class KnittedFabInwardController extends Controller
      */
     public function index()
     {
-        //
-    }
+        //$rsknittedfabricinward= KnittedFabInward::orderBy('name','asc')->paginate(5);
+       // return view('knitted.list',compact('rsknittedfabricinward'));
+       return view('knitted.autocomplete');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    }
+    
+    public function searchResponse(Request $request){
+        $query = $request->get('term','');
+        $countries=\DB::table('countries');
+        if($request->type=='countryname'){
+            $countries->where('name','LIKE','%'.$query.'%');
+        }
+        if($request->type=='country_code'){
+            $countries->where('sortname','LIKE','%'.$query.'%');
+        }
+           $countries=$countries->get();        
+        $data=array();
+        foreach ($countries as $country) {
+                $data[]=array('name'=>$country->name,'sortname'=>$country->sortname);
+        }
+        if(count($data))
+             return $data;
+        else
+            return ['name'=>'','sortname'=>''];
+    }
+    
     public function create()
     {
         return view('knitted.create');

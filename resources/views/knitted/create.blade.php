@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Create Fabric')
+@section('pagetitle','Inward Knitted Fabric')
     
 
 
@@ -14,7 +14,7 @@
                         <h4 class="m-b-0 text-white">New </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('admin/fabric') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/knittedfabric') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -35,7 +35,7 @@
                                             <div class="offset-sm-3 col-md-7">
                                                
                                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                                <a href="{{ url('admin/fabric') }}" class="btn btn-inverse">Cancel</a>
+                                                <a href="{{ url('admin/knittedfabric') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
 

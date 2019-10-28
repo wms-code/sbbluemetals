@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Fabric')
+@section('pagetitle','Knitted Fabric Inward')
     
 
 
@@ -12,7 +12,7 @@
                             <div class="card-block">
                                     <div class="row justify-content-between">
                                             <div class="col-4">
-                                                <h4 class="card-title">Fabric Name List </h4>
+                                                <h4 class="card-title">Knitted Fabric Inward </h4>
                                             </div>
                                             <div class="col-6">
                                                     <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/fabric/create') }}">Add New</a></div>
@@ -32,14 +32,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($fabrics as $d)
+                                            @foreach ($rsknittedfabricinward as $d)
                                             <tr>
                                                 
                                                 <td>{{$d->name}}</td>                                               
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('admin/fabric') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
-                                                            <form action="{{ url('admin/fabric') }}/{{$d->id}}" method="post">
+                                                            <form action="{{ url('admin/knittedfabric') }}/{{$d->id}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
@@ -51,7 +51,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $fabrics->links() }}
+                                    {{ $rsknittedfabricinward->links() }}
                                 </div>
                             </div>
                         </div>
