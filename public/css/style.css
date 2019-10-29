@@ -12783,9 +12783,9 @@ form p:last-child {
 
 [type=checkbox]:not(:checked),
 [type=checkbox]:checked {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
+   /*position: absolute;  checkbox aspect */
+    /*left: -9999px; checkbox aspect */
+  opacity: 50;
 }
 
 [type=checkbox] {

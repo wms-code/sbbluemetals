@@ -5,7 +5,9 @@
 	      
 //adds extra table rows
 var i=$('table tr').length;
+
 $(".addmore").on('click',function(){
+	
 	html = '<tr>';
 	html += '<td><input class="case" type="checkbox"/></td>';
 	html += '<td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
@@ -20,11 +22,13 @@ $(".addmore").on('click',function(){
 
 //to check all checkboxes
 $(document).on('change','#check_all',function(){
+
 	$('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
 });
 
 //deletes the selected table rows
 $(".delete").on('click', function() {
+ 
 	$('.case:checkbox:checked').parents("tr").remove();
 	$('#check_all').prop("checked", false); 
 	calculateTotal();

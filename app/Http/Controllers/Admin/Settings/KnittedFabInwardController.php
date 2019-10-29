@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Settings;
 use Illuminate\Http\Request;
 use App\Model\KnittedFabInward;
 use App\Http\Controllers\Controller;
-
+use DB;
 class KnittedFabInwardController extends Controller
 {
     /**
@@ -20,15 +20,35 @@ class KnittedFabInwardController extends Controller
        return view('knitted.autocomplete');
 
     }
-    
+    public function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('apps_countries')
+        ->where('country_name', 'LIKE', "%{$query}%")
+        ->get();
+      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= '
+       <li><a href="#">'.$row->country_name.'</a></li>
+       ';
+      }
+      $output .= '</ul>';
+      echo $output;
+     }
+    }
+
+
     public function searchResponse(Request $request){
         $query = $request->get('term','');
-        $countries=\DB::table('countries');
+        $countries=\DB::table('colour');
         if($request->type=='countryname'){
             $countries->where('name','LIKE','%'.$query.'%');
         }
         if($request->type=='country_code'){
-            $countries->where('sortname','LIKE','%'.$query.'%');
+            $countries->where('name','LIKE','%'.$query.'%');
         }
            $countries=$countries->get();        
         $data=array();
