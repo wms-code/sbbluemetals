@@ -5,6 +5,11 @@ use App\Model\Fabric;
 use Illuminate\Routing\Controller;
 class FabricController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function index()
     {
         $fabrics= Fabric::orderBy('name','asc')->paginate(5);

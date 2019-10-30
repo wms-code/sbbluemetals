@@ -6,6 +6,11 @@ use Illuminate\Routing\Controller;
 
 class StockpointController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function index()
     {
         $stockpoints= Stockpoint::orderBy('name','asc')->paginate(5);

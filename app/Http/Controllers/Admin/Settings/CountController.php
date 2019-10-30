@@ -5,7 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 class CountController extends Controller
 {
-   
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function index()
     {
         $counts= Count::orderBy('name','asc')->paginate(5);

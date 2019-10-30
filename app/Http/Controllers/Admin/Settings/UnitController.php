@@ -5,7 +5,11 @@ use App\Model\Unit;
 use Illuminate\Routing\Controller;
 class UnitController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function index()
     {
         $units= Unit::orderBy('name','asc')->paginate(5);

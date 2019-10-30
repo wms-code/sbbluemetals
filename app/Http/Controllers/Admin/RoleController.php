@@ -24,7 +24,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('admin::roles.create');
+        return view('admin.roles.create');
     }
 
     public function edit(Role $role)

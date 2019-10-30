@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stockpoint extends Model
 {
-    //
     protected $table='stockpoints';
     protected $guarded=['active'];
    

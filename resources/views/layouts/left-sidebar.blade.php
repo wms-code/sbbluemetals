@@ -5,7 +5,7 @@
             <nav class="sidebar-nav">
                 <ul id="sidebarnav"> 
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">KNITTED FABRIC</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-select-inverse"></i><span class="hide-menu">Knitted Fabric</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{ url('admin/knittedfabric')}}">KNITTED FABRIC INWARD</a></li>
                             <li><a href="{{ url('items')}}">CUTTING OUTWARD</a></li>
@@ -15,7 +15,7 @@
                     </li>
                     
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">SETTINGS</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
                         <ul aria-expanded="false" class="collapse">
                                
                             <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
@@ -25,6 +25,16 @@
                             <li><a href="{{ url('admin/stockpoint')}}">STOCK POINT & RACK</a></li> 
                         </ul>
                     </li>
+                    @admin('super')
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User Management</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                               
+                            <li><a href="{{ url('admin/show')}}">Admins</a></li>
+                            <li><a href="{{ url('admin/roles')}}">Roles</a></li>
+                        </ul>
+                    </li>
+                    @endadmin
 
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Others</span></a>
@@ -43,7 +53,7 @@
                     
                    
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">TRANSACTIONS</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cached"></i><span class="hide-menu">Transactions</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="#">Order Entry</a></li>
                             <li><a href="#">Invoice</a></li>
@@ -52,7 +62,7 @@
                     </li>
                      
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">PURCHASE</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">Puchase</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="#">Payment Entry</a></li>
                             <li><a href="#">Receipt Entry</a></li>

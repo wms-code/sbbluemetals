@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
-   
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function index()
     {
         $accounts= Account::orderBy('name','asc')->with(['accountsgroups'])->get();

@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 class ColourController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function index()
     {
         $colours= Colour::orderBy('name','asc')->paginate(5);

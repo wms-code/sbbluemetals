@@ -44,13 +44,13 @@ Route::group(['namespace' => 'Admin'], function() {
 
     // Admin Roles
     Route::post('/{admin}/role/{role}', 'AdminRoleController@attach')->name('admin.attach.roles');
-    Route::delete('/{admin}/role/{role}', 'AdminRoleController@detach');
+    Route::delete('/{admin}/role/{role}', 'AdminRoleController@detach')->middleware('role:super');
 
     // Roles
     Route::get('/roles', 'RoleController@index')->name('admin.roles');
     Route::get('/role/create', 'RoleController@create')->name('admin.role.create');
     Route::post('/role/store', 'RoleController@store')->name('admin.role.store');
-    Route::delete('/role/{role}', 'RoleController@destroy')->name('admin.role.delete');
+    Route::delete('/role/{role}', 'RoleController@destroy')->name('admin.role.delete')->middleware('role:super');
     Route::get('/role/{role}/edit', 'RoleController@edit')->name('admin.role.edit');
     Route::patch('/role/{role}', 'RoleController@update')->name('admin.role.update');
     Route::get('/{any}', function () {
