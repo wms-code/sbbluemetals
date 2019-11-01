@@ -5,11 +5,18 @@
 <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Noto+Serif:400,700"> 
 <!-- Bootstrap core CSS -->
 
-    
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.11/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.11/js/select2.min.js"></script> 
+
+<script src="{{ url('invoice/js/jquery.min.js')}}"></script>
+<script src="{{ url('invoice/js/jquery-ui.min.js')}}"></script>
+<script src="{{ url('invoice/js/bootstrap.min.js')}}"></script>
+<script src="{{ url('invoice/js/bootstrap-datepicker.js')}}"></script>
+
 <link href="{{ url('invoice/css/jquery-ui.min.css.css') }}" rel="stylesheet">
  
 <link href="{{ url('invoice/css/font-awesome.min.css') }}" rel="stylesheet">
- <
+ 
 <link href="{{ url('invoice/css/sticky-footer-navbar.css') }}" rel="stylesheet">
  
      <!-- Custom styles for this template -->
@@ -46,7 +53,18 @@
           <input class="check_boxes optional" id="listing_amenity_ids_4" name="listing[amenity_ids][]" type="checkbox" value="4" style="opacity: 0;">
         </span>
       </div>
-        
+      <div class="form-group">
+
+          <td><input class="form-control autocomplete_txt" type='text' data-type="countryname" id='countryname_1' name='countryname[]'/></td>
+          <td><input class="form-control autocomplete_txt" type='text' data-type="country_code" id='country_code_1' name='country_code[]'/> </td>
+
+          <input type="text" name="country_name" id="country_name" class="form-control input-lg" placeholder="Enter Country Name" />
+          <div id="countryList">
+          </div>
+         </div>
+         {{ csrf_field() }}
+        </div>
+  
          <h2>From </h2>
        <div class='row'>
            <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
@@ -83,12 +101,14 @@
          </div>
          <h2>&nbsp;</h2>
            
-         
+        
+ 
          <div class='row'>
            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
              <table  border="1" class="table">
            <thead>
              <tr>
+
                <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/> SNo</th>
                <th width="15%">Item No</th>
                <th width="38%">Item Name</th>
@@ -100,11 +120,13 @@
            <tbody>
              <tr>
               <th width="2%"><input class="case" type="checkbox"/></th>
-              <td><input class="form-control autocomplete_txt" type='text' data-type="countryname" id='countryname_1' name='countryname[]'/></td>
-              
-              <td><input class="form-control autocomplete_txt" type='text' data-type="country_code" id='country_code_1' name='country_code[]'/> </td>
-        
-                
+              <td> 
+                  <input type="text" class="namecountry_name form-control" id="idcountry_name1" />
+                  <div class="form-control" id="idcountryList1"></div> 
+                  <select id="selectcountry"><option>ss</option></select>
+               </td>
+               <td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_1" class="form-control autocomplete_txt" autocomplete="off"></td>
+               <td><input type="text" data-type="productName" name="itemName[]" id="itemName_1" class="form-control autocomplete_txt" autocomplete="off"></td>
                <td><input type="number" name="price[]" id="price_1" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
                <td><input type="number" name="quantity[]" id="quantity_1" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
                <td><input type="number" name="total[]" id="total_1" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
@@ -113,11 +135,16 @@
          </table>
            </div>
          </div>
+        
          <div class='row'>
            <div class='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
              <button class="btn btn-danger delete" type="button">- Delete</button>
              <button class="btn btn-success addmore" type="button">+ Add More</button>
            </div>
+
+           
+
+
            <div class='col-xs-12 col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-sm-5 col-md-5 col-lg-5'>
          <form class="form-inline">
            <div class="form-group">
@@ -177,68 +204,124 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      
      
-     <div class="form-group">
-        <input type="text" name="country_name" id="country_name" class="form-control input-lg" placeholder="Enter Country Name" />
-        <div id="countryList">
-        </div>
-       </div>
-       {{ csrf_field() }}
-      </div>
 
-
-      <script>
+     <script>
+        $(document).ready(function(){
+        var i=$('table tr').length;
+        $(".addmore").on('click',function(){
+          html = '<tr>';
+          html += '<td><input class="case" type="checkbox"/></td>';
+          html += '<td><input type="text" class="namecountry_name form-control" id="idcountry_name'+i+'"  />';
+          html += '<div class="form-control" id="idcountryList'+i+'"></div></td>';
+          html += '<td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
+          html += '<td><input type="text" data-type="productName" name="itemName[]" id="itemName_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
+          html += '<td><input type="text" name="price[]" id="price_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
+          html += '<td><input type="text" name="quantity[]" id="quantity_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
+          html += '<td><input type="text" name="total[]" id="total_'+i+'" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
+          html += '</tr>';
+          $('table').append(html);
+          i++;
+          //alert('s');
+        });
+      });
+        </script>
+       <script>
           $(document).ready(function(){
-          
-           $('#country_name').keyup(function(){ 
-                  var query = $(this).val();
+            $(document).on('select', "[id^=selectcountry]", function(){
+            var query = $('div[id^="selectcountry"]');
+            var id = $(this).attr('id');  
+            alert('d')
+            // calculateTotal(id); 
+	           
+           });  
+           function calculateTotal(id){
                  
+                //  var query = $(id).val();//idcountry_name
+               //   id = id.replace("qty_",'');	 
+                  var query = $('#'+id).val();
+                  var idd = $('#'+id).attr('id');
+                   
                   if(query != '')
-                  {
+                    {
                    var _token = $('input[name="_token"]').val();
                    $.ajax({
                     url:"{{ route('knittedfabric.fetch') }}",
                     method:"POST",
                     data:{query:query, _token:_token},
                     success:function(data){
-                     $('#countryList').fadeIn();  
-                              $('#countryList').html(data);
+                      $('#idcountryList1').fadeIn();  
+                      $(idd).html(data);
+                      $(idd).val($(this).text());  
+                      $('#idcountryList1').fadeOut();  
                     }
                    });
                   }
-              });
+
+             
+              };//s
           
-              $(document).on('click', 'li', function(){  
-                  $('#country_name').val($(this).text());  
-                  $('#countryList').fadeOut();  
-              });  
+              
           
           });
           </script>
-     <script src="{{ url('invoice/js/jquery.min.js')}}"></script>
-     <script src="{{ url('invoice/js/jquery-ui.min.js')}}"></script>
-     <script src="{{ url('invoice/js/bootstrap.min.js')}}"></script>
-     <script src="{{ url('invoice/js/bootstrap-datepicker.js')}}"></script>
-     <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"> </link>
-<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+
+      <script>
+          $(document).ready(function(){
+            $(document).on('keyup', "[id^=idcountry_name]", function(){
+            var query = $('div[id^="idcountry_name"]');
+            var id = $(this).attr('id');   
+            //  var query =$("div[id^='idcountry_name']");
+             // $('#test').attr('id')
+             // var query = $("div[id^='idcountry_name']").attr('id');
+              // var query = $(this).attr('id');
+             // alert(id);  
+              calculateTotal(id); 
+	           
+           });  
+           function calculateTotal(id){
+                 
+                //  var query = $(id).val();//idcountry_name
+               //   id = id.replace("qty_",'');	 
+                  var query = $('#'+id).val();
+                  var idd = $('#'+id).attr('id');
+                   
+                  if(query != '')
+                    {
+                   var _token = $('input[name="_token"]').val();
+                   $.ajax({
+                    url:"{{ route('knittedfabric.fetch') }}",
+                    method:"POST",
+                    data:{query:query, _token:_token},
+                    success:function(data){
+                      $('#idcountryList1').fadeIn();  
+                      $(idd).html(data);
+                      $(idd).val($(this).text());  
+                      $('#idcountryList1').fadeOut();  
+                    }
+                   });
+                  }
+
+              ////////////////////////
+              $(document).on('click', 'li', function(){  
+              
+                  $(idd).val($(this).text());  
+                  $('#idcountryList1').fadeOut();  
+              });  
+              //////////////////////////    
+              };//s
+          
+              
+          
+          });
+          </script>
+    
+      
+ 
     <script >
     
-var i=$('table tr').length;
-$(".addmore").on('click',function(){
-	html = '<tr>';
-  html += '<td><input class="case" type="checkbox"/></td>';
-  html += '<td><input type="text" data-type="countryname" name="countryname[]" id="countryname_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
-	html += '<td><input type="text" data-type="country_code" name="country_code[]" id="country_code_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
-	html += '<td><input type="text" name="price[]" id="price_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
-	html += '<td><input type="text" name="quantity[]" id="quantity_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
-	html += '<td><input type="text" name="total[]" id="total_'+i+'" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
-	html += '</tr>';
-	$('table').append(html);
-  i++;
-  //alert('s');
-});
+ 
 
 //to check all checkboxes
 $(document).on('change','#check_all',function(){	
@@ -257,13 +340,13 @@ $(document).on('focus','.autocomplete_txt',function(){
    
 	type = $(this).data('type');
 	
-	if(type =='countryname' )autoTypeNo=name;
-	if(type =='country_code' )autoTypeNo=sortname; 	
-
-	//$(this).autocomplete({//
+	if(type =='productCode' )autoTypeNo=0;
+	if(type =='productName' )autoTypeNo=1; 	
+	
+	$(this).autocomplete({
 		source: function( request, response ) {
- 			$.ajax({
-        url:"{{ route('knittedfabric.searchResponse') }}", 
+			$.ajax({
+        url:"{{ route('knittedfabric.fetch') }}", 
 				dataType: "json",
 				method: 'post',
 				data: {
@@ -271,7 +354,6 @@ $(document).on('focus','.autocomplete_txt',function(){
 				   type: type
 				},
 				 success: function( data ) {
-          alert(data);
 					 response( $.map( data, function( item ) {
 					 	var code = item.split("|");
 						return {
@@ -279,8 +361,7 @@ $(document).on('focus','.autocomplete_txt',function(){
 							value: code[autoTypeNo],
 							data : item
 						}
-          }));
-          response(array)
+					}));
 				}
 			});
 		},
@@ -288,16 +369,16 @@ $(document).on('focus','.autocomplete_txt',function(){
 		minLength: 0,
 		select: function( event, ui ) {
 			var names = ui.item.data.split("|");						
-		  	id_arr = $(this).attr('id');
+			id_arr = $(this).attr('id');
 	  		id = id_arr.split("_");
-			$('#country_code_'+id[1]).val(names[0]);
-			$('#countryname_'+id[1]).val(names[1]);
-		//	$('#quantity_'+id[1]).val(1);
-		//	$('#price_'+id[1]).val(names[2]);
-		//	$('#total_'+id[1]).val( 1*names[2] );
+			$('#itemNo_'+id[1]).val(names[0]);
+			$('#itemName_'+id[1]).val(names[1]);
+			$('#quantity_'+id[1]).val(1);
+			$('#price_'+id[1]).val(names[2]);
+			$('#total_'+id[1]).val( 1*names[2] );
 			calculateTotal();
 		}		      	
-	//});
+	});
 });
 
 //price change
@@ -365,7 +446,7 @@ function IsNumeric(e) {
 
 //datepicker
 $(function () {
-    $('#invoiceDate').datepicker({});
+    //$('#invoiceDate').datepicker({});
 });
     </script>
   

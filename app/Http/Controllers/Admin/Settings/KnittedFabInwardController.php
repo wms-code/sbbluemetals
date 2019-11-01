@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;  
 use App\Model\KnittedFabInward;
 use App\Http\Controllers\Controller;
 use DB;
@@ -19,12 +19,14 @@ class KnittedFabInwardController extends Controller
      */
     public function index()
     {
-        //$rsknittedfabricinward= KnittedFabInward::orderBy('name','asc')->paginate(5);
-       // return view('knitted.list',compact('rsknittedfabricinward'));
-       return view('knitted.autocomplete');
+        $rsdepartmentData['data'] = KnittedFabInward::getcolour();
+          
+       return view('knitted.autocomplete',compact('rsdepartmentData'));
 
     }
-    public function fetch(Request $request)
+
+
+    public function fetcssh(Request $request)
     {
      if($request->get('query'))
      {
@@ -44,21 +46,44 @@ class KnittedFabInwardController extends Controller
      }
     }
 
-
-    public function searchResponse(Request $request){
+    public function fetch(Request $request){
+    //    $rsdepartmentData = KnittedFabInward::getcolour1();
+       // echo $rsdepartmentData;
+       // return response()->json(['results' => $rsdepartmentData]);
+       //$query = $request->get('query');
+       $data = DB::table('apps_countries')
+        // ->where('country_name', 'LIKE', "%{$query}%")
+         ->get();
+       $output ='';// '<optopn class="dropdown-menu" style="display:block; position:relative">';
+       foreach($data as $row)
+       {
+        $output .= '
+        <option value='.$row->country_name.'>'.$row->country_name.'</option>
+        ';
+       }
+     //  $output .= '</ul>';
+       echo $output;
+       //<option value='"+id+"'>"+name+"</option>"
+     
+      //  echo json_encode($rsdepartmentData);
+        //exit;
+          
+    }
+    public function fetch1(Request $request){
         $query = $request->get('term','');
-        $countries=\DB::table('colour');
-        if($request->type=='countryname'){
-            $countries->where('name','LIKE','%'.$query.'%');
-        }
-        if($request->type=='country_code'){
-            $countries->where('name','LIKE','%'.$query.'%');
-        }
+        $countries=\DB::table('apps_countries');
+       // if($request->type=='country_name'){
+            $countries->where('country_name','LIKE','%'.$query.'%');
+       // }
+       // if($request->type=='country_code'){
+       //     $countries->where('country_name','LIKE','%'.$query.'%');
+       // }
            $countries=$countries->get();        
         $data=array();
         foreach ($countries as $country) {
-                $data[]=array('name'=>$country->name,'sortname'=>$country->sortname);
+                $data[]=array('name'=>$country->country_name,'sortname'=>$country->country_name);
         }
+        return redirect()->back() ->with('alert',$data);
         if(count($data))
              return $data;
         else
