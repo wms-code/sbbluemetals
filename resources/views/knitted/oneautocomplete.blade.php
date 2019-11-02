@@ -1,3 +1,17 @@
+<link href="{{ url('invoice/css/jquery-ui.min.css.css') }}" rel="stylesheet"> 
+<link href="{{ url('invoice/css/font-awesome.min.css') }}" rel="stylesheet">  
+<link href="{{ url('invoice/css/sticky-footer-navbar.css') }}" rel="stylesheet">
+
+<link //href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"> </link>
+<script //src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+<script src="{{ url('invoice/js/jquery-ui.min.js')}}"></script>
+<script src="{{ url('invoice/js/ie.js')}}"></script>
+  
+<script //src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link //rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script //src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{ url('invoice/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{ url('invoice/js/bootstrap.min.js')}}"></script>
 @extends('layouts.admin')
 
 @section('pagetitle','Knitted Fabric Inward') 
@@ -38,7 +52,11 @@
        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
      <![endif]-->
    </head>
- 
+   //datepicker
+   $(function () {
+      // $('#invoiceDate').datepicker({});
+   });
+    </script>
    <body>
   
       <!-- Begin page content -->
