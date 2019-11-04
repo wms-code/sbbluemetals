@@ -54,7 +54,7 @@
                                   <thead>
                                     <tr>
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
-                                      <th>SNo</th>
+                                      <th width="4%">SNo</th>
                                       <th width="15%">Fabirc</th>
                                       <th width="15%">Colour</th>
                                       <th width="10%">H.S.N.</th>
@@ -68,7 +68,8 @@
                                   <tbody>
                                       <tr>
                                         <th><input class="case" type="checkbox"/></th>
-                                        <th>1</th>
+                                        <th> <INPUT class="form-control" type='text' readonly  id='sno_1'	 value='1'  size='4'  
+                                             readonly name='sno[]'/> </th>
                                         <td> 
                                            <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
                                                 <option value='0'>-- Select Fabric --</option>
@@ -205,7 +206,7 @@
             $(".addmore").on('click',function(){
               html = '<tr>';
               html += '<td><input class="case" type="checkbox"/></td>';
-              html += '<td>'+i+'</td>';
+              html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
               html += '<td><select class="form-control" id="sel_user_'+i+'"  name="sel_fabric[]"><option value="0">- Select Fabric-</option></select></td>';
               html += '<td><select class="form-control" id="sel_colour_'+i+'" name="sel_colour[]"><option value="0">- Select Colour-</option></select></td>';
               html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
@@ -217,8 +218,12 @@
               html += '</tr>';
               updateselect2('sel_user_'+i);
               updateselect2('sel_colour_'+i);
+              
               $('table').append(html);
+              setrowvalue();
               i++;
+
+
               function updateselect2(para){
                 para='#'+para;
                 var _token = $('input[name="_token"]').val();
@@ -264,6 +269,7 @@
             //to check all checkboxes
             $(document).on('change','#check_all',function(){	
               $('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
+              setrowvalue();
             });
             
             //deletes the selected table rows
@@ -271,10 +277,18 @@
               $('.case:checkbox:checked').parents("tr").remove();
               $('#check_all').prop("checked", false); 
               calculateTotal();
+              setrowvalue();
             });
             
              
-            
+            function setrowvalue()
+            {
+              
+              var names = document.getElementsByName('sno[]');
+              for (var j = 0, iLen = names.length; j < iLen; j++) {
+	               names[j].value=j+1;
+                }
+            }
             //price change
             $(document).on('change keyup blur','.changesNo',function(){
             
@@ -293,6 +307,9 @@
             
             //total price calculation 
             function calculateTotal(){
+
+              
+            
               subTotal = 0 ; total = 0; 
               $('.totalLinePrice').each(function(){
                 if($(this).val() != '' )subTotal += parseFloat( $(this).val() );
