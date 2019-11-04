@@ -19,6 +19,13 @@ class CreateAppsCountriesTable extends Migration
             $table->string('country_name', 100)->nullable();            
             $table->timestamps();
         });
+
+        Schema::create('apps_countries ', function (Blueprint $table) {
+            $table->bigIncrements('id'); //->primary();          
+            $table->string('country_code', 100)->nullable();
+            $table->string('country_name', 100)->nullable();            
+            $table->timestamps();
+        });
     }
 
     /**
