@@ -57,12 +57,16 @@
                                       <th width="4%">SNo</th>
                                       <th width="15%">Fabirc</th>
                                       <th width="15%">Colour</th>
-                                      <th width="10%">H.S.N.</th>
-                                      <th width="15%">Particulars</th>
-                                      <th width="10%">Rolls</th>
-                                      <th width="10%">Qty</th>
-                                      <th width="10%">Rate</th>
-                                      <th width="20%">Amount</th>
+                                      <th width="5%">H.S.N.</th>
+                                      <th width="5%">Particulars</th>
+                                      <th width="5%">Rolls</th>
+                                      <th width="5%">Qty</th>
+                                      <th width="8%">Rate</th>
+                                      <th width="5%">Qty*Rate</th>
+                                      <th width="5%">Tax %</th>
+                                      <th width="5%">Tax Amt</th>
+                                      <th width="5%">Rnd Off</th>
+                                      <th width="10%">Amount</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -96,16 +100,32 @@
                                           <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
                                         </td>
                                         <td>
-                                            <input type="text" name="qty[]" id="qty_1" class="form-control changesNo" 
+                                            <input type="text" value="5060" name="qty[]" id="qty_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                           </td>
+                                        
                                         <td>
-                                            <input type="number" name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            <input type="number" value="34.40" name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                          </td>
-                                          <td>
+                                        </td>
+                                        <td>
+                                          <input type="number" name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
+                                       </td>
+                                      
+                                        <td>
+                                          <input type="number" value="5" name="taxper[]" id="taxper_1" class="form-control changesNo" 
+                                            autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                       </td>
+                                       <td>
+                                        <input type="number" name="taxamt[]" id="taxamt_1" class="form-control" 
+                                        totalLinetax  readonly >
+                                       </td>
+                                       <td>
+                                        <input type="number" name="roundoff[]" id="roundoff_1" class="form-control" readonly >
+                                     </td>
+                                        <td>
                                               <input type="number"  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
-                                            </td>
+                                        </td>
                                         </tr>
                                        </tbody>
                                    
@@ -170,10 +190,7 @@
                             </div>
                         </div>
 
-
-
-                           
-                              
+                                                         
                         <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -214,6 +231,10 @@
               html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
               html += '<td><input type="number" name="qty[]"  id="qty_'+i+'" class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
               html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"></td>';
+              html += '<td><input type="number" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
+              html += '<td><input type="number" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"></td>';
+              html += '<td><input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control" readonly></td>';
+              html += '<td><input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
               updateselect2('sel_user_'+i);
@@ -291,13 +312,53 @@
             }
             //price change
             $(document).on('change keyup blur','.changesNo',function(){
-            
+              var perrateamount=0.0;
+              var subtotal = 0; var total = 0; 
+
               id_arr = $(this).attr('id');
               id = id_arr.split("_");
               quantity = $('#qty_'+id[1]).val();
               price = $('#rate_'+id[1]).val();
               $('#amount_'+id[1]).val(0);
-              if( quantity!='' && price !='' ) $('#amount_'+id[1]).val( (parseFloat(price)*parseFloat(quantity)).toFixed(2) );	
+              $('#perrateamount_'+id[1]).val(0);
+              $('#roundoff_'+id[1]).val(0);
+
+              taxper = $('#taxper_'+id[1]).val();
+              taxamt = $('#taxamt_'+id[1]).val();
+              
+              if(quantity!='' && price !='') 
+              {
+                perrateamount= (parseFloat(price)*parseFloat(quantity)).toFixed(2);
+               // console.log(perrateamount);
+               // perrateamount = parseFloat(perrateamount).toFixed(2);
+                $('#perrateamount_'+id[1]).val(perrateamount);
+              }
+              if(taxper != '' && typeof(taxper) != "undefined" )
+              {
+                taxamt = perrateamount * ( parseFloat(taxper) /100 );
+                $('#taxamt_'+id[1]).val(taxamt.toFixed(2)); //$('#taxAmount').val(taxamt.toFixed(2));
+                total=(parseFloat(perrateamount)+parseFloat(taxamt)).toFixed(2);
+                //ROUND OFF 
+                var round =Math.round(total); 
+                console.log(total);
+                round =total-round; 
+                round =parseFloat(round).toFixed(2);
+                $('#roundoff_'+id[1]).val(round);  
+
+                total =Math.round(total);                                
+                $('#amount_'+id[1]).val(total);
+
+                 
+              }
+              else
+              {
+                $('#taxamt_'+id[1]).val(0);
+                total = perrateamount;
+                $('#amount_'+id[1]).val(total);
+              }
+              
+            //  if( quantity!='' && price !='' ) $('#amount_'+id[1]).val( (parseFloat(price)*parseFloat(quantity)).toFixed(2) );	
+              
               calculateTotal();
             });
             
@@ -307,24 +368,37 @@
             
             //total price calculation 
             function calculateTotal(){
+              subTotal = 0 ; total = 0; taxamtt = 0; 
+              perrateamount=0;
 
-              
-            
-              subTotal = 0 ; total = 0; 
               $('.totalLinePrice').each(function(){
-                if($(this).val() != '' )subTotal += parseFloat( $(this).val() );
+                if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
-              $('#subTotal').val( subTotal.toFixed(2) );
-              tax = $('#tax').val();
-              if(tax != '' && typeof(tax) != "undefined" ){
-                taxAmount = subTotal * ( parseFloat(tax) /100 );
-                $('#taxAmount').val(taxAmount.toFixed(2));
-                total = subTotal + taxAmount;
-              }else{
-                $('#taxAmount').val(0);
-                total = subTotal;
-              }
-              $('#txtTotal').val( total.toFixed(2) );
+              $('#txtTotal').val( subTotal.toFixed(2));
+
+              $('.totalSubTotal').each(function(){
+                if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
+              });
+              $('#subTotal').val( perrateamount.toFixed(2));              
+
+              $('.totalLinetax').each(function(){
+                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
+              });
+
+             // $('#subTotal').val( subTotal.toFixed(2) );
+              $('#tax').val( taxamtt.toFixed(2) );
+
+             // tax = $('#tax').val();
+              //if(tax != '' && typeof(tax) != "undefined" ){
+               // taxAmount = subTotal * ( parseFloat(tax) /100 );
+               // $('#taxAmount').val(taxAmount.toFixed(2));
+               // total = subTotal + taxAmount;
+              //}else{
+               // $('#taxAmount').val(0);
+               // total = subTotal;
+              //}
+
+              //$('#txtTotal').val( total.toFixed(2) );
             }
              
             
@@ -333,7 +407,7 @@
             specialKeys.push(8,46); //Backspace
             function IsNumeric(e) {
                 var keyCode = e.which ? e.which : e.keyCode;
-                console.log( keyCode );
+            //    console.log( keyCode );
                 var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
                 return ret;
             }
