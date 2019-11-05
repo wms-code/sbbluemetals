@@ -55,17 +55,14 @@
                                     <tr>
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
-                                      <th width="15%">Fabirc</th>
-                                      <th width="15%">Colour</th>
+                                      <th width="10%">Fabirc</th>
+                                      <th width="10%">Colour</th>
                                       <th width="5%">H.S.N.</th>
                                       <th width="5%">Particulars</th>
                                       <th width="5%">Rolls</th>
-                                      <th width="5%">Qty</th>
-                                      <th width="8%">Rate</th>
-                                      <th width="5%">Qty*Rate</th>
-                                      <th width="5%">Tax %</th>
-                                      <th width="5%">Tax Amt</th>
-                                      <th width="5%">Rnd Off</th>
+                                      <th width="10%">Qty</th>
+                                      <th width="10%">Rate</th>
+                                      <th width="10%">Tax %</th>
                                       <th width="10%">Amount</th>
                                     </tr>
                                   </thead>
@@ -107,20 +104,20 @@
                                         <td>
                                             <input type="number" value="34.40" name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                        </td>
-                                        <td>
+                                        <br>
+                                         
                                           <input type="number" name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
                                        </td>
                                       
                                         <td>
                                           <input type="number" value="5" name="taxper[]" id="taxper_1" class="form-control changesNo" 
                                             autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                       </td>
-                                       <td>
+                                       <br>
+                                        
                                         <input type="number" name="taxamt[]" id="taxamt_1" class="form-control" 
                                         totalLinetax  readonly >
-                                       </td>
-                                       <td>
+                                       <br>
+                                      
                                         <input type="number" name="roundoff[]" id="roundoff_1" class="form-control" readonly >
                                      </td>
                                         <td>
@@ -230,11 +227,11 @@
               html += '<td><input type="text" name="particulars[]" id="particulars_'+i+'" class="form-control"></td>';
               html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
               html += '<td><input type="number" name="qty[]"  id="qty_'+i+'" class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
-              html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"></td>';
-              html += '<td><input type="number" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
-              html += '<td><input type="number" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"></td>';
-              html += '<td><input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control" readonly></td>';
-              html += '<td><input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
+              html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
+              html += '<input type="number" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
+              html += '<td><input type="number" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
+              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control" readonly><br>';
+              html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
               updateselect2('sel_user_'+i);
