@@ -23,8 +23,8 @@ class ColourController extends Controller
 
     public function store(Request $request)
     {        
-        $request->validate([
-            'name' => 'required|name|max:255|unique:colours' ]);        
+       // $request->validate([
+        //    'name' => 'required|name|max:255|unique:colours' ]);        
         Colour::create($request->all());
         $msg = [ 'message' => 'Colour created successfully!' ];
         return  redirect('admin/colour')->with($msg);

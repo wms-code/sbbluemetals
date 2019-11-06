@@ -34,7 +34,7 @@
 
                               <div style="margin-left: 0px;" class="form-group row">
                                   <label class="control-label text-left col-md-2"> Supplier </label>
-                                   <div class="col-md-6">
+                                   <div class="col-md-3">
                                       <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
                                           <option value='0'>-- Select department --</option>
                                           @foreach($rsdepartmentData['data'] as $department)
@@ -134,9 +134,10 @@
                                   <button class="btn btn-success addmore" type="button">+ Add More</button>
                               </div>
                          </div>
+                         <br>
                          
 
-                        <div  style="margin-left: 0px;" class="form-group row">
+                        <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Subtotal:.</label>
                               <div class="col-md-2">
                                     <input type="number" readonly class="form-control" id="subTotal" placeholder="Subtotal"
@@ -145,18 +146,22 @@
                         </div>
 
                         <div  style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Tax %:.</label>
-                              <div class="col-md-2">
-                                    <input type="number" class="form-control" id="tax" placeholder="Tax %" 
-                                    onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-                              </div>
                               <label class="control-label text-left col-md-2">Tax Amount %:.</label>
-                               <div class="col-md-3">
+                               <div class="col-md-2">
                                   <input type="number" readonly class="form-control" id="taxAmount" placeholder="Tax"
                                       onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
                                    
                                 </div>
                         </div>
+                      
+                      <div  style="margin-left: 0px;" class="form-group row">
+                          <label class="control-label text-left col-md-2">Round Off</label>
+                           <div class="col-md-2">
+                              <input type="number" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
+                            </div>
+                      </div>
+
+                      
                             
                         <div  style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Total:.</label>
@@ -168,7 +173,7 @@
 
                         <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Stock Point </label>
-                             <div class="col-md-6">
+                             <div class="col-md-2">
                                 <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
                                     <option value='0'>-- Select department --</option>
                                     @foreach($rsdepartmentData['data'] as $department)
@@ -182,7 +187,7 @@
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
                             <label class="control-label text-left col-md-2"> Remarks</label>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                   <input type="text" name="name" maxlength="50" class="form-control">
                             </div>
                         </div>
@@ -383,7 +388,7 @@
               });
 
              // $('#subTotal').val( subTotal.toFixed(2) );
-              $('#tax').val( taxamtt.toFixed(2) );
+             // $('#tax').val( taxamtt.toFixed(2) );
 
              // tax = $('#tax').val();
               //if(tax != '' && typeof(tax) != "undefined" ){
