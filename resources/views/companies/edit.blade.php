@@ -53,24 +53,35 @@
                                         <input type="text" name="gstno" class="form-control"value="{{  $company->gstno }}">
                                     </div>   
                                 </div>
-                                <!--/span-->
+
+                               
+
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Status</label>
-                                        <div class="form-check">
-                                            <label class="custom-control custom-radio">
-                                                <input id="radio1" name="active" type="radio" checked="" class="custom-control-input">
-                                                <span class="custom-control-indicator"></span>
-                                                <span class="custom-control-description">Active</span>
-                                            </label>
-                                            <label class="custom-control custom-radio">
-                                                <input id="radio2" name="active" type="radio" class="custom-control-input">
-                                                <span class="custom-control-indicator"></span>
-                                                <span class="custom-control-description">InActive</span>
-                                            </label>
+                                        <div class="form-group">
+                                            <label class="control-label">Active/In Active</label>
+                                            <div class="form-check">
+                                                <label class="custom-control custom-radio">
+                                                    <input id="radio1" name="active" 
+                                                    {{ ($company->active=="1")? "checked" : "" }}
+                                                    value ="1" type="radio"  class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">Active</span>
+                                                </label>
+                                                <label class="custom-control custom-radio">
+                                                    <input id="radio2" name="active"
+                                                    {{ ($company->active=="0")? "checked" : "" }}
+                                                    type="radio" value ="0" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">InActive</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>  
+
+
+                               
+
+
                                 <!--/span-->
                             </div>
                             <!--/row-->

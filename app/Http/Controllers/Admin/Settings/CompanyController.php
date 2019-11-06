@@ -37,9 +37,8 @@ class CompanyController extends Controller
 
     public function update(Request $request)
     { 
-         $msgg= $request->active;
+      
         Company::where('id',
-        
         $request->id)->update([
             'name'=>$request->name,
             'mobile'=>$request->mobile,
@@ -47,11 +46,12 @@ class CompanyController extends Controller
             'gstno'=>$request->gstno,
             'address1'=>$request->address1,
             'address2'=>$request->address2,
+            'active'=>$request->active,
             'address3'=>$request->address3
              ]
     
     );       
-        $msg =['message' => 'Company Updated successfully!'.$msgg];
+        $msg =['message' => 'Company Updated successfully!'];
         return  redirect('admin/companies')->with($msg);
     }
 
