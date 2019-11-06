@@ -23,7 +23,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                         <div class="float-right">
-                                                            <a class="btn btn-sm  btn-primary" href="{{ url('admin/accounts/create') }}">Add New</a></div>
+                                                            <a class="btn btn-sm  btn-primary" href="{{ url('accounts/create') }}">Add New</a></div>
                                                     
                                                 </div>
                                               </div>
@@ -31,7 +31,8 @@
                                         <div class="table-responsive  m-t-40">
                                             <table id="myTable" class="table table-bordered table-striped">
                                                 <thead>
-                                                    <tr>                                                         
+                                                    <tr>
+                                                         
                                                         <th>Accounts Name</th>
                                                         <th>Accounts Group</th>                                                        
                                                         <th>Address</th>
@@ -41,19 +42,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($accounts as $account)
+                                                    @foreach ($accounts as $d)
                                                     <tr>
                                                         
-                                                        <td>{{$account->name}}</td>                                               
-                                                        <td>test</td>                                               
-                                                        <td>{{$account->address}}</td>                             
-                                                        <td>{{$account->phone}}/{{$account->mobile}}</td>  
-                                                        <td>{{$account->gst_no}}  {{$account->opening_balance}}</td>                             
+                                                        <td>{{$d->Ac_Name}}</td>                                               
+                                                        <td>{{$d->accountsgroups['Group_Name']}}.{{$d->subgroup['Group_Name']}}</td>                                               
+                                                        <td>{{$d->Address1}}</td>                             
+                                                        <td>{{$d->Phone}}/{{$d->Mobile}}</td>  
+                                                        <td>{{$d->GSTNO}}  {{$d->Opn_Bal}}</td>                             
                                                                                                   
                                                         <td class="text-nowrap">
-                                                            <a href="{{ url('accounts') }}/{{$account->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                            <a href="{{ url('accounts') }}/{{$d->Ac_Code}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
-                                                                    <form action="{{ url('/accounts') }}/{{$account->id}}" method="post">
+                                                                    <form action="{{ url('/accounts') }}/{{$d->Ac_Code}}" method="post">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                     </form>

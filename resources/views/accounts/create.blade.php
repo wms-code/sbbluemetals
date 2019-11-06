@@ -15,7 +15,7 @@
                     </div>
                 
                     <div class="card-body">
-                        <form action="{{ url('admin/accounts') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('accounts') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -24,27 +24,27 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Accounts Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="name" maxlength="50" class="form-control">
+                                        <input type="text" name="Ac_Name" maxlength="50" class="form-control">
                                     </div>
                                 </div>
                                 
                              <div class="form-group row last">
-                                    <label class="control-label text-right col-md-3">Accounts Group</label>
+                                    <label class="control-label text-right col-md-3">Under Accounts Group</label>
                                     <div class="col-md-7">
-                                        <select name="accounts_groups_id" class="form-control">
-                                            @foreach ($accountsgroups as $group)                                                
-                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                        <select name="Group_Code" class="form-control">
+                                            @foreach ($accountsgroups as $item)                                                
+                                            <option value="{{ $item->Group_Code }}">{{ $item->Group_Name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div> 
                       
                                 <div class="form-group row ">
-                                        <label class="control-label text-right col-md-3">Ac Category</label>
+                                        <label class="control-label text-right col-md-3">Sub Group</label>
                                         <div class="col-md-7">
-                                            <select name="accounts_category_id" class="form-control">
-                                                @foreach ($accountscategory as $category)                                                
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <select name="SubGroup_Code" class="form-control">
+                                                @foreach ($subgroup as $unit)                                                
+                                                <option value="{{ $unit->Group_Code }}">{{ $unit->Group_Name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -53,10 +53,9 @@
                                 <div class="form-group row ">
                                         <label class="control-label text-right col-md-3">Report Group</label>
                                         <div class="col-md-7">
-                                            <select name="accounts_report_id" class="form-control">
-                                                <option value=""> -- </option>                                                
-                                                @foreach ($accounts as $unit)
-                                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                            <select name="ReportGroup" class="form-control">
+                                                @foreach ($reportgroup as $unit)                                                
+                                                <option value="{{ $unit->Ac_Name }}">{{ $unit->Ac_Name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -65,62 +64,67 @@
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Phone</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="phone" maxlength="50" class="form-control">
+                                            <input type="text" name="Phone" maxlength="50" class="form-control">
                                         </div>
                                 </div>
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Mobile</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="mobile" maxlength="50" class="form-control">
+                                            <input type="text" name="Mobile" maxlength="50" class="form-control">
                                         </div>
                                 </div>
 
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Address</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="address" maxlength="50" class="form-control">
+                                            <input type="text" name="Address1" maxlength="50" class="form-control">
                                         </div>
                                 </div>
 
                                     <div class="form-group row">
-                                            <label class="control-label text-right col-md-3">Address 1</label>
+                                            <label class="control-label text-right col-md-3">Address</label>
                                             <div class="col-md-6">
-                                                <input type="text" name="address1" maxlength="50" class="form-control">
+                                                <input type="text" name="Address2" maxlength="50" class="form-control">
                                             </div>
                                         </div>
-                                
+                                    <div class="form-group row">
+                                                <label class="control-label text-right col-md-3">Address</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="Address3" maxlength="50" class="form-control">
+                                                </div>
+                                            </div>
                                      <div class="form-group row">
                                                 <label class="control-label text-right col-md-3">Delivery Address</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="delivery_address" maxlength="50" class="form-control">
+                                                    <input type="text" name="DelAddress" maxlength="50" class="form-control">
                                                 </div>
                                     </div>        
                                     <div class="form-group row">
                                                     <label class="control-label text-right col-md-3">G.S.T. No</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="gst_no" maxlength="50" class="form-control">
+                                                        <input type="text" name="GSTNO" maxlength="50" class="form-control">
                                                     </div>
                                     </div>        
                                     <div class="form-group row last">
-                                        <label class="control-label text-right col-md-3">Opening Balance</label>
+                                        <label class="control-label text-right col-md-3">Opn Bal</label>
                                         <div class="col-md-6">
-                                            <input type="number" name="opening_balance" maxlength="8" class="form-control">
-                                            <select name="opening_balance_type">
+                                            <input type="number" name="Opn_Bal" maxlength="8" class="form-control">
+                                            <select name="opnbal">
                                                 <option value="1">Dr</option><option value="2">Cr</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">Status</label>
+                                                <label class="control-label">Active/In Active</label>
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio1" name="status" type="radio" value="1" checked="" class="custom-control-input">
+                                                        <input id="radio1" name="ActiveRadio" type="radio" checked="" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">Active</span>
                                                     </label>
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio2" name="status" type="radio" value="0" class="custom-control-input">
+                                                        <input id="radio2" name="ActiveRadio" type="radio" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">InActive</span>
                                                     </label>

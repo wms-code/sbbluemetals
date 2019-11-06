@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppsCountriesTablee extends Migration
+class CreateAppsCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateAppsCountriesTablee extends Migration
      */
     public function up()
     { 
+        if (!Schema::hasTable('apps_countries')) {
 
+       
         Schema::create('apps_countries ', function (Blueprint $table) {
             $table->bigIncrements('id'); //->primary();          
             $table->string('country_code', 100)->nullable();
             $table->string('country_name', 100)->nullable();            
             $table->timestamps();
         });
+    }
     }
 
     /**

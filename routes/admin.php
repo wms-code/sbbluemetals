@@ -7,7 +7,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::GET('/', 'LoginController@showLoginForm')->name('admin.login');
     Route::POST('/', 'LoginController@login');
     Route::POST('/logout', 'LoginController@logout')->name('admin.logout');
-    Route::resource('company', 'CompanyController');
+    //Route::resource('company', 'CompanyController');
 
     //Master
     Route::group(['namespace' => 'Settings'], function() {
@@ -17,6 +17,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
         Route::resource('accounts', 'AccountController');
+        Route::resource('companies', 'CompanyController');
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         //Route::get('searchajax', ['as'=>'searchajax','fetch'=>'KnittedFabInwardController@fetch']);
         Route::post('knittedfabric/fetch', 'KnittedFabInwardController@fetch')->name('knittedfabric.fetch');

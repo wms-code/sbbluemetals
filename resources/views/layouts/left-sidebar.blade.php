@@ -20,16 +20,18 @@
                                
                             <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
                             <li><a href="{{ url('admin/fabric')}}">FABRIC</a></li>
+                            <li><a href="{{ url('admin/fabricgroup')}}">FABRIC-GROUP</a></li>
                             <li><a href="{{ url('admin/count')}}">COUNTS</a></li>
                             <li><a href="{{ url('admin/unit')}}">Unit</a></li>
-                            <li><a href="{{ url('admin/stockpoint')}}">STOCK POINT & RACK</a></li> 
+                            <li><a href="{{ url('admin/stockpoint')}}">FABRIC POINT & FLOOR</a></li> 
+                            
                         </ul>
                     </li>
                     @admin('super')
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User Management</span></a>
                         <ul aria-expanded="false" class="collapse">
-                               
+                            <li><a href="{{ url('admin/companies')}}">COMPANY</a></li>   
                             <li><a href="{{ url('admin/show')}}">Admins</a></li>
                             <li><a href="{{ url('admin/roles')}}">Roles</a></li>
                         </ul>

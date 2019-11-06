@@ -43,13 +43,12 @@ $(document).ready(function() {
                             
                             <div style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Supplier </label>
-                                 <div class="col-md-2">
+                                 <div class="col-md-3">
                                     <select class="form-control js-example-basic-single" id='selsupplier' name='selsupplier'>
                                         <option value='0'>-- Select Supplier --</option>
                                         @foreach($rsdepartmentData['data'] as $department)
                                           <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
                                         @endforeach
-                                    
                                      </select>
                                   </div>
                                   
@@ -57,8 +56,8 @@ $(document).ready(function() {
     
                            <div style="margin-left: 0px;" class="form-group row">                                  
                                 <label class="control-label text-left col-md-2"> Supplier Inovice No</label>
-                                <div class="col-md-2">
-                                      <input type="text" name="name" maxlength="50" class="form-control">
+                                <div class="col-md-3">
+                                      <input type="text" name="name"  class="form-control">
                                 </div>
                             </div>
                             
