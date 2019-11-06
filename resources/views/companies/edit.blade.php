@@ -23,35 +23,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Company Name</label>
-                                        <input type="text" name="name" class="form-control"value="{{  $company->name }}">
+                                        <input type="text" readonly name="id" class="form-control"value="{{$company->id }}">
+                                        <input type="text" name="name" class="form-control"value="{{$company->name }}">
                                    </div>                                       
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Eamil</label>
-                                        <input type="text" name="compmail" class="form-control"value="{{   $company->compmail }}">
+                                        <label class="control-label">E-Mail</label>
+                                        <input type="text" name="compmail" class="form-control" value="{{$company->compmail }}">
                                     </div>   
                                 </div>
                                 <!--/span-->
                             </div>
-                            <!--/row-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Phone</label>
-                                        <input type="text" name="compphone" class="form-control"value="{{  $company->compphone }}">
-                                    </div>   
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
+                            
+                            <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Mobile</label>
                                         <input type="text" name="mobile" class="form-control"value="{{ $company->mobile }}">
                                     </div>   
                                 </div>
                                 <!--/span-->
-                            </div>
+                          
                              
                             <div class="row">
                                 <div class="col-md-6">
@@ -66,12 +59,12 @@
                                         <label class="control-label">Status</label>
                                         <div class="form-check">
                                             <label class="custom-control custom-radio">
-                                                <input id="radio1" name="radio" type="radio" checked="" class="custom-control-input">
+                                                <input id="radio1" name="active" type="radio" checked="" class="custom-control-input">
                                                 <span class="custom-control-indicator"></span>
                                                 <span class="custom-control-description">Active</span>
                                             </label>
                                             <label class="custom-control custom-radio">
-                                                <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                                <input id="radio2" name="active" type="radio" class="custom-control-input">
                                                 <span class="custom-control-indicator"></span>
                                                 <span class="custom-control-description">InActive</span>
                                             </label>

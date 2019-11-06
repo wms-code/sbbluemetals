@@ -13,7 +13,7 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     { 
-        Schema::dropIfExists('companies');
+       // Schema::dropIfExists('companies');
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id'); //->primary();      
             $table->string('name', 100)->nullable(); 
@@ -23,7 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->string('address1', 100)->nullable(); 
             $table->string('address2', 100)->nullable(); 
             $table->string('address3', 100)->nullable();              
-            $table->boolean('active')->default(0);
+          //  $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

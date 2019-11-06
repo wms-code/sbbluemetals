@@ -36,9 +36,22 @@ class CompanyController extends Controller
     }
 
     public function update(Request $request)
-    {
-        Company::where('id', $request->id)->update(['name'=>$request->name ]);       
-        $msg =['message' => 'Company Updated successfully!'];
+    { 
+         $msgg= $request->active;
+        Company::where('id',
+        
+        $request->id)->update([
+            'name'=>$request->name,
+            'mobile'=>$request->mobile,
+            'compmail'=>$request->compmail,
+            'gstno'=>$request->gstno,
+            'address1'=>$request->address1,
+            'address2'=>$request->address2,
+            'address3'=>$request->address3
+             ]
+    
+    );       
+        $msg =['message' => 'Company Updated successfully!'.$msgg];
         return  redirect('admin/companies')->with($msg);
     }
 
