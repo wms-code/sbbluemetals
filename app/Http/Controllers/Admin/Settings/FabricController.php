@@ -12,7 +12,7 @@ class FabricController extends Controller
     
     public function index()
     {
-        $fabrics= Fabric::orderBy('name','asc')->paginate(5);
+        $fabrics= Fabric::orderBy('name','asc')->paginate(15);
         return view('fabrics.list',compact('fabrics'));
     }
 
