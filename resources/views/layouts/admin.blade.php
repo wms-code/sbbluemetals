@@ -19,17 +19,16 @@
     @endif
     <!-- You can change the theme colors from here -->
     <link href="{{ url('css')}}/colors/blue.css" id="theme" rel="stylesheet">
-    
-<script src="{{ url('invoice/js/jquery.min.js')}}"></script>
+    <script src="{{ url('assets/plugins/jquery/jquery.min.js')}}"></script>
+        
+  
 
-<script src="{{ url('dist/js/select2.min.js')}}"></script>
-<link href="{{ url('dist/css/select2.min.css') }}" rel="stylesheet">
 
  
  
 
 
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
     @stack('style')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -134,7 +133,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{ url('assets/plugins/jquery/jquery.min.js')}}"></script>
+    
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ url('assets/plugins/bootstrap/js/tether.min.js')}}"></script>
     <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -173,7 +172,7 @@
     </script>
   @endif
     <script src="{{ url('js/custom.js')}}"></script>
-   
+ 
     @stack('script')
 </body>
 

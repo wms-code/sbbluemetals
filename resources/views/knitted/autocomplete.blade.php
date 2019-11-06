@@ -1,17 +1,26 @@
+
 @extends('layouts.admin')
-
-@section('pagetitle','Knitted Fabric Inward ')
+@push('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" /> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+@endpush
+@push('script')
+<script>
+  
+$(document).ready(function() {
+   
+    $('.js-example-basic-single').select2();
     
+});
+  </script>
+@endpush
+@section('pagetitle','Knitted Fabric Inward ')
 
-<style>
-.form-horizontal label { {
-  text-align: left !important; /* !important added for priority in SO snippet. */
-}
-</style>
+
+ 
 
 @section('content')               
-  
-        <div class="row">
+  <div class="row">
             <div class="col-md-12 col-md-offset-2 ">
                 <div class="card card-outline-info">
                    
@@ -24,30 +33,34 @@
                             <div  style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Inward No:.</label>
                                   <div class="col-md-2">
-                                        <input type="text" name="name" maxlength="50" class="form-control">
+                                        <input type="text" name="name" readonly maxlength="50" class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Inward Date:.</label>
                                    <div class="col-md-3">
-                                      <input type="date" name="name" maxlength="25" class="form-control">
+                                      <input type="date" name="name" maxlength="12" class="form-control">
                                     </div>
                             </div>
-
-                              <div style="margin-left: 0px;" class="form-group row">
-                                  <label class="control-label text-left col-md-2"> Supplier </label>
-                                   <div class="col-md-3">
-                                      <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
-                                          <option value='0'>-- Select department --</option>
-                                          @foreach($rsdepartmentData['data'] as $department)
-                                            <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
-                                          @endforeach
-                                      
-                                       </select>
-                                    </div>
+                            
+                            <div style="margin-left: 0px;" class="form-group row">
+                                <label class="control-label text-left col-md-2"> Supplier </label>
+                                 <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single" id='selsupplier' name='selsupplier'>
+                                        <option value='0'>-- Select Supplier --</option>
+                                        @foreach($rsdepartmentData['data'] as $department)
+                                          <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
+                                        @endforeach
                                     
-                              </div>
-                              
-                             
-                                
+                                     </select>
+                                  </div>
+                                  
+                            </div>
+    
+                           <div style="margin-left: 0px;" class="form-group row">                                  
+                                <label class="control-label text-left col-md-2"> Supplier Inovice No</label>
+                                <div class="col-md-2">
+                                      <input type="text" name="name" maxlength="50" class="form-control">
+                                </div>
+                            </div>
                             
                           <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                             <table  border="1" class="table">
@@ -72,7 +85,7 @@
                                         <th> <INPUT class="form-control" type='text' readonly  id='sno_1'	 value='1'  size='4'  
                                              readonly name='sno[]'/> </th>
                                         <td> 
-                                           <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
+                                           <select class="form-control js-example-basic-single" id='selfabric1' name='sel_depart[]'>
                                                 <option value='0'>-- Select Fabric --</option>
                                                   @foreach($rsdepartmentData['data'] as $department)
                                                 <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
@@ -80,12 +93,12 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="form-control itemName" id='sel_colour_1' name='sel_colour[]'>
-                                                <option value='0'>-- Select Colour --</option>
+                                            <select class="form-control js-example-basic-single" id='selfabric2' name='sel_depart[]'>
+                                                <option value='0'>-- Select Fabric --</option>
                                                   @foreach($rsdepartmentData['data'] as $department)
                                                 <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
                                                 @endforeach
-                                            </select>
+                                            </select> 
                                         </td>
                                         <td>
                                            <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
@@ -174,7 +187,7 @@
                         <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Stock Point </label>
                              <div class="col-md-2">
-                                <select class="form-control itemName" id='sel_depart1' name='sel_depart'>
+                                <select class="form-control js-example-basic-single" id='seldepart1' name='sel_depart'>
                                     <option value='0'>-- Select department --</option>
                                     @foreach($rsdepartmentData['data'] as $department)
                                       <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
