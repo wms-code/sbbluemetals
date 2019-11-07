@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+@push('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" /> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+@endpush
+@push('script')
 
 @section('pagetitle','Accounts')
     
@@ -24,14 +29,15 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Accounts Name</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="Ac_Name" maxlength="50" class="form-control">
+                                        <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>
                                 </div>
                                 
                              <div class="form-group row last">
                                     <label class="control-label text-right col-md-3">Under Accounts Group</label>
                                     <div class="col-md-7">
-                                        <select name="group_code" class="form-control">
+                                        <select name="group_code" 
+                                             class="form-control js-example-basic-single">
                                             @foreach ($accountsgroups as $item)                                                
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -42,9 +48,9 @@
                                 <div class="form-group row ">
                                         <label class="control-label text-right col-md-3">Sub Group</label>
                                         <div class="col-md-7">
-                                            <select name="SubGroup_Code" class="form-control">
+                                            <select name="subgroup_gode" class="form-control js-example-basic-single">
                                                 @foreach ($subgroup as $unit)                                                
-                                                <option value="{{ $unit->Group_Code }}">{{ $unit->Group_Name }}</option>
+                                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -52,64 +58,71 @@
 
                                 <div class="form-group row ">
                                         <label class="control-label text-right col-md-3">Report Group</label>
-                                        <div class="col-md-7">
-                                            <select name="ReportGroup" class="form-control">
+                                        <div class="col-md-6">
+                                            <select name="reportgroup_code" class="form-control jstag">
                                                 @foreach ($reportgroup as $unit)                                                
-                                                <option value="{{ $unit->Ac_Name }}">{{ $unit->Ac_Name }}</option>
+                                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                 </div> 
  
                                 <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Phone</label>
+                                        <label class="control-label text-right col-md-3">Contact Nos.</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="Phone" maxlength="50" class="form-control">
+                                            <input type="text" name="phone" maxlength="50" class="form-control">
                                         </div>
                                 </div>
-                                <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Mobile</label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="Mobile" maxlength="50" class="form-control">
-                                        </div>
-                                </div>
+                                 
 
                                 <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Address</label>
+                                        <label class="control-label text-right col-md-3">Address Line I</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="Address1" maxlength="50" class="form-control">
+                                            <input type="text" name="address1" maxlength="50" class="form-control">
                                         </div>
                                 </div>
 
                                     <div class="form-group row">
-                                            <label class="control-label text-right col-md-3">Address</label>
+                                            <label class="control-label text-right col-md-3">Address Line II</label>
                                             <div class="col-md-6">
-                                                <input type="text" name="Address2" maxlength="50" class="form-control">
+                                                <input type="text" name="address2" maxlength="50" class="form-control">
                                             </div>
                                         </div>
                                     <div class="form-group row">
-                                                <label class="control-label text-right col-md-3">Address</label>
+                                                <label class="control-label text-right col-md-3">Address Line III</label>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="Address3" maxlength="50" class="form-control">
+                                                    <input type="text" name="address3" maxlength="50" class="form-control">
                                                 </div>
                                             </div>
-                                     <div class="form-group row">
-                                                <label class="control-label text-right col-md-3">Delivery Address</label>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="DelAddress" maxlength="50" class="form-control">
-                                                </div>
-                                    </div>        
+                                      
+                                    </div>  
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">e-Mail</label>
+                                        <div class="col-md-6">
+                                            <input type="email" name="email" maxlength="50" class="form-control">
+                                        </div>
+                                     </div>       
                                     <div class="form-group row">
                                                     <label class="control-label text-right col-md-3">G.S.T. No</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="GSTNO" maxlength="50" class="form-control">
+                                                        <input type="text" name="gst_no" maxlength="50" class="form-control">
                                                     </div>
-                                    </div>        
+                                    </div> 
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">G.S.T.-State & Code</label>
+                                        <div class="col-md-6">
+                                            <select name="stategst_code" class="form-control jstag">
+                                                @foreach ($stategst as $unit)                                                
+                                                <option value="{{ $unit->id }}">{{ $unit->name.'-'.$unit->statecode }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                  </div>        
                                     <div class="form-group row last">
                                         <label class="control-label text-right col-md-3">Opn Bal</label>
                                         <div class="col-md-6">
-                                            <input type="number" name="Opn_Bal" maxlength="8" class="form-control">
-                                            <select name="opnbal">
+                                            <input type="number" name="opn_bal" maxlength="8" class="form-control">
+                                            <select name="opnbal" class="form-control js-example-basic-single">
                                                 <option value="1">Dr</option><option value="2">Cr</option>
                                             </select>
                                         </div>
@@ -119,12 +132,12 @@
                                                 <label class="control-label">Active/In Active</label>
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio1" name="ActiveRadio" type="radio" checked="" class="custom-control-input">
+                                                        <input id="radio1" name="active" type="radio" checked="" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">Active</span>
                                                     </label>
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio2" name="ActiveRadio" type="radio" class="custom-control-input">
+                                                        <input id="radio2" name="active" type="radio" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">InActive</span>
                                                     </label>
@@ -155,5 +168,12 @@
 
 
 
-                                    
+<script>
+ $(document).ready(function() {
+     $('.js-example-basic-single').select2();
+     $(".jstag").select2({
+  tags: true
+});
+      });
+ </script>                                
 @endsection

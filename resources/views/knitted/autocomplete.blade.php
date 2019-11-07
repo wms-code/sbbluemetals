@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 @push('style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" /> 
@@ -8,12 +7,12 @@
 <script>
   
 $(document).ready(function() {
-   
+ 
     $('.js-example-basic-single').select2();
     
 });
   </script>
-@endpush
+ 
 @section('pagetitle','Knitted Fabric Inward ')
 
 

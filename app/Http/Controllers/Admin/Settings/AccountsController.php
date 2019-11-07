@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Settings;
-
-//use App\Traits\AddAccount;
+ 
+  
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Model\Account;
+use App\Model\Reportgroup;
 use App\Model\AccountsGroup;
+use App\Model\Stategst;
 use App\Http\Controllers\Controller;
 class AccountsController extends Controller
 {
@@ -18,7 +21,8 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $accounts= Account::orderBy('Ac_Name','asc')->with(['accountsgroups','subgroup'])->get();
+        $accountsgroups = AccountsGroup::getall();        
+        $accounts= Account::orderBy('Ac_Name','asc')->with(['accountsgroups'])->get();
         return view('accounts.list',compact('accounts'));
 
     }
@@ -30,10 +34,11 @@ class AccountsController extends Controller
      */
     public function create()
     { 
-        $reportgroup = Account::report();
+        $stategst = Stategst::gststate();
         $subgroup = AccountsGroup::subgroup();
         $accountsgroups = AccountsGroup::getall();
-        return view('accounts.create',compact('accountsgroups','subgroup','reportgroup'));
+        $reportgroup = Reportgroup::gstreportgroup();
+        return view('accounts.create',compact('accountsgroups','subgroup','reportgroup','stategst'));
     }
 
     /**
@@ -43,13 +48,37 @@ class AccountsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $this->submit($request->all());
+    { 
+        //$input = $request->except(['credit_card']); $input = $request->only('username', 'password');
+        //DB::table('users')->insert(
+    //['email' => 'john@example.com', 'votes' => 0]
+//); 
+        
+        $opn_bal=$request->opn_bal;
+        if ( $opn_bal<=0)
+        {
+            $opn_bal=$opn_bal*-1;
+        }
+         
+        Account::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'group_code'=>$request->group_code,
+                'subgroup_code'=>$request->name,
+                'reportgroup_code'=>$request->reportgroup_code,
+                'stategst_code'=>$request->stategst_code,
+                'gst_no'=>$request->gst_no,
+                'address1'=>$request->address1,
+                'address2'=>$request->address2,
+                'address3'=>$request->address3,
+                'opn_bal'=>$opn_bal,
+                'active'=>$request->active,
+            ]);
         $msg = [
           'message' => 'Ac Name  created successfully!' ];
-        return  redirect('accounts')->with($msg);
+        return  redirect('admin/accounts')->with($msg);
     }
-
+     
     /**
      * Display the specified res
      * 
@@ -62,20 +91,22 @@ class AccountsController extends Controller
     {
         //
     }
-
+     
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Model\Accounts  $accounts
      * @return \Illuminate\Http\Response
      */
-    public function edit($ac_code)
+    public function edit($id)
     {
+        //return $id;
         $accgroup = AccountsGroup::getall();
-        $subgroup = AccountsGroup::subgroup();
-        $reportgroup = Account::report();
-        $accounts = Account::where('Ac_Code',  '=', $ac_code)->first();
-        return view('accounts.edit', compact('accounts','accgroup','subgroup','reportgroup'));
+        $subgroup = AccountsGroup::subgroup();        
+        $accounts = Account::find($id);     // Account::where('id',  '=', $id)->first();
+        $stategst = Stategst::gststate();
+        $reportgroup = Reportgroup::gstreportgroup();
+        return view('accounts.edit', compact('accounts','accgroup','subgroup','reportgroup','stategst'));
 
     }
 
@@ -86,24 +117,24 @@ class AccountsController extends Controller
      * @param  \App\Model\Accounts  $accounts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $accounts)
+    public function update(Request $request)
     {
         
-        Accounts::where('Ac_Code', $accounts)
-        ->update($request->except(['_token','_method','opnbal']));       
-        $msg =['message' => 'Accounts Name  Updated successfully ...'.$request['opnbal']];
+        Account::where('id', $request->id)
+        ->update($request->except(['_token','_method','opn_bal','opnbal']));       
+        $msg =['message' => 'Accounts Name  Updated successfully ...'];
 
-        $opnbal=$request->Opn_Bal;
+        $opnbal=$request->opn_bal;
         if ( $opnbal<=0)
         {
             $opnbal=$opnbal*-1;
-            Account::where('Ac_Code', $accounts)
-           ->update(['Opn_Bal'=> $opnbal]);  
+            Account::where('id', $request->id)
+           ->update(['opn_bal'=> $opnbal]);  
         }
         else
         {
-            Account::where('Ac_Code', $accounts)
-            ->update(['Opn_Bal'=>$request->Opn_Bal]); 
+            Account::where('id', $request->id)
+            ->update(['opn_bal'=>$request->opn_bal]); 
         }
           
 

@@ -12,6 +12,7 @@ Route::group(['namespace' => 'Admin'], function() {
     //Master
     Route::group(['namespace' => 'Settings'], function() {
         Route::resource('accounts', 'AccountsController');
+        Route::put('accounts', 'AccountsController@update');
         Route::resource('colour', 'ColourController');
         Route::resource('fabric', 'FabricController');
         Route::resource('count', 'CountController');
