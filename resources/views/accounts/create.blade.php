@@ -56,16 +56,7 @@
                                         </div>
                                 </div> 
 
-                                <div class="form-group row ">
-                                        <label class="control-label text-right col-md-3">Report Group</label>
-                                        <div class="col-md-6">
-                                            <select name="reportgroup_code" class="form-control jstag">
-                                                @foreach ($reportgroup as $unit)                                                
-                                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                </div> 
+                               
  
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Contact Nos.</label>
@@ -108,16 +99,32 @@
                                                         <input type="text" name="gst_no" maxlength="50" class="form-control">
                                                     </div>
                                     </div> 
+
+                                    
+                                    
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">G.S.T.-State & Code</label>
-                                        <div class="col-md-6">
-                                            <select name="stategst_code" class="form-control jstag">
-                                                @foreach ($stategst as $unit)                                                
-                                                <option value="{{ $unit->id }}">{{ $unit->name.'-'.$unit->statecode }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                  </div>        
+                                            <label class="control-label text-right col-md-3">G.S.T.-State & Code</label>
+                                            <div class="col-md-6">
+                                                <select  id="stategst_code" name="stategst_code" class="form-control jstag">
+                                                    @foreach ($stategst as $unit)                                                
+                                                    <option value="{{ $unit->id }}">{{ $unit->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="text" id="txtstategst_code" name="txtstategst_code" readonly  maxlength="50" class="form-control"/>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row ">
+                                                <label class="control-label text-right col-md-3">Report Group</label>
+                                                <div class="col-md-6">
+                                                    <select id="reportgroup_code"   name="reportgroup_code" class="form-control jstag">
+                                                        @foreach ($reportgroup as $unit)                                                
+                                                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <input type="text" id="txtreportgroup_code" name="txtreportgroup_code" readonly  maxlength="50" class="form-control"/>
+                                                </div>
+                                        </div> 
+
                                     <div class="form-group row last">
                                         <label class="control-label text-right col-md-3">Opn Bal</label>
                                         <div class="col-md-6">
@@ -132,12 +139,13 @@
                                                 <label class="control-label">Active/In Active</label>
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio1" name="active" type="radio" checked="" class="custom-control-input">
+                                                        <input id="radio1" name="active" type="radio"
+                                                         checked="" value ="1" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">Active</span>
                                                     </label>
                                                     <label class="custom-control custom-radio">
-                                                        <input id="radio2" name="active" type="radio" class="custom-control-input">
+                                                        <input id="radio2" value ="0" name="active" type="radio" class="custom-control-input">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">InActive</span>
                                                     </label>
@@ -151,7 +159,7 @@
                                         <div class="row">
                                             <div class="offset-sm-3 col-md-7">
                                                 
-                                                <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                                <button type="submit" class="go-btn btn btn-success"> <i class="fa fa-check"></i> Save</button>
                                                 <a href="{{ url('admin/accounts') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
@@ -174,6 +182,18 @@
      $(".jstag").select2({
   tags: true
 });
+
+
+$('.go-btn').click(function() {
+    var selected = $('#stategst_code option:selected');  
+    document.getElementById("txtstategst_code").value = selected.html();
+
+    selected = $('#reportgroup_code option:selected');  
+    document.getElementById("txtreportgroup_code").value = selected.html();
+    
+});
       });
- </script>                                
+
+    
+      </script>                               
 @endsection

@@ -49,24 +49,52 @@ class AccountsController extends Controller
      */
     public function store(Request $request)
     { 
-        //$input = $request->except(['credit_card']); $input = $request->only('username', 'password');
-        //DB::table('users')->insert(
-    //['email' => 'john@example.com', 'votes' => 0]
-//); 
-     $opnbalno=$request->opn_bal;
-     $opnbalstring=$request->opnbal;
-     if ( $opnbalstring="1")
-     {
-       $opnbalno=$opnbalno*-1; 
-     }
+        $strstategst_code=$request->txtstategst_code;
+        $strreportgroup_code=$request->txtreportgroup_code;
+        $last2=0;$last3=0;
+
+        $user = Stategst::where('name', '=', $strstategst_code)->first();
+        if ($user === null) {
+            Stategst::create([
+                'name'=>$strstategst_code,
+            ]);
+            $last2 = Stategst::orderBy('id', 'DESC')->first();
+            $last2 = $last2->id;
+        }
+        else
+        {
+            $last2=Stategst::where('name', $strstategst_code)->pluck('id');
+            $last2=$last2[0];
+        }
+
+        $user = Reportgroup::where('name', '=', $strreportgroup_code)->first();
+        if ($user === null) {
+            Reportgroup::create([
+                'name'=>$strreportgroup_code,
+            ]);
+            $last3 = Reportgroup::orderBy('id', 'DESC')->first();
+            $last3 = $last3->id;
+        }
+        else
+        {
+            $last3=Reportgroup::where('name', $strreportgroup_code)->pluck('id');
+            $last3=$last3[0];
+        }
+         
+        $opnbalno=$request->opn_bal;
+        $opnbalstring=$request->opnbal;
+        if ( $opnbalstring="1")
+        {
+         $opnbalno=$opnbalno*-1; 
+        }
  
         Account::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'group_code'=>$request->group_code,
-                'subgroup_code'=>$request->name,
-                'reportgroup_code'=>$request->reportgroup_code,
-                'stategst_code'=>$request->stategst_code,
+                'subgroup_code'=>$request->subgroup_code,
+                'reportgroup_code'=>$last3,
+                'stategst_code'=>$last2,
                 'gst_no'=>$request->gst_no,
                 'address1'=>$request->address1,
                 'address2'=>$request->address2,
@@ -121,8 +149,51 @@ class AccountsController extends Controller
     {
         
         Account::where('id', $request->id)
-        ->update($request->except(['_token','_method','opn_bal','opnbal']));       
+        ->update($request->except(['_token','_method','opn_bal','opnbal','stategst_code','reportgroup_code','txtreportgroup_code','txtstategst_code']));       
         $msg =['message' => 'Accounts Name  Updated successfully ...'];
+        
+
+        $strstategst_code=$request->txtstategst_code;
+        $strreportgroup_code=$request->txtreportgroup_code;
+        $last2=0;$last3=0;
+
+        $user = Stategst::where('name', '=', $strstategst_code)->first();
+        if ($user === null) {
+            Stategst::create([
+                'name'=>$strstategst_code,
+            ]);
+              $last2 = Stategst::orderBy('id', 'DESC')->first();
+              $strstategst_code=$last2->id;
+        }
+        else
+        {
+            $last2=Stategst::where('name', $strstategst_code)->pluck('id');
+            $strstategst_code=$last2[0];
+        }
+        Account::where('id', $request->id)
+           ->update(['stategst_code'=> $strstategst_code]);
+
+
+        $user = Reportgroup::where('name', '=', $strreportgroup_code)->first();
+        if ($user === null) {
+            Reportgroup::create([
+                'name'=>$strreportgroup_code,
+            ]);
+            $last3 = Reportgroup::orderBy('id', 'DESC')->first();           
+            $strreportgroup_code=$last->id;
+        }
+        else
+        {
+            $last3=Reportgroup::where('name', $strreportgroup_code)->pluck('id');
+            $strreportgroup_code=$last3[0];
+        }
+
+        Account::where('id', $request->id)
+        ->update(['reportgroup_code'=> $strreportgroup_code]); 
+
+
+
+
 
         $opnbalno=$request->opn_bal;
         $opnbalstring=$request->opnbal;
@@ -136,8 +207,6 @@ class AccountsController extends Controller
         {
             Account::where('id', $request->id)
             ->update(['opn_bal'=>$request->opn_bal
-            
-            
             ]); 
         }
           

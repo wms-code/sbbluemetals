@@ -16,4 +16,5 @@ class Stategst extends Model
         ->orderBy('name')
         ->get();
     }
+    
 }
