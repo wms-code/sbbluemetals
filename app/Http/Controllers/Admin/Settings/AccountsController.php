@@ -124,17 +124,21 @@ class AccountsController extends Controller
         ->update($request->except(['_token','_method','opn_bal','opnbal']));       
         $msg =['message' => 'Accounts Name  Updated successfully ...'];
 
-        $opnbal=$request->opn_bal;
-        if ( $opnbal<=0)
+        $opnbalno=$request->opn_bal;
+        $opnbalstring=$request->opnbal;
+        if ( $opnbalstring="1")
         {
-            $opnbal=$opnbal*-1;
+            $opnbalno=$opnbalno*-1;
             Account::where('id', $request->id)
-           ->update(['opn_bal'=> $opnbal]);  
+           ->update(['opn_bal'=> $opnbalno]);  
         }
-        else
+        else if ( $opnbalstring="2")
         {
             Account::where('id', $request->id)
-            ->update(['opn_bal'=>$request->opn_bal]); 
+            ->update(['opn_bal'=>$request->opn_bal
+            
+            
+            ]); 
         }
           
 
