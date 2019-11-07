@@ -13,4 +13,11 @@ class Account extends Model
     {
         return $this->hasOne(AccountsGroup::class, 'id', 'accounts_groups_id');
     }
+    protected function report()
+    {
+        return $this->select('id','name') 
+        //->whereIn('id', array(11,12,14,15))
+        ->orderBy('name')
+        ->get();
+    }
 }

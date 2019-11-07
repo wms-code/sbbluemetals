@@ -23,7 +23,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                         <div class="float-right">
-                                                            <a class="btn btn-sm  btn-primary" href="{{ url('accounts/create') }}">Add New</a></div>
+                                                            <a class="btn btn-sm  btn-primary" href="{{ url('admin/accounts/create') }}">Add New</a></div>
                                                     
                                                 </div>
                                               </div>
@@ -52,9 +52,9 @@
                                                         <td>{{$d->GSTNO}}  {{$d->Opn_Bal}}</td>                             
                                                                                                   
                                                         <td class="text-nowrap">
-                                                            <a href="{{ url('accounts') }}/{{$d->Ac_Code}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                            <a href="{{ url('admin/accounts') }}/{{$d->Ac_Code}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i>
-                                                                    <form action="{{ url('/accounts') }}/{{$d->Ac_Code}}" method="post">
+                                                                    <form action="{{ url('admin/accounts') }}/{{$d->Ac_Code}}" method="post">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                     </form>

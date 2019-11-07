@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Master;
+namespace App\Http\Controllers\Admin\Settings;
 
-use App\Traits\AddAccount;
+//use App\Traits\AddAccount;
 use Illuminate\Http\Request;
-use App\Model\Master\Accounts;
-use App\Model\Master\AccountsGroup;
+use App\Model\Account;
+use App\Model\AccountsGroup;
 use App\Http\Controllers\Controller;
 class AccountsController extends Controller
 {
-    use AddAccount;
+   // use AddAccount;
     
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        $accounts= Accounts::orderBy('Ac_Name','asc')->with(['accountsgroups','subgroup'])->get();
+        $accounts= Account::orderBy('Ac_Name','asc')->with(['accountsgroups','subgroup'])->get();
         return view('accounts.list',compact('accounts'));
 
     }
@@ -30,7 +30,7 @@ class AccountsController extends Controller
      */
     public function create()
     { 
-        $reportgroup = Accounts::report();
+        $reportgroup = Account::report();
         $subgroup = AccountsGroup::subgroup();
         $accountsgroups = AccountsGroup::getall();
         return view('accounts.create',compact('accountsgroups','subgroup','reportgroup'));
@@ -58,7 +58,7 @@ class AccountsController extends Controller
      * @param  \App\Model\Accounts  $accounts
      * @return \Illuminate\Http\Response
      */
-    public function show(Accounts $accounts)
+    public function show(Account $accounts)
     {
         //
     }
@@ -73,8 +73,8 @@ class AccountsController extends Controller
     {
         $accgroup = AccountsGroup::getall();
         $subgroup = AccountsGroup::subgroup();
-        $reportgroup = Accounts::report();
-        $accounts = Accounts::where('Ac_Code',  '=', $ac_code)->first();
+        $reportgroup = Account::report();
+        $accounts = Account::where('Ac_Code',  '=', $ac_code)->first();
         return view('accounts.edit', compact('accounts','accgroup','subgroup','reportgroup'));
 
     }
@@ -97,17 +97,17 @@ class AccountsController extends Controller
         if ( $opnbal<=0)
         {
             $opnbal=$opnbal*-1;
-            Accounts::where('Ac_Code', $accounts)
+            Account::where('Ac_Code', $accounts)
            ->update(['Opn_Bal'=> $opnbal]);  
         }
         else
         {
-            Accounts::where('Ac_Code', $accounts)
+            Account::where('Ac_Code', $accounts)
             ->update(['Opn_Bal'=>$request->Opn_Bal]); 
         }
           
 
-        return  redirect('accounts')->with($msg);
+        return  redirect('admin/accounts')->with($msg);
     }
 
     /**

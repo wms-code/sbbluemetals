@@ -11,12 +11,13 @@ Route::group(['namespace' => 'Admin'], function() {
 
     //Master
     Route::group(['namespace' => 'Settings'], function() {
+        Route::resource('accounts', 'AccountsController');
         Route::resource('colour', 'ColourController');
         Route::resource('fabric', 'FabricController');
         Route::resource('count', 'CountController');
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
-        Route::resource('accounts', 'AccountController');
+        //Route::resource('accounts', 'AccountController');
         Route::resource('companies', 'CompanyController');
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         Route::resource('fabricgroup', 'FabricGroupController');

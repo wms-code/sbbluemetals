@@ -15,7 +15,7 @@
                     </div>
                 
                     <div class="card-body">
-                        <form action="{{ url('accounts') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/accounts') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -31,9 +31,9 @@
                              <div class="form-group row last">
                                     <label class="control-label text-right col-md-3">Under Accounts Group</label>
                                     <div class="col-md-7">
-                                        <select name="Group_Code" class="form-control">
+                                        <select name="group_code" class="form-control">
                                             @foreach ($accountsgroups as $item)                                                
-                                            <option value="{{ $item->Group_Code }}">{{ $item->Group_Name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -139,7 +139,7 @@
                                             <div class="offset-sm-3 col-md-7">
                                                 
                                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                                <a href="{{ url('accounts') }}" class="btn btn-inverse">Cancel</a>
+                                                <a href="{{ url('admin/accounts') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
 
