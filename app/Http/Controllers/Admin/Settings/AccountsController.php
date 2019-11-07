@@ -180,7 +180,7 @@ class AccountsController extends Controller
                 'name'=>$strreportgroup_code,
             ]);
             $last3 = Reportgroup::orderBy('id', 'DESC')->first();           
-            $strreportgroup_code=$last->id;
+            $strreportgroup_code=$last3->id;
         }
         else
         {
