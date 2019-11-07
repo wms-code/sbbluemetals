@@ -30,8 +30,12 @@ class FabricGroupController extends Controller
     }
 
   
-    public function edit(FabricGroup $rsfabricgroup)
+    public function edit($id)
     {
+      //  return $id;
+          
+        $rsfabricgroup = FabricGroup::find($id);     
+        
         return  view('fabricgroup.edit',compact('rsfabricgroup'));
     }
 

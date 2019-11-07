@@ -12,7 +12,7 @@ class ColourController extends Controller
     
     public function index()
     {
-        $colours= Colour::orderBy('name','asc')->paginate(5);
+        $colours= Colour::orderBy('name','asc')->paginate(25);
         return view('colours.list',compact('colours'));
     }
 
