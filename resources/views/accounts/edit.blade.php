@@ -136,7 +136,7 @@
                                             <input type="number" name="opn_bal" 
                                             
                                             value="{{  abs($accounts->opn_bal) }}"  maxlength="8" class="form-control">
-                                            <select name="opnbal">
+                                            <select class="form-control" name="opnbal">
                                                 <option {{ ($accounts->opn_bal<"0")? "selected" : "" }} value="1">Dr</option>
                                                 <option {{ ($accounts->opn_bal>"0")? "selected" : "" }} value="2">Cr</option>
                                             </select>

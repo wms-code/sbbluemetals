@@ -129,7 +129,7 @@
                                         <label class="control-label text-right col-md-3">Opn Bal</label>
                                         <div class="col-md-6">
                                             <input type="number" name="opn_bal" maxlength="8" class="form-control">
-                                            <select name="opnbal" class="form-control js-example-basic-single">
+                                            <select name="opnbal" class="form-control">
                                                 <option value="1">Dr</option><option value="2">Cr</option>
                                             </select>
                                         </div>

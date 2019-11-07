@@ -83,7 +83,7 @@ class AccountsController extends Controller
          
         $opnbalno=$request->opn_bal;
         $opnbalstring=$request->opnbal;
-        if ( $opnbalstring="1")
+        if ( $opnbalstring=="1")
         {
          $opnbalno=$opnbalno*-1; 
         }
@@ -195,19 +195,17 @@ class AccountsController extends Controller
 
 
 
-        $opnbalno=$request->opn_bal;
+         $opnbalno=$request->opn_bal;
         $opnbalstring=$request->opnbal;
-        if ( $opnbalstring="1")
+        if ( $opnbalstring=="1")
         {
             $opnbalno=$opnbalno*-1;
-            Account::where('id', $request->id)
-           ->update(['opn_bal'=> $opnbalno]);  
+            Account::where('id', $request->id)->update(['opn_bal'=> $opnbalno]);  
         }
-        else if ( $opnbalstring="2")
+        else if ( $opnbalstring=="2")
         {
-            Account::where('id', $request->id)
-            ->update(['opn_bal'=>$request->opn_bal
-            ]); 
+            Account::where('id', $request->id)->update(['opn_bal'=>$request->opn_bal]); 
+            // $request->opn_bal;
         }
           
 
