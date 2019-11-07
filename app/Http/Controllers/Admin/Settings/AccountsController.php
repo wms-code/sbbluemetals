@@ -53,13 +53,13 @@ class AccountsController extends Controller
         //DB::table('users')->insert(
     //['email' => 'john@example.com', 'votes' => 0]
 //); 
-        
-        $opn_bal=$request->opn_bal;
-        if ( $opn_bal<=0)
-        {
-            $opn_bal=$opn_bal*-1;
-        }
-         
+     $opnbalno=$request->opn_bal;
+     $opnbalstring=$request->opnbal;
+     if ( $opnbalstring="1")
+     {
+       $opnbalno=$opnbalno*-1; 
+     }
+ 
         Account::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
@@ -71,7 +71,7 @@ class AccountsController extends Controller
                 'address1'=>$request->address1,
                 'address2'=>$request->address2,
                 'address3'=>$request->address3,
-                'opn_bal'=>$opn_bal,
+                'opn_bal'=>$opnbalno,
                 'active'=>$request->active,
             ]);
         $msg = [
