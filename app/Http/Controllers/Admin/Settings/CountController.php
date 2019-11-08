@@ -24,7 +24,7 @@ class CountController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([ 'name' => 'required|name|max:255|unique:counts', ]);
+      //  $request->validate([ 'name' => 'required|name|max:255|unique:counts', ]);
         Count::create($request->all());
         $msg = ['message' => 'Count created successfully!' ];
         return  redirect('admin/count')->with($msg);

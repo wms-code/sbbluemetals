@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Stock Point ')
+@section('pagetitle','Fabric Stock Rack ')
     
 
 
@@ -12,7 +12,7 @@
                             <div class="card-block">
                                     <div class="row justify-content-between">
                                             <div class="col-4">
-                                                <h4 class="card-title">Stock Points List </h4>
+                                                <h4 class="card-title">Fabric Stock Racks List </h4>
                                             </div>
                                             <div class="col-6">
                                                     <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/stockpoint/create') }}">Add New</a></div>
@@ -26,8 +26,8 @@
                                         <thead>
                                             <tr>
                                                  
-                                                <th>Stock Point</th>
-                                                <th>Rack</th>
+                                                <th>Fabric Stock Rack</th>
+                                                <th>Rack-Extra</th>
                                                 <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>

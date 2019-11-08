@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Stock Point')
+@section('pagetitle','Fabric Stock Rack')
     
 
 
@@ -20,14 +20,14 @@
                             @csrf
                             @method('post')
                             <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Stock Point Name</label>
+                                    <label class="control-label text-right col-md-3">Fabric Stock Rack </label>
                                     <div class="col-md-6">
                                         <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>
                                 </div>
 
                             <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Rack</label>
+                                    <label class="control-label text-right col-md-3">Rack Extra</label>
                                     <div class="col-md-6">
                                         <input type="text" name="rack" maxlength="50" class="form-control">
                                     </div>

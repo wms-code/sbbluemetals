@@ -1,10 +1,18 @@
 @extends('layouts.admin')
 @push('style')
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" /> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
- 
+<style>
+    sel_colour {
+        color: inherit;
+        font-size: inherit;
+        font-weight:bold;
+        padding: 6px 4px;
+    }
+    </style>
 @section('pagetitle','Knitted Fabric Inward ')
  
 @section('content')               

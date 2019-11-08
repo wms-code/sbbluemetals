@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Edit Stock Point')
+@section('pagetitle','Edit Fabric Stock Rack')
     
 
 
@@ -20,14 +20,14 @@
                         @csrf
                         @method('put')
                         <div class="form-group row">
-                                <label class="control-label text-right col-md-3">StockPoint ID</label>
+                                <label class="control-label text-right col-md-3">Fabric StockPoint ID</label>
                                 <div class="col-md-6">
                                     <input type="text" name="id" readonly value="{{ $stockpoint->id }}" class="form-control">
                                    
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Stock Point Name</label>
+                                <label class="control-label text-right col-md-3">Fabric Stock Rack</label>
                                 <div class="col-md-6">
                                     
                                     <input type="text" name="name" maxlength="50" value="{{ $stockpoint->name }}" class="form-control">
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Rack</label>
+                                <label class="control-label text-right col-md-3">Rack Extra</label>
                                 <div class="col-md-6">
                                     
                                     <input type="text" name="rack" maxlength="50" value="{{ $stockpoint->rack }}" class="form-control">
