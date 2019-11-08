@@ -4,7 +4,7 @@ namespace App\Model;
 use App\Http\Controllers\Admin;
 use Illuminate\Database\Eloquent\Model;
 
-class FabricGroup extends Model
+class Fabricgroup extends Model
 {
     protected $table='fabricgroup';
     protected $guarded=['active'];
