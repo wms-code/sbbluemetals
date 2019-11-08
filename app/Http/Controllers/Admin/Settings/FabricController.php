@@ -63,7 +63,7 @@ class FabricController extends Controller
     public function update(Request $request)
     {
         Fabric::where('id', $request->id)
-        ->update(['name'=>$request->name ]);       
+        ->update(['name'=>$request->name,'fabricgroup_code'=>$request->fabricgroup_code ]);       
         $msg =['message' => 'Fabric Updated successfully!'];
          return  redirect('admin/fabric')->with($msg);
     }

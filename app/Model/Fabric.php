@@ -12,5 +12,11 @@ class Fabric extends Model
     {
         return $this->hasOne(FabricGroup::class, 'id', 'fabricgroup_code');
     }
+    protected function getall()
+    {
+        return $this->select('id','name')        
+        ->orderBy('name')
+        ->get();
+    }
    
 }

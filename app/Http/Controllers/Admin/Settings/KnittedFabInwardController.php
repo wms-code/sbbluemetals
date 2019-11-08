@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Settings;
 
 use Illuminate\Http\Request;  
 use App\Model\KnittedFabInward;
+use App\Model\Fabric;
+use App\Model\Colour;
 use App\Http\Controllers\Controller;
 use DB;
 class KnittedFabInwardController extends Controller
@@ -12,16 +14,20 @@ class KnittedFabInwardController extends Controller
     {
         $this->middleware('auth:admin');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     
     public function index()
     {
-        $rsdepartmentData['data'] = KnittedFabInward::getcolour();
-          
-       return view('knitted.autocomplete',compact('rsdepartmentData'));
+        $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
+        
+         $rsfabrics = DB::table('fabrics')        
+                ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
+                ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+                ->orderBy('fabricgroup.name', 'asc')
+                ->orderBy('fabrics.name', 'asc')
+                ->get(); 
+        
+        $rsdepartmentData['colour'] = Colour::getall();            
+        return view('knitted.autocomplete',compact(['rsdepartmentData','rsfabrics']));
 
     }
 

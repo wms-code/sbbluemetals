@@ -3,21 +3,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" /> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
-@push('script')
-<script>
-  
-$(document).ready(function() {
- 
-    $('.js-example-basic-single').select2();
-    
-});
-  </script>
+
  
 @section('pagetitle','Knitted Fabric Inward ')
-
-
  
-
 @section('content')               
   <div class="row">
             <div class="col-md-12 col-md-offset-2 ">
@@ -46,7 +35,7 @@ $(document).ready(function() {
                                     <select class="form-control js-example-basic-single" id='selsupplier' name='selsupplier'>
                                         <option value='0'>-- Select Supplier --</option>
                                         @foreach($rsdepartmentData['data'] as $department)
-                                          <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
+                                          <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                         @endforeach
                                      </select>
                                   </div>
@@ -68,7 +57,7 @@ $(document).ready(function() {
                                       <th width="4%">SNo</th>
                                       <th width="10%">Fabirc</th>
                                       <th width="10%">Colour</th>
-                                      <th width="5%">H.S.N.</th>
+                                      <th width="4%">H.S.N.</th>
                                       <th width="5%">Particulars</th>
                                       <th width="5%">Rolls</th>
                                       <th width="10%">Qty</th>
@@ -83,20 +72,40 @@ $(document).ready(function() {
                                         <th> <INPUT class="form-control" type='text' readonly  id='sno_1'	 value='1'  size='4'  
                                              readonly name='sno[]'/> </th>
                                         <td> 
-                                           <select class="form-control js-example-basic-single" id='selfabric1' name='sel_depart[]'>
-                                                <option value='0'>-- Select Fabric --</option>
-                                                  @foreach($rsdepartmentData['data'] as $department)
-                                                <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <select class="js-example-basic-single" id='selcolour1' name='sel_colour[]'>
+{{ $previousCountry = null}} 
+@foreach($rsfabrics  as $courseCategory) 
+<?php 
+    if ($previousCountry != $courseCategory->fabricgroupname) 
+      {
+          echo "<optgroup label='$courseCategory->fabricgroupname'>";
+      } 
+?>
+  <option value="{{ $courseCategory->id }}">  {{$courseCategory->fabricname }} </option>
+  {{  $previousCountry = $courseCategory->fabricgroupname }}
+    
+  <?php 
+  if ($previousCountry != $courseCategory->fabricgroupname) 
+    {
+    echo '</optgroup>';
+    } 
+?>                                                   
+ @endforeach
+</select>
                                         </td>
                                         <td>
-                                            <select class="form-control js-example-basic-single" id='selfabric2' name='sel_depart[]'>
+                                            <select class="js-example-basic-single" id='selfabric1' name='sel_depart[]'>
                                                 <option value='0'>-- Select Fabric --</option>
-                                                  @foreach($rsdepartmentData['data'] as $department)
-                                                <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
+                                                  @foreach($rsdepartmentData['colour'] as $department)
+                                                
+                                                <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                              
                                                 @endforeach
-                                            </select> 
+                                            </select>
+                                           
+
+
+                                           
                                         </td>
                                         <td>
                                            <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
@@ -187,8 +196,8 @@ $(document).ready(function() {
                              <div class="col-md-2">
                                 <select class="form-control js-example-basic-single" id='seldepart1' name='sel_depart'>
                                     <option value='0'>-- Select department --</option>
-                                    @foreach($rsdepartmentData['data'] as $department)
-                                      <option value='{{ $department->country_name }}'>{{ $department->country_name }}</option>
+                                    @foreach($rsdepartmentData['colour'] as $department)
+                                      <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                     @endforeach
                                 
                                  </select>
@@ -427,6 +436,14 @@ $(document).ready(function() {
             
  </script>
             
-
+            
+            <script>
+              
+            $(document).ready(function() {
+             
+                $('.js-example-basic-single').select2();
+                
+            });
+              </script>
                                     
 @endsection
