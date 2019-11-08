@@ -28,7 +28,8 @@ class KnittedFabInwardController extends Controller
                 ->get(); 
         
         $rsdepartmentData['colour'] = Colour::getall(); 
-        $rsdepartmentData['rsstockpoint'] = Stockpoint::getall();             
+        $rsdepartmentData['rsstockpoint'] = Stockpoint::getall(); 
+        $rsdepartmentData['inwardno'] = KnittedFabInward::max('inward_number');;            
         return view('knitted.autocomplete',compact(['rsdepartmentData','rsfabrics']));
 
     }
@@ -83,7 +84,7 @@ class KnittedFabInwardController extends Controller
         ->orderBy('fabricgroup.name', 'asc')
         ->orderBy('fabrics.name', 'asc')
         ->get(); 
-        
+
         $output ='';
         $previousCountry = null; 
         foreach($rsfabrics  as $courseCategory) 

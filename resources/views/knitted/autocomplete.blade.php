@@ -21,7 +21,9 @@
                             <div  style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Inward No:.</label>
                                   <div class="col-md-2">
-                                        <input type="text" name="name" readonly maxlength="50" class="form-control">
+                                        <input type="text" name="name" 
+                                        value ={{ $rsdepartmentData['inwardno'] }}
+                                        readonly maxlength="50" class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Inward Date:.</label>
                                    <div class="col-md-3">
@@ -258,13 +260,15 @@
               html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
-            
+             
               updatecolour('selcolour'+i);
               updatefabric('selfabric'+i);
               updaterack('selrack'+i);
               
               $('table').append(html);
+              
               setrowvalue();
+             
               i++;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
 function updaterack(para){
@@ -277,6 +281,7 @@ function updaterack(para){
               success: function(response){                   
               var len = response.length;
               $(para).append(response);
+              $(para).select2();
               },//sucess
               error: function (jqXHR, exception) {
                     var msg = '';
@@ -302,7 +307,7 @@ function updaterack(para){
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     } 
                   });
-                  $('.jssingle').select2();
+                 
             }               
             
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -318,6 +323,7 @@ function updaterack(para){
                        success: function(response){                   
                         var len = response.length;
                         $(para).append(response);
+                        $(para).select2();
                        },//sucess
                        error: function (jqXHR, exception) {
                     var msg = '';
@@ -358,6 +364,7 @@ function updatefabric(para){
                        success: function(response){                   
                         var len = response.length;
                         $(para).append(response);
+                        $(para).select2();
                        },//sucess
                        error: function (jqXHR, exception) {
                     var msg = '';
