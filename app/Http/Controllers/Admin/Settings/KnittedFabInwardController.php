@@ -15,7 +15,10 @@ class KnittedFabInwardController extends Controller
     {
         $this->middleware('auth:admin');
     }
-     
+    private  function getmax()
+    {
+        KnittedFabInward::max('inward_number')
+    }
     public function index()
     {
         $rsdepartmentData['data'] = KnittedFabInward::getsupplier();

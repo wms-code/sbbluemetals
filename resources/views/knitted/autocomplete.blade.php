@@ -58,7 +58,7 @@
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
                                       <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc & Rack </th>
+                                      <th width="10%">Fabirc</th>
                                       <th width="4%">H.S.N.</th>
                                       <th width="5%">Particulars</th>
                                       <th width="5%">Rolls</th>
@@ -108,15 +108,7 @@
 </select><br>
                                         
                                              
-                                                    <select class="jssingle" id='selrack1' name='sel_rack[]'>
-                                                        <option value='0'>-- Select Rack --</option>
-                                                        @foreach($rsdepartmentData['rsstockpoint'] as $department)
-                                                
-                                                        <option value='{{ $department->id }}'>{{ $department->name }}</option>
-                                                         
-                                                        @endforeach
-                                                    
-                                                     </select>
+                                              
                                                    
                                         </td>
                                         <td>
@@ -247,8 +239,7 @@
               html += '<td><input class="case" type="checkbox"/></td>';
               html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
               html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
-              html += '<select class="form-control jssingle " id="selrack'+i+'" name="selrack[]"><option value="0">- Select Rack-</option></select></td>';
+              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select></td>';
               html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
               html += '<td><input type="text" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
               html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
