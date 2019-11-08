@@ -32,7 +32,7 @@
                             <div style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Supplier </label>
                                  <div class="col-md-3">
-                                    <select class="form-control js-example-basic-single" id='selsupplier' name='selsupplier'>
+                                    <select class="form-control jssingle" id='selsupplier' name='selsupplier'>
                                         <option value='0'>-- Select Supplier --</option>
                                         @foreach($rsdepartmentData['data'] as $department)
                                           <option value='{{ $department->id }}'>{{ $department->name }}</option>
@@ -73,7 +73,7 @@
                                              readonly name='sno[]'/> </th>
                                      
                                         <td>
-                                            <select class="js-example-basic-single" id='selcolour1' name='sel_colour[]'>
+                                            <select class="jssingle" id='selcolour1' name='sel_colour[]'>
                                                 <option value='0'>-- Select Colour --</option>
                                                   @foreach($rsdepartmentData['colour'] as $department)
                                                 
@@ -83,7 +83,7 @@
                                             </select>
                                         </td>
                                         <td> 
-                                            <select class="js-example-basic-single" id='selfabric1' name='sel_fabric[]'>
+                                            <select class="jssingle" id='selfabric1' name='sel_fabric[]'>
                                                 <option value='0'>-- Select Fabric --</option>
                                               {{ $previousCountry = null}} 
 @foreach($rsfabrics  as $courseCategory) 
@@ -106,7 +106,7 @@
 </select><br>
                                         
                                              
-                                                    <select class="form-control js-example-basic-single" id='selrack1' name='sel_rack[]'>
+                                                    <select class="jssingle" id='selrack1' name='sel_rack[]'>
                                                         <option value='0'>-- Select Rack --</option>
                                                         @foreach($rsdepartmentData['rsstockpoint'] as $department)
                                                 
@@ -244,10 +244,11 @@
               html = '<tr>';
               html += '<td><input class="case" type="checkbox"/></td>';
               html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
-              html += '<td><select class="form-control" id="sel_user_'+i+'"  name="sel_fabric[]"><option value="0">- Select Fabric-</option></select></td>';
-              html += '<td><select class="form-control" id="sel_colour_'+i+'" name="sel_colour[]"><option value="0">- Select Colour-</option></select></td>';
+              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
+              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
+              html += '<select class="form-control jssingle " id="selrack'+i+'" name="selrack[]"><option value="0">- Select Rack-</option></select></td>';
               html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
-              html += '<td><input type="text" name="particulars[]" id="particulars_'+i+'" class="form-control"></td>';
+              html += '<td><input type="text" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
               html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
               html += '<td><input type="number" name="qty[]"  id="qty_'+i+'" class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
               html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
@@ -257,20 +258,61 @@
               html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
-              updateselect2('sel_user_'+i);
-              updateselect2('sel_colour_'+i);
+            
+              updatecolour('selcolour'+i);
+              updatefabric('selfabric'+i);
+              updaterack('selrack'+i);
               
               $('table').append(html);
               setrowvalue();
               i++;
-
-
-              function updateselect2(para){
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+function updaterack(para){
+  para='#'+para;
+  var _token = $('input[name="_token"]').val();
+    $.ajax({
+              url:"{{ route('knittedfabric.fetchrack') }}",
+              method:"POST", 
+              data:{_token:_token},  
+              success: function(response){                   
+              var len = response.length;
+              $(para).append(response);
+              },//sucess
+              error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+                  $('.jssingle').select2();
+            }               
+            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+              function updatecolour(para){
                 para='#'+para;
                 var _token = $('input[name="_token"]').val();
                        ///////////////////////////////////
                        $.ajax({
-                       url:"{{ route('knittedfabric.fetch') }}",
+                       url:"{{ route('knittedfabric.fetchcolour') }}",
                        method:"POST", 
                        data:{_token:_token},  
                        success: function(response){                   
@@ -300,13 +342,50 @@
                     headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     } 
-                  });//ajax
+                  });
+            }               
             
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+function updatefabric(para){
+                para='#'+para;
+                var _token = $('input[name="_token"]').val();
                        ///////////////////////////////////
-            }
-              //alert('s');
+                       $.ajax({
+                       url:"{{ route('knittedfabric.fetchfabric') }}",
+                       method:"POST", 
+                       data:{_token:_token},  
+                       success: function(response){                   
+                        var len = response.length;
+                        $(para).append(response);
+                       },//sucess
+                       error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+            }               
             });
-            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
             //to check all checkboxes
             $(document).on('change','#check_all',function(){	
               $('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
@@ -439,7 +518,7 @@
               
             $(document).ready(function() {
              
-                $('.js-example-basic-single').select2();
+                $('.jssingle').select2();
                 
             });
               </script>

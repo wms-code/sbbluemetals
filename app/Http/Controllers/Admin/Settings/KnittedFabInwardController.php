@@ -54,28 +54,53 @@ class KnittedFabInwardController extends Controller
      }
     }
 
-    public function fetch(Request $request){
-    //    $rsdepartmentData = KnittedFabInward::getcolour1();
-       // echo $rsdepartmentData;
-       // return response()->json(['results' => $rsdepartmentData]);
-       //$query = $request->get('query');
-       $data = DB::table('apps_countries')
-        // ->where('country_name', 'LIKE', "%{$query}%")
-         ->get();
-       $output ='';// '<optopn class="dropdown-menu" style="display:block; position:relative">';
-       foreach($data as $row)
-       {
-        $output .= '
-        <option value='.$row->country_name.'>'.$row->country_name.'</option>
-        ';
-       }
-     //  $output .= '</ul>';
-       echo $output;
-       //<option value='"+id+"'>"+name+"</option>"
+    public function fetchrack(Request $request)
+    {      
+        $data = DB::table('stockpoints')->get();
+        $output ='';
+        foreach($data as $row)
+        {
+            $output .='<option value='.$row->id.'>'.$row->name.'</option>';
+        }         
+         echo $output;      
+    }
+    public function fetchcolour()
+    {    
+        echo 's';  
+        $data = DB::table('colours')->get();
+        $output ='';
+        foreach($data as $row)
+        {
+            $output .='<option value='.$row->id.'>'.$row->name.'</option>';
+        }         
+         echo $output;      
+    }
+    public function fetchfabric(Request $request){
      
-      //  echo json_encode($rsdepartmentData);
-        //exit;
-          
+        $rsfabrics = DB::table('fabrics')        
+        ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
+        ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+        ->orderBy('fabricgroup.name', 'asc')
+        ->orderBy('fabrics.name', 'asc')
+        ->get(); 
+        
+        $output ='';
+        $previousCountry = null; 
+        foreach($rsfabrics  as $courseCategory) 
+        {
+            if ($previousCountry != $courseCategory->fabricgroupname) 
+              {
+                $output .= "<optgroup label='$courseCategory->fabricgroupname'>";
+              } 
+        
+            $output .="<option value='$courseCategory->id'>$courseCategory->fabricname</option>";
+            $previousCountry = $courseCategory->fabricgroupname;            
+            if ($previousCountry != $courseCategory->fabricgroupname) 
+            {
+                $output .= "</optgroup>";
+            }                                             
+        } 
+       echo $output;      
     }
     public function fetch1(Request $request){
         $query = $request->get('term','');

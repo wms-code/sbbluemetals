@@ -23,7 +23,10 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         Route::resource('fabricgroup', 'FabricGroupController');
         //Route::get('searchajax', ['as'=>'searchajax','fetch'=>'KnittedFabInwardController@fetch']);
-        Route::post('knittedfabric/fetch', 'KnittedFabInwardController@fetch')->name('knittedfabric.fetch');
+        Route::post('knittedfabric/fetchfabric', 'KnittedFabInwardController@fetchfabric')->name('knittedfabric.fetchfabric');
+        Route::post('knittedfabric/fetchcolour', 'KnittedFabInwardController@fetchcolour')->name('knittedfabric.fetchcolour');
+        Route::post('knittedfabric/fetchrack', 'KnittedFabInwardController@fetchrack')->name('knittedfabric.fetchrack');
+        
         //Route::resource('admin/colour', 'ColourController');
     });
 
