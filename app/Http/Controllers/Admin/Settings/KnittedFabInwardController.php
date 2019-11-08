@@ -17,7 +17,7 @@ class KnittedFabInwardController extends Controller
     }
     private  function getmax()
     {
-        KnittedFabInward::max('inward_number')
+        KnittedFabInward::max('inward_number');
     }
     public function index()
     {
