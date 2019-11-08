@@ -15,28 +15,103 @@ class KnittedFabInwardController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
+    public function store(Request $request)
+    {
+        KnittedFabInward::create(['inward_number'=>$request->inward_number,
+                                    'inwardnumber'=>$request->inwardnumber,
+                                    'party_code'=>$request->pty_code,
+                                    'inward_date'=>$request->inward_date,
+                                    'inwarddate'=>$request->inwarddate,
+                                    'reference'=>$request->reference,
+                                    'sub_total'=>$request->sub_total,
+                                    'total_weight'=>$request->total_weight,
+                                    'tax_amount'=>$request->tax_amount,
+                                    'round_off'=>$request->round_off,
+                                    'net_value'=>$request->net_value,
+                                    'remarks'=>$request->remarks ]);
+                                    
+        $msg = [
+          'message' => 'Knitted Fabric Entry created successfully!' ];
+        return  redirect('admin/knittedfabric')->with($msg);
+    }
+
     private  function getmax()
     {
-        KnittedFabInward::max('inward_number');
+        $str='000000';$stringlen=0;
+        $retvalue=KnittedFabInward::max('inwardnumber');
+        if ($retvalue === null)
+        {
+            $retvalue=1;
+            $stringlen=1;
+        }
+        elseif ($retvalue >=1)
+        {
+            $stringlen=$retvalue;
+            $retvalue=$retvalue+1;
+        }
+         $stringlen=strlen($retvalue);
+        switch ($stringlen) {
+            case 1:
+            $str='00000';
+                break;
+            case 2:
+            $str='0000';
+                break;
+            case 3:
+            $str='000';
+                break;
+            case 4:
+                $str='00';
+                break;
+            case 5:
+                $str='0';
+                break;  
+            case 6:
+                $str='';
+                break;               
+            default:
+            $str='0';
+        }
+        $retvalue=$str.$retvalue.'/19-20';
+        return $retvalue;
+    }
+    private  function getmaxinwardno()
+    {
+        $retvalue=KnittedFabInward::max('inwardnumber');
+        if ($retvalue === null)
+        {
+            $retvalue=1;
+        }
+        elseif ($retvalue >=1)
+        {
+            $retvalue=$retvalue+1;
+        }
+        return $retvalue;
     }
     public function index()
     {
+        $rsdepartmentData['data'] = KnittedFabInward::getall();
+        return view('knitted.list',compact(['rsdepartmentData']));
+    }
+    public function create()
+    {
         $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
         
-         $rsfabrics = DB::table('fabrics')        
-                ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
-                ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
-                ->orderBy('fabricgroup.name', 'asc')
-                ->orderBy('fabrics.name', 'asc')
-                ->get(); 
-        
-        $rsdepartmentData['colour'] = Colour::getall(); 
-        $rsdepartmentData['rsstockpoint'] = Stockpoint::getall(); 
-        $rsdepartmentData['inwardno'] = KnittedFabInward::max('inward_number');;            
-        return view('knitted.autocomplete',compact(['rsdepartmentData','rsfabrics']));
-
+        $rsfabrics = DB::table('fabrics')        
+               ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
+               ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+               ->orderBy('fabricgroup.name', 'asc')
+               ->orderBy('fabrics.name', 'asc')
+               ->get(); 
+       
+       $rsdepartmentData['colour'] = Colour::getall(); 
+       $rsdepartmentData['rsstockpoint'] = Stockpoint::getall(); 
+       $rsdepartmentData['inward_number'] = $this->getmax(); 
+       $rsdepartmentData['inwardnumber'] = $this->getmaxinwardno();           
+       return view('knitted.create',compact(['rsdepartmentData','rsfabrics']));
+       
     }
-
 
     public function fetcssh(Request $request)
     {
@@ -127,64 +202,32 @@ class KnittedFabInwardController extends Controller
             return ['name'=>'','sortname'=>''];
     }
     
-    public function create()
-    {
-        return view('knitted.create');
-    }
+    
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
+   
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\KnittedFabInward  $knittedFabInward
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(KnittedFabInward $knittedFabInward)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\KnittedFabInward  $knittedFabInward
-     * @return \Illuminate\Http\Response
-     */
+     
     public function edit(KnittedFabInward $knittedFabInward)
     {
-        //
+         
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\KnittedFabInward  $knittedFabInward
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, KnittedFabInward $knittedFabInward)
     {
-        //
+       
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\KnittedFabInward  $knittedFabInward
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(KnittedFabInward $knittedFabInward)
     {
-        //
+         
     }
+    
 }

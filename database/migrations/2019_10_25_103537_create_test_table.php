@@ -14,11 +14,24 @@ class CreateTestTable extends Migration
     public function up()
     {
 
-        Schema::table('fabrics', function($table) {
-        $table->integer('fabricgroup_code')->nullable();;
-     
-             
-        });
+       // Schema::table('fabrics', function($table) {
+       // $table->integer('fabricgroup_code')->nullable();
+      //  });
+
+      //  Schema::table('knitted_fab_inwards', function($table) {
+         //   $table->integer('inwardnumber')->nullable();
+         ///   $table->dateTime('inwarddate')->nullable()->useCurrent();
+         //   });
+
+            Schema::table('knitted_fab_inwards', function($table) {
+         //     $table->integer('inwardnumber')->nullable();
+             // $table->dateTime('inwarddate')->nullable();
+              });
+
+              Schema::table('knitted_fab_inwards', function($table) {
+               //     $table->integer('inwardnumber')->nullable();
+                    $table->double('total_weight')->nullable();
+                    });
 
         
     }

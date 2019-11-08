@@ -15,8 +15,10 @@ class CreateKnittedFabInwardsTable extends Migration
     {
         Schema::create('knitted_fab_inwards', function (Blueprint $table) {
             $table->string('inward_number', 20)->primary();
+            $table->integer('inwardnumber')->unsigned()->nullable();;
             $table->dateTime('inward_date')->nullable()->useCurrent();
-            $table->integer('party_code')->unsigned();
+            $table->dateTime('inwarddate')->nullable()->useCurrent();
+            $table->integer('party_code')->unsigned()->nullable();;
             $table->string('reference', 200)->nullable();
             $table->string('remarks', 200)->nullable();
             $table->tinyInteger('stock_point_id')->nullable();

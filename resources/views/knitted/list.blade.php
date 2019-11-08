@@ -15,7 +15,7 @@
                                                 <h4 class="card-title">Knitted Fabric Inward </h4>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/fabric/create') }}">Add New</a></div>
+                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/knittedfabric/create') }}">Add New</a></div>
                                                 
                                             </div>
                                           </div>
@@ -26,20 +26,30 @@
                                         <thead>
                                             <tr>
                                                  
-                                                <th>Fabric Name</th>
-                                            
+                                                <th>Inward Number</th>
+                                                <th>Inward Date</th>
+                                                <th>Supplier</th>
+                                                <th>Supplier Ref No</th>
+                                                <th>Total Weight</th>
+                                                <th>Total Amount</th>
                                                 <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($rsknittedfabricinward as $d)
+                                            @foreach ($rsdepartmentData['data'] as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->name}}</td>                                               
+                                                <td>{{$d->inward_number}}</td>
+                                                <td>{{$d->inward_date}}</td>
+                                                <td>{{$d->name}}</td>
+                                                <td>{{$d->reference}}</td>
+                                                <td>{{$d->total_weight}}</td>                                                    
+                                                <td>{{$d->net_value}}</td>
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}/edit" data-toggle="tooltip" data-original-title="Edit-FRN"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
-                                                            <form action="{{ url('admin/knittedfabric') }}/{{$d->id}}" method="post">
+                                                            <form action="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
@@ -51,7 +61,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $rsknittedfabricinward->links() }}
+                                    {{ $rsdepartmentData['data']->links() }}
                                 </div>
                             </div>
                         </div>

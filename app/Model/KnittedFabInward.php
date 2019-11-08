@@ -8,6 +8,20 @@ class KnittedFabInward extends Model
 {
      protected $table='knitted_fab_inwards';
      protected $guarded=[];
+    
+     protected function getall()
+    {
+      return DB::table('knitted_fab_inwards')
+              ->leftJoin('accounts', 'knitted_fab_inwards.party_code', '=', 'accounts.id')
+              ->select('inward_number','inward_date','net_value','sub_total','total_weight','reference','name')  
+              ->orderBy('inward_date', 'asc')
+              ->paginate(10);    
+
+       // return $this->select('inward_number','inward_date','net_value','sub_total','total_weight','reference')        
+       // ->orderBy('inward_date')      
+       // ->paginate(10);   
+        
+    }
 
      protected function getsupplier()
      {

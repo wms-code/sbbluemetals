@@ -20,14 +20,14 @@
                             @method('post')
                             <div  style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Inward No:.</label>
-                                  <div class="col-md-2">
+                                  <div class="col-md-3">
                                         <input type="text" name="name" 
                                         value ={{ $rsdepartmentData['inwardno'] }}
                                         readonly maxlength="50" class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Inward Date:.</label>
-                                   <div class="col-md-3">
-                                      <input type="date" name="name" maxlength="12" class="form-control">
+                                   <div class="col-md-2">
+                                      <input type="date" name="inward_date" maxlength="12" class="form-control">
                                     </div>
                             </div>
                             
@@ -48,6 +48,10 @@
                                 <label class="control-label text-left col-md-2"> Supplier Inovice No</label>
                                 <div class="col-md-3">
                                       <input type="text" name="name"  class="form-control">
+                                </div>
+                                <label class="control-label text-left col-md-2"> Supplier Inovice Date</label>
+                                <div class="col-md-2">
+                                      <input type="date" name="inwarddate"  class="form-control">
                                 </div>
                             </div>
                             
@@ -134,15 +138,14 @@
                                        </td>
                                       
                                         <td>
-                                          <input type="number" value="5" name="taxper[]" id="taxper_1" class="form-control changesNo" 
+                                          <input type="number" value="5" name="taxper[]" id="taxper_1" class="form-control  changesNo" 
                                             autocomplete="off" onkeypress="return IsNumeric(event);" >
                                        <br>
                                         
-                                        <input type="number" name="taxamt[]" id="taxamt_1" class="form-control" 
-                                        totalLinetax  readonly >
+                                        <input type="number" name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
                                        <br>
                                       
-                                        <input type="number" name="roundoff[]" id="roundoff_1" class="form-control" readonly >
+                                        <input type="number" name="roundoff[]" id="roundoff_1" class="form-control totalRoundOff" readonly >
                                      </td>
                                         <td>
                                               <input type="number"  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
@@ -172,8 +175,7 @@
                         <div  style="margin-left: 0px;" class="form-group row">
                               <label class="control-label text-left col-md-2">Tax Amount %:.</label>
                                <div class="col-md-2">
-                                  <input type="number" readonly class="form-control" id="taxAmount" placeholder="Tax"
-                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+                                  <input type="number" readonly class="form-control" id="taxAmount" placeholder="Tax">
                                    
                                 </div>
                         </div>
@@ -247,8 +249,8 @@
               html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
               html += '<input type="number" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
               html += '<td><input type="number" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control" readonly><br>';
-              html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control" readonly </td>';
+              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly><br>';
+              html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control totalRoundOff" readonly </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
              
@@ -471,6 +473,7 @@ function updatefabric(para){
               $('.totalLinePrice').each(function(){
                 if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
+
               $('#txtTotal').val( subTotal.toFixed(2));
 
               $('.totalSubTotal').each(function(){
@@ -478,9 +481,17 @@ function updatefabric(para){
               });
               $('#subTotal').val( perrateamount.toFixed(2));              
 
+              taxamtt=0;   
               $('.totalLinetax').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
               });
+              $('#taxAmount').val( taxamtt.toFixed(2));  
+             
+              taxamtt=0;
+              $('.totalRoundOff').each(function(){
+                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
+              });
+              $('#taxroundoff').val( taxamtt.toFixed(2));  
 
              // $('#subTotal').val( subTotal.toFixed(2) );
              // $('#tax').val( taxamtt.toFixed(2) );
