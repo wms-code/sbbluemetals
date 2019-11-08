@@ -5,14 +5,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-<style>
-    sel_colour {
-        color: inherit;
-        font-size: inherit;
-        font-weight:bold;
-        padding: 6px 4px;
-    }
-    </style>
 @section('pagetitle','Knitted Fabric Inward ')
  
 @section('content')               
@@ -63,8 +55,8 @@
                                     <tr>
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
-                                      <th width="10%">Fabirc</th>
                                       <th width="10%">Colour</th>
+                                      <th width="10%">Fabirc & Rack </th>
                                       <th width="4%">H.S.N.</th>
                                       <th width="5%">Particulars</th>
                                       <th width="5%">Rolls</th>
@@ -79,9 +71,21 @@
                                         <th><input class="case" type="checkbox"/></th>
                                         <th> <INPUT class="form-control" type='text' readonly  id='sno_1'	 value='1'  size='4'  
                                              readonly name='sno[]'/> </th>
-                                        <td> 
+                                     
+                                        <td>
                                             <select class="js-example-basic-single" id='selcolour1' name='sel_colour[]'>
-{{ $previousCountry = null}} 
+                                                <option value='0'>-- Select Colour --</option>
+                                                  @foreach($rsdepartmentData['colour'] as $department)
+                                                
+                                                <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                              
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td> 
+                                            <select class="js-example-basic-single" id='selfabric1' name='sel_fabric[]'>
+                                                <option value='0'>-- Select Fabric --</option>
+                                              {{ $previousCountry = null}} 
 @foreach($rsfabrics  as $courseCategory) 
 <?php 
     if ($previousCountry != $courseCategory->fabricgroupname) 
@@ -99,21 +103,19 @@
     } 
 ?>                                                   
  @endforeach
-</select>
-                                        </td>
-                                        <td>
-                                            <select class="js-example-basic-single" id='selfabric1' name='sel_depart[]'>
-                                                <option value='0'>-- Select Fabric --</option>
-                                                  @foreach($rsdepartmentData['colour'] as $department)
+</select><br>
+                                        
+                                             
+                                                    <select class="form-control js-example-basic-single" id='selrack1' name='sel_rack[]'>
+                                                        <option value='0'>-- Select Rack --</option>
+                                                        @foreach($rsdepartmentData['rsstockpoint'] as $department)
                                                 
-                                                <option value='{{ $department->id }}'>{{ $department->name }}</option>
-                                              
-                                                @endforeach
-                                            </select>
-                                           
-
-
-                                           
+                                                        <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                                         
+                                                        @endforeach
+                                                    
+                                                     </select>
+                                                   
                                         </td>
                                         <td>
                                            <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
@@ -199,19 +201,7 @@
                               </div>
                         </div>
 
-                        <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Stock Point </label>
-                             <div class="col-md-2">
-                                <select class="form-control js-example-basic-single" id='seldepart1' name='sel_depart'>
-                                    <option value='0'>-- Select department --</option>
-                                    @foreach($rsdepartmentData['colour'] as $department)
-                                      <option value='{{ $department->id }}'>{{ $department->name }}</option>
-                                    @endforeach
-                                
-                                 </select>
-                              </div>
-                              
-                        </div>
+                       
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
                             <label class="control-label text-left col-md-2"> Remarks</label>

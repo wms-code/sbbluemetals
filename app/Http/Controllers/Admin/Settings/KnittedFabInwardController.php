@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\KnittedFabInward;
 use App\Model\Fabric;
 use App\Model\Colour;
+use App\Model\Stockpoint;
 use App\Http\Controllers\Controller;
 use DB;
 class KnittedFabInwardController extends Controller
@@ -26,7 +27,8 @@ class KnittedFabInwardController extends Controller
                 ->orderBy('fabrics.name', 'asc')
                 ->get(); 
         
-        $rsdepartmentData['colour'] = Colour::getall();            
+        $rsdepartmentData['colour'] = Colour::getall(); 
+        $rsdepartmentData['rsstockpoint'] = Stockpoint::getall();             
         return view('knitted.autocomplete',compact(['rsdepartmentData','rsfabrics']));
 
     }
