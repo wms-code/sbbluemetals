@@ -11,7 +11,7 @@ class Account extends Model
 
     public function accountsgroups()
     {
-        return $this->hasOne(AccountsGroup::class, 'id', 'accounts_groups_id');
+        return $this->hasOne(AccountsGroup::class, 'id', 'group_code');
     }
     protected function report()
     {

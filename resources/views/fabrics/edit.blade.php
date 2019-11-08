@@ -33,6 +33,21 @@
                                     <input type="text" name="name" maxlength="50" value="{{ $fabric->name }}" class="form-control">
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Fabric Group Name</label>
+                                <div class="col-md-6">
+                                    <select class="form-control js-example-basic-single"
+                                     id='fabricgroup_code'
+                                     name='fabricgroup_code'>                                
+                                    @foreach($fabricgroups as $department)
+                                       <option value='{{ $department->id }}'
+                                        {{ $department->id== $fabric->fabricgroup_code ? 'selected' : ''}}>
+                                        {{ $department->name }}</option>
+                                    @endforeach
+                                 </select>
+                                </div>
+                            </div>
                             
                         {{--     <div class="form-group row last">
                                 <label class="control-label text-right col-md-3">Country</label>

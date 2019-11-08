@@ -19,15 +19,29 @@
                             <br>
                             @csrf
                             @method('post')
-                                <div class="form-group row">
+                         
+                            <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Fabric Name</label>
                                     <div class="col-md-6">
                                         <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>
-                                </div>
-                                
-                    
                             </div>
+                             
+
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Fabric Group Name</label>
+                                <div class="col-md-6">
+                                    <select class="form-control js-example-basic-single"
+                                     id='fabricgroup_code'
+                                    name='fabricgroup_code'>                                
+                                    @foreach($fabricgroups as $department)
+                                      <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                    @endforeach
+                                 </select>
+                                </div>
+                            </div>
+
+ 
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-12">

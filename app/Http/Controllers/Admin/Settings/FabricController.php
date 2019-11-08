@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Admin\Settings; 
 use Illuminate\Http\Request;
 use App\Model\Fabric; 
+use App\Model\Fabricgroup; 
 use Illuminate\Routing\Controller;
+use DB;
 class FabricController extends Controller
 {
     public function __construct()
@@ -12,13 +14,35 @@ class FabricController extends Controller
     
     public function index()
     {
-        $fabrics= Fabric::orderBy('name','asc')->paginate(15);
-        return view('fabrics.list',compact('fabrics'));
+              
+       // $accounts= Account::orderBy('Ac_Name','asc')->with(['accountsgroups'])->get();
+        //return view('accounts.list',compact('accounts')); fabricgroups
+
+       // $fabricgroups = Fabricgroup::getall(); 
+       // $fabrics= Fabric::orderBy('name','asc')
+       //    ->with(['fabricgroups'])->get();
+          // ->paginate(15);
+          // ->get();
+        // 
+       // $fabrics= with(['fabricgroups'], Fabric::orderBy('name', 'asc')->paginate(15)->get());
+       //$users = Fabric::orderBy('name','asc')->paginate(15);
+       
+        
+        $fabrics = DB::table('fabrics')
+    //   $fabrics= Fabric::orderBy('name','asc')
+            ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
+            ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+            ->orderBy('fabrics.name', 'asc')
+            ->paginate(10);          
+       //     ->get();
+       // return view('user.index', ['users' => $users]);
+        return view('fabrics.list',compact(['fabrics']));
     }
 
     public function create()
     {
-        return view('fabrics.create');
+        $fabricgroups = Fabricgroup::getall(); 
+        return view('fabrics.create',compact(['fabricgroups']));
     }
 
     public function store(Request $request)
@@ -31,7 +55,9 @@ class FabricController extends Controller
 
     public function edit(Fabric $fabric)
     {
-        return  view('fabrics.edit',compact('fabric'));
+       
+        $fabricgroups = Fabricgroup::getall(); 
+        return  view('fabrics.edit', compact(['fabricgroups','fabric']));
     }
 
     public function update(Request $request)

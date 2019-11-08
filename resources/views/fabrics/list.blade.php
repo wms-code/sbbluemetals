@@ -27,7 +27,7 @@
                                             <tr>
                                                  
                                                 <th>Fabric Name</th>
-                                            
+                                                <th>Fabric Group</th>
                                                 <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
@@ -35,7 +35,8 @@
                                             @foreach ($fabrics as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->name}}</td>                                               
+                                                <td>{{$d->fabricname}}</td>
+                                                <td>{{$d->fabricgroupname}}</td>                                               
                                                 <td class="text-nowrap">
                                                     <a href="{{ url('admin/fabric') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
