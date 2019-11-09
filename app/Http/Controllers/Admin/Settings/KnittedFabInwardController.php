@@ -17,11 +17,41 @@ class KnittedFabInwardController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function edit(KnittedFabInward $knittedFabInward,$id)
+    {
+         
+        $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
+        
+        
+
+        $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')        
+              ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
+              ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
+              ->select( 'colours.name as coloursname',
+                        'fabrics.name as fabricsname','hsn',
+                         'indx','particulars','rolls','weight','rate',
+                         'amount','perrateamount','taxper','taxamt','roundoff',
+                         'inwardnumber','inward_number')
+               ->orderBy('indx', 'asc')              
+               ->where('inwardnumber',$id)
+               ->get(); 
+
+       $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
+               ->join('accounts', 'accounts.id', '=', 'knitted_fab_inwards.party_code')
+               ->select('accounts.name as acname','inward_number',
+                          'reference','remarks','sub_total','net_value','total_weight',
+                         'round_off','inward_date','inwarddate','party_code','tax_amount',
+                          'inwardnumber')
+                ->orderBy('knitted_fab_inwards.inward_date', 'asc')              
+                ->where('inwardnumber',$id)
+                ->get();       
+       
+      
+       return view('knitted.edit',compact(['rsdepartmentData']));
+    }
+
     public function store(Request $request)
     {
-
-       
-         
         KnittedFabInward::create(['inward_number'=>$request->inward_number,
                                     'inwardnumber'=>$request->inwardnumber,
                                     'party_code'=>$request->pty_code,
@@ -40,9 +70,10 @@ class KnittedFabInwardController extends Controller
             {
                 Knittedfabdetails::create(['knitted_fab_inward_number'=>$request->inward_number,
                                         'inward_date'=>$request->inward_date,
+                                        'inwardnumber'=>$request->inwardnumber,
                                         'party_code'=>$request->pty_code,
                                         'indx'=>$i+1,
-                                        'colour_id'=>$request->$arrcolour,
+                                        'colour_id'=>$arrcolour,
                                         'fabric_id'=>$request->selfabric[$i],
                                         'particulars'=>$request->particulars[$i],
                                         'hsn'=>$request->hsn[$i],
@@ -239,10 +270,7 @@ class KnittedFabInwardController extends Controller
     }
 
      
-    public function edit(KnittedFabInward $knittedFabInward)
-    {
-         
-    }
+   
  
     public function update(Request $request, KnittedFabInward $knittedFabInward)
     {

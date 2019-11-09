@@ -33,8 +33,13 @@ class CreateTestTable extends Migration
              //  });
 
                Schema::table('knitted_fab_details', function($table) {
-                $table->string('hsn', 200)->nullable();          
+              //  $table->string('hsn', 200)->nullable();          
                 });
+
+                Schema::table('knitted_fab_details', function($table) {
+                  $table->integer('inwardnumber')->nullable();     
+                  });
+
 
         
     }

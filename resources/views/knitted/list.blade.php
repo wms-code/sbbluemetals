@@ -46,8 +46,8 @@
                                                 <td>{{$d->total_weight}}</td>                                                    
                                                 <td>{{$d->net_value}}</td>
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}/edit" data-toggle="tooltip" data-original-title="Edit-FRN"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit-FRN"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
                                                             <form action="{{ url('admin/knittedfabric') }}/{{$d->inward_number}}" method="post">
                                                                 @csrf
