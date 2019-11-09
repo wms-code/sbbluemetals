@@ -29,10 +29,10 @@ class CreateTestTable extends Migration
               $table->double('total_weight')->nullable();
               });
 
-              Schema::table('knitted_fab_inwards', function($table) {
+              //Schema::table('knitted_fab_inwards', function($table) {
                //     $table->integer('inwardnumber')->nullable();
                 //    $table->double('total_weight')->nullable();
-                    });
+                //    });
 
         
     }
