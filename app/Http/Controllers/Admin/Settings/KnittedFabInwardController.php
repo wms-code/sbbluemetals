@@ -18,6 +18,33 @@ class KnittedFabInwardController extends Controller
 
     public function store(Request $request)
     {
+
+        $i=0;
+        
+        foreach($request->selcolour as $arrcolour)
+        {
+            
+            DB::table('knitted_fab_details')
+            ->create(['knitted_fab_inward_number'=>$request->inward_number,
+            'inward_date'=>$request->inward_date,
+            'party_code'=>$request->pty_code,
+            'indx'=>$i+1,
+            'colour_id'=>$request->$arrcolour,
+            'fabric_id'=>$request->$request->selfabric[$i],
+            'particulars'=>$request->$request->particulars[$i],
+            'hsn'=>$request->hsn[$i],
+            'rolls'=>$request->rolls[$i],
+            'weight'=>$request->qty[$i],
+            'rate'=>$request->rate[$i],
+            'amount'=>$request->amount[$i],
+            'perrateamount'=>$request->perrateamount[$i],
+            'taxper'=>$request->taxper[$i],
+            'taxamt'=>$request->taxamt[$i],
+            'roundoff'=>$request->roundoff[$i] ]);
+           $i=$i+1;
+        }
+        return $request->selcolour;
+        
         KnittedFabInward::create(['inward_number'=>$request->inward_number,
                                     'inwardnumber'=>$request->inwardnumber,
                                     'party_code'=>$request->pty_code,

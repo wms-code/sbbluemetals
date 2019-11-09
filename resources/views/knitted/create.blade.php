@@ -83,7 +83,7 @@
                                              readonly name='sno[]'/> </th>
                                      
                                         <td>
-                                            <select class="jssingle" id='selcolour1' name='sel_colour[]'>
+                                            <select class="jssingle" id='selcolour1' name='selcolour[]'>
                                                 <option value='0'>-- Select Colour --</option>
                                                   @foreach($rsdepartmentData['colour'] as $department)
                                                 
@@ -93,7 +93,7 @@
                                             </select>
                                         </td>
                                         <td> 
-                                            <select class="jssingle" id='selfabric1' name='sel_fabric[]'>
+                                            <select class="jssingle" id='selfabric1' name='selfabric[]'>
                                                 <option value='0'>-- Select Fabric --</option>
                                               {{ $previousCountry = null}} 
 @foreach($rsfabrics  as $courseCategory) 

@@ -18,21 +18,19 @@ class CreateTestTable extends Migration
        // $table->integer('fabricgroup_code')->nullable();
       //  });
 
-      //  Schema::table('knitted_fab_inwards', function($table) {
-         //   $table->integer('inwardnumber')->nullable();
-         ///   $table->dateTime('inwarddate')->nullable()->useCurrent();
-         //   });
+       
+          //  Schema::table('knitted_fab_inwards', function($table) {
+           //   $table->integer('inwardnumber')->nullable();
+           //   $table->dateTime('inwarddate')->nullable();
+            //  $table->double('total_weight')->nullable();
+            //  });
 
-            Schema::table('knitted_fab_inwards', function($table) {
-              $table->integer('inwardnumber')->nullable();
-              $table->dateTime('inwarddate')->nullable();
-              $table->double('total_weight')->nullable();
-              });
-
-              //Schema::table('knitted_fab_inwards', function($table) {
-               //     $table->integer('inwardnumber')->nullable();
-                //    $table->double('total_weight')->nullable();
-                //    });
+              Schema::table('knitted_fab_details', function($table) {
+               $table->double('perrateamount')->nullable();
+               $table->double('taxper')->nullable();
+               $table->double('taxamt')->nullable();
+               $table->double('roundoff')->nullable();
+               });
 
         
     }
