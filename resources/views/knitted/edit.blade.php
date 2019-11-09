@@ -43,7 +43,7 @@
                             <div style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Supplier </label>
                                  <div class="col-md-3">
-                                    <select class="form-control jssingle" id='pty_code' name='pty_code'>                                        
+                                    <select readonly class="form-control jssingle" id='pty_code' name='pty_code'>                                        
                                         @foreach($rsdepartmentData['data'] as $department)
                                           <option value='{{ $department->id }}'
                                             {{ $department->id== $fabrics->party_code ? 'selected' : ''}}>
