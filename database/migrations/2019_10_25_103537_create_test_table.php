@@ -24,13 +24,14 @@ class CreateTestTable extends Migration
          //   });
 
             Schema::table('knitted_fab_inwards', function($table) {
-         //     $table->integer('inwardnumber')->nullable();
-             // $table->dateTime('inwarddate')->nullable();
+              $table->integer('inwardnumber')->nullable();
+              $table->dateTime('inwarddate')->nullable();
+              $table->double('total_weight')->nullable();
               });
 
               Schema::table('knitted_fab_inwards', function($table) {
                //     $table->integer('inwardnumber')->nullable();
-                    $table->double('total_weight')->nullable();
+                //    $table->double('total_weight')->nullable();
                     });
 
         
