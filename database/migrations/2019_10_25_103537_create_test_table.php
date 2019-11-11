@@ -30,14 +30,13 @@ class CreateTestTable extends Migration
              //  $table->double('taxper')->nullable();
              //  $table->double('taxamt')->nullable();
              //  $table->double('roundoff')->nullable();
+            // $table->integer('inwardnumber')->nullable();
+              //  $table->string('hsn', 200)->nullable();             
              //  });
-
-               Schema::table('knitted_fab_details', function($table) {
-              //  $table->string('hsn', 200)->nullable();          
-                });
+ 
 
                 Schema::table('knitted_fab_details', function($table) {
-                  $table->integer('inwardnumber')->nullable();     
+                  $table->integer('frnnumber')->nullable();   
                   });
 
 

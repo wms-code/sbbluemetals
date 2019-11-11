@@ -16,13 +16,34 @@ class KnittedFabInwardController extends Controller
     {
         $this->middleware('auth:admin');
     }
-
+   
+    
+    public function editfrn($id)
+    {
+         
+    }
+    public function fetchfrn(Request $request)
+    {      
+        
+        $data = DB::table('knitted_fab_details')        
+        ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
+        ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
+        ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
+                  'fabrics.name as fabricsname','hsn',
+                   'indx','particulars','rolls','weight','rate',
+                   'amount','perrateamount','taxper','taxamt','roundoff',
+                   'inwardnumber','inward_number')
+         ->orderBy('indx', 'asc')  
+         ->where('inwardnumber',$request->id)
+         ->get();  
+         
+            
+        return $data;      
+    }
     public function edit(KnittedFabInward $knittedFabInward,$id)
     {
          
         $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
-        
-        
 
         $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')        
               ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
