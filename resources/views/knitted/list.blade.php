@@ -48,7 +48,11 @@
                                                 <td>{{  number_format((float)$d->net_value, 2, '.', '') }}</td>
                                                 <td>
 
-                                                        <button type="button" class="btn btn-success" id="edit-item" data-item-id="1">Edit FRN </button>
+                                                        <button type="button" 
+                                                        data-id="{{$d->inwardnumber}}"  
+                                                        data-toggle="modal" data-target="#edit-modal"
+                                                        class="btn btn-success" id="edit-item">Edit FRN 
+                                                    </button>
                                                 </td>
                                                         <td class="text-nowrap">
                                                     <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
@@ -88,6 +92,10 @@
                    
                   <div class="card-body">
                     
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Entry No</label> 
+                                <input type="text" class="form-control" id="inw_no" name="inw_no" placeholder="Inward Number" >
+                        </div>
                     <div id="welcome">
 
                     </div>
@@ -97,7 +105,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="#save-item"  onClick="savefrn()"  >Done</button>
+              <button type="button" class="btn btn-primary" id="#save-item"
+                 onClick="savefrn()"  >Done</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -108,22 +117,29 @@
       function savefrn()
       {
          
-            var id=2;
-             
-            var colourname = $('input[name="colourname[]"]').map(function(){ 
+          
+            var id=$('#inw_no').val();	
+            
+           // data:{_token:_token,id:id},  
+            var sno = $('input[name="sno[]"]').map(function(){ 
                     return this.value; 
                 }).get();
-            alert(colourname);
+
+            var recdweight = $('input[name="recdweight[]"]').map(function(){ 
+                    return this.value; 
+                }).get();    
+                
             var _token = $('input[name="_token"]').val();
                $.ajax
                 ({
                     url:"{{ route('knittedfabric.savefrn') }}",
                     method:"POST",
-                    data:{colourname:colourname,id:id },                                  
+                    data:{'sno[]':sno,'recdweight[]':recdweight, id:id,_token:_token},                                  
                     success: function(response)
                     {      
-                        alert(data);
-                       $('#welcome').append('');  
+                       
+                      alert(response);
+                      $('#edit-modal').modal('toggle');
                         
                     } ,                       
                    headers: {
@@ -133,12 +149,12 @@
             
       }
       
-     $(document).on('click', "#edit-item", function()
-    {
-        $('#welcome').html('');   
-         $(this).addClass('edit-item-trigger-clicked'); 
-          var options = {'backdrop': 'static'};
-            $('#edit-modal').modal(options)
+    
+    $('#edit-modal').on('show.bs.modal', function(e) {
+       
+        $('#welcome').html('');
+        var  id = $(e.relatedTarget).data('id');  
+        $('#inw_no').val(id);
             var html='';
             html +='<div class="table-responsive  m-t-40">';
             html +='<table id="myTable" class="table table-bordered table-striped">';
@@ -152,15 +168,13 @@
               
                                     
         //    $("#modal-input-id").val('welcome');
-            updatecolour();
+            updatecolour(id);
            
         
     //////////////////////////////////////////////////////////////////////////////   
-            function updatecolour()
+            function updatecolour(id)
             {
                 var _token = $('input[name="_token"]').val();
-                var id=2;
-               
                 $.ajax
                 ({
                     url:"{{ route('knittedfabric.fetchfrn') }}",
@@ -179,7 +193,7 @@
     html +='<td>'+response[index].fabricsname+'<input type="hidden"  name="fabricname[]"  value="'+response[index].fabricsid+'"/></td>';
     html +='<td>'+x+'</td>';
     html +='<td>'+response[index].weight+'</td>';
-    html +='<td><input type="text"  style=" width: 100px;"  name="recdweight[]"  value=""/></td>';
+    html +='<td><input type="number"  style=" width: 100px;"  name="recdweight[]"   value="'+response[index].delivery_weight+'"/></td>';
     html +='</tr>';
                            
                        })   

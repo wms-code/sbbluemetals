@@ -25,19 +25,18 @@ class KnittedFabInwardController extends Controller
 
     public function savefrn(Request $request)
     {
-        $i=0;
-        return $request;
-        foreach($request->sno as $arrcolour)
-            {
-                Knittedfabdetails::where(
-                   ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
-                   [ 'delivery_weight'=>$request->recdweight[$i] ]);
-                   $i=$i+1;
-            }             
-
-        $msg = [
-            'message' => 'Knitted Fabric Entry Updated successfully!' ];
-        return  redirect('admin/knittedfabric')->with($msg);
+        $i=0;$output='';
+           
+       foreach($request->sno as $arrcolour)
+           { 
+            Knittedfabdetails::where(
+                    ['inwardnumber'=>$request->id,'indx'=>$i+1])->update(
+                    ['delivery_weight'=>$request->recdweight[$i]]); 
+                    $i=$i+1;
+           }             
+     
+        echo 'Knitted Fabric Entry Updated successfully!';
+         
     }
 
     public function fetchfrn(Request $request)
@@ -47,7 +46,7 @@ class KnittedFabInwardController extends Controller
         ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
         ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
         ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
-                  'fabrics.name as fabricsname','hsn',
+                  'fabrics.name as fabricsname','hsn','delivery_weight',
                    'indx','particulars','rolls','weight','rate',
                    'amount','perrateamount','taxper','taxamt','roundoff',
                    'inwardnumber','inward_number')
