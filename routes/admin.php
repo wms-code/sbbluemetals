@@ -20,7 +20,10 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('stockpoint', 'StockpointController');
         //Route::resource('accounts', 'AccountController');
         Route::resource('companies', 'CompanyController');
+
         Route::resource('knittedfabric', 'KnittedFabInwardController');
+        Route::put('knittedfabric', 'KnittedFabInwardController@update');
+        
         Route::resource('fabricgroup', 'FabricGroupController');
         //Route::get('searchajax', ['as'=>'searchajax','fetch'=>'KnittedFabInwardController@fetch']);
         Route::post('knittedfabric/fetchfabric', 'KnittedFabInwardController@fetchfabric')->name('knittedfabric.fetchfabric');

@@ -11,16 +11,15 @@
   <div class="row">
             <div class="col-md-12 col-md-offset-2 ">
                 <div class="card card-outline-info">
-                   
+                  @foreach( $rsdepartmentData['rsfabrics'] as $fabrics)
+                                   
+                  @endforeach
                     <div class="card-body">
                         <form action="{{ url('admin/knittedfabric') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
-                            @csrf
-                            @method('post')
-                            @foreach( $rsdepartmentData['rsfabrics'] as $fabrics)
-                                   
-                            @endforeach
+                            @csrf  @method('put')
+                           
                             <div  style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Inward No:.</label>
                                   <div class="col-md-3">
@@ -33,7 +32,7 @@
                                         readonly  class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Inward Date:.</label>
-                                   <div class="col-md-2">
+                                   <div class="col-md-3">
                                       <input type="date" name="inward_date"
                                        value={{ $fabrics->inward_date }}
                                        maxlength="12" class="form-control">
@@ -60,7 +59,7 @@
                                       <input type="text" name="reference" value={{ $fabrics->reference }} class="form-control">
                                 </div>
                                 <label class="control-label text-left col-md-2"> Supplier Inovice Date</label>
-                                <div class="col-md-2">
+                                <div class="col-md-3s">
                                       <input type="date" name="inwarddate" value={{ $fabrics->inwarddate }}  class="form-control">
                                 </div>
                             </div>
@@ -75,7 +74,7 @@
                                       <th width="4%">H.S.N.</th>
                                       <th width="5%">Particulars</th>
                                       <th width="5%">Rolls</th>
-                                      <th width="10%">Qty</th>
+                                      <th width="10%">Weight</th>
                                       <th width="10%">Rate</th>
                                       <th width="10%">Tax %</th>
                                       <th width="10%">Amount</th>
@@ -85,8 +84,15 @@
                                         @foreach ($rsdepartmentData['rsdetails'] as $details)
                                       <tr>
                                         <th>{{$details->indx}} </th>
-                                        <td>{{$details->coloursname}} </td>
-                                        <td>{{$details->fabricsname}} </td>
+                                        <td>
+                                           {{$details->coloursname}} 
+                                           <input type ="hidden" readonly name="selcolour[]"
+                                           value="{{$details->coloursid}}" />  
+                                          </td>
+                                        <td>{{$details->fabricsname}} 
+                                            <input type ="hidden" readonly name="selfabric[]"
+                                            value="{{$details->fabricsid}}" />  
+                                        </td>
                                         <td>
                                            <input type="text" name="hsn[]" id="hsn_1" 
                                           value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
@@ -100,30 +106,30 @@
                                           value='{{$details->rolls}}'   name="rolls[]" id="rolls_1" class="form-control">                                             
                                         </td>
                                         <td>
-                                            <input type="text"  value='{{$details->weight}}' name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
+                                            <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                           </td>
                                         
                                         <td>
-                                            <input type="number"  value='{{$details->rate}}' name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            <input type="number"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                         <br>
                                          
-                                          <input type="number" value='{{$details->perrateamount}}' name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
+                                          <input type="number" value='{{  number_format((float)$details->perrateamount, 2, '.', '') }}' name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
                                        </td>
                                       
                                         <td>
-                                          <input type="number" value='{{$details->taxper}}'  name="taxper[]" id="taxper_1" class="form-control  changesNo" 
+                                          <input type="number" value='{{ number_format((float)$details->taxper, 2, '.', '') }}'  name="taxper[]" id="taxper_1" class="form-control  changesNo" 
                                             autocomplete="off" onkeypress="return IsNumeric(event);" >
                                        <br>
                                         
-                                        <input type="number" value='{{$details->taxamt}}' name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
+                                        <input type="number" value='{{  number_format((float)$details->taxamt, 2, '.', '') }}' name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
                                        <br>
                                       
-                                        <input type="number" value='{{$details->roundoff}}' name="roundoff[]" id="roundoff_1" class="form-control totalRoundOff" readonly >
+                                        <input type="number" value='{{ number_format((float)$details->roundoff ,2, '.', '') }}' name="roundoff[]" id="roundoff_1" class="form-control totalRoundOff" readonly >
                                      </td>
                                         <td>
-                                              <input type="number" value='{{$details->amount}}'  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
+                                              <input type="number" value='{{  number_format((float)$details->amount, 2, '.', '')}}'  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
                                         </td>
                                         </tr>
                                        </tbody>
@@ -137,13 +143,13 @@
                             <label class="control-label text-left col-md-2"> Total Weight:.</label>
                               <div class="col-md-2">
                                   <input type="number" name="total_weight" readonly class="form-control"
-                                   id="total_weight" value={{ $fabrics->total_weight }} placeholder="Total Weight" >
+                                   id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} placeholder="Total Weight" >
                               </div>
                         </div>
                         <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Subtotal:.</label>
                               <div class="col-md-2">
-                                    <input type="number"value={{ $fabrics->sub_total }}
+                                    <input type="number"value={{ number_format((float)$fabrics->sub_total, 2, '.', '')  }}
                                       name="sub_total" readonly class="form-control" id="subTotal" placeholder="Subtotal"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
                               </div>
@@ -152,7 +158,7 @@
                         <div  style="margin-left: 0px;" class="form-group row">
                               <label class="control-label text-left col-md-2">Tax Amount %:.</label>
                                <div class="col-md-2">
-                                  <input type="number" value={{ $fabrics->tax_amount }}  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
+                                  <input type="number" value={{ number_format((float)$fabrics->tax_amount, 2, '.', '')  }}  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
                                    
                                 </div>
                         </div>
@@ -160,7 +166,7 @@
                       <div  style="margin-left: 0px;" class="form-group row">
                           <label class="control-label text-left col-md-2">Round Off</label>
                            <div class="col-md-2">
-                              <input type="number"  value={{ $fabrics->round_off }}  name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
+                              <input type="number"  value={{ number_format((float)$fabrics->round_off, 2, '.', '')  }}  name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
                             </div>
                       </div>
 
@@ -169,7 +175,7 @@
                         <div  style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Total:.</label>
                               <div class="col-md-2">
-                                    <input type="number"  value={{ $fabrics->net_value }}  name="net_value" readonly class="form-control" id="txtTotal" 
+                                    <input type="number"  value={{ number_format((float)$fabrics->net_value, 2, '.', '')  }}  name="net_value" readonly class="form-control" id="txtTotal" 
                                       placeholder="Total"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
                               </div>
@@ -211,36 +217,8 @@
             </div>
         </div>
 
-        <script >
-          
-            var i=$('table tr').length;
-            $(".addmore").on('click',function(){
-              html = '<tr>';
-              html += '<td><input class="case" type="checkbox"/></td>';
-              html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
-              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select></td>';
-              html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
-              html += '<td><input type="text" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
-              html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
-              html += '<td><input type="number" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
-              html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="number" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
-              html += '<td><input type="number" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly><br>';
-              html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control totalRoundOff" readonly </td>';
-              html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
-              html += '</tr>';
-             
-              updatecolour('selcolour'+i);
-              updatefabric('selfabric'+i);
-              updaterack('selrack'+i);
-              
-              $('table').append(html);
-              
-              setrowvalue();
-             
-              i++;
+        <script>
+         
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
 function updaterack(para){
   para='#'+para;

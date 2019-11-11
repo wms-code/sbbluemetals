@@ -27,7 +27,7 @@ class KnittedFabInwardController extends Controller
         $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')        
               ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
               ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
-              ->select( 'colours.name as coloursname',
+              ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
                         'fabrics.name as fabricsname','hsn',
                          'indx','particulars','rolls','weight','rate',
                          'amount','perrateamount','taxper','taxamt','roundoff',
@@ -271,10 +271,47 @@ class KnittedFabInwardController extends Controller
 
      
    
- 
+    
     public function update(Request $request, KnittedFabInward $knittedFabInward)
-    {
-       
+    {  
+        KnittedFabInward::where('inwardnumber',$request->inwardnumber)->update([ 
+        'party_code'=>$request->pty_code,
+        'inward_date'=>$request->inward_date,
+        'inwarddate'=>$request->inwarddate,
+        'reference'=>$request->reference,
+        'sub_total'=>$request->sub_total,
+        'total_weight'=>$request->total_weight,
+        'tax_amount'=>$request->tax_amount,
+        'round_off'=>$request->round_off,
+        'net_value'=>$request->net_value,
+        'remarks'=>$request->remarks ]);
+    
+        
+        $i=0;
+        foreach($request->selcolour as $arrcolour)
+            {
+ Knittedfabdetails::where(
+     ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
+         ['inward_date'=>$request->inward_date,
+                           'party_code'=>$request->pty_code,
+                                        'colour_id'=>$arrcolour,
+                                        'fabric_id'=>$request->selfabric[$i],
+                                        'particulars'=>$request->particulars[$i],
+                                        'hsn'=>$request->hsn[$i],
+                                        'rolls'=>$request->rolls[$i],
+                                        'weight'=>$request->qty[$i],
+                                        'rate'=>$request->rate[$i],
+                                        'amount'=>$request->amount[$i],
+                                        'perrateamount'=>$request->perrateamount[$i],
+                                        'taxper'=>$request->taxper[$i],
+                                        'taxamt'=>$request->taxamt[$i],
+                                        'roundoff'=>$request->roundoff[$i] ]);
+            $i=$i+1;
+            }             
+
+        $msg = [
+            'message' => 'Knitted Fabric Entry Updated successfully!' ];
+        return  redirect('admin/knittedfabric')->with($msg);
     }
 
   
