@@ -217,155 +217,7 @@
             </div>
         </div>
 
-        <script>
-         
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-function updaterack(para){
-  para='#'+para;
-  var _token = $('input[name="_token"]').val();
-    $.ajax({
-              url:"{{ route('knittedfabric.fetchrack') }}",
-              method:"POST", 
-              data:{_token:_token},  
-              success: function(response){                   
-              var len = response.length;
-              $(para).append(response);
-              $(para).select2();
-              },//sucess
-              error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
-                   
-                    headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    } 
-                  });
-                 
-            }               
-            
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-              function updatecolour(para){
-                para='#'+para;
-                var _token = $('input[name="_token"]').val();
-                       ///////////////////////////////////
-                       $.ajax({
-                       url:"{{ route('knittedfabric.fetchcolour') }}",
-                       method:"POST", 
-                       data:{_token:_token},  
-                       success: function(response){                   
-                        var len = response.length;
-                        $(para).append(response);
-                        $(para).select2();
-                       },//sucess
-                       error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
-                   
-                    headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    } 
-                  });
-            }               
-            
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-function updatefabric(para){
-                para='#'+para;
-                var _token = $('input[name="_token"]').val();
-                       ///////////////////////////////////
-                       $.ajax({
-                       url:"{{ route('knittedfabric.fetchfabric') }}",
-                       method:"POST", 
-                       data:{_token:_token},  
-                       success: function(response){                   
-                        var len = response.length;
-                        $(para).append(response);
-                        $(para).select2();
-                       },//sucess
-                       error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
-                   
-                    headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    } 
-                  });
-            }               
-            });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
-            //to check all checkboxes
-            $(document).on('change','#check_all',function(){	
-              $('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
-              setrowvalue();
-            });
-            
-            //deletes the selected table rows
-            $(".delete").on('click', function() {
-              $('.case:checkbox:checked').parents("tr").remove();
-              $('#check_all').prop("checked", false); 
-              calculateTotal();
-              setrowvalue();
-            });
-            
-             
-            function setrowvalue()
-            {
-              
-              var names = document.getElementsByName('sno[]');
-              for (var j = 0, iLen = names.length; j < iLen; j++) {
-	               names[j].value=j+1;
-                }
-            }
-            //price change
+        <script> 
             $(document).on('change keyup blur','.changesNo',function(){
               var perrateamount=0.0;
               var subtotal = 0; var total = 0; 
@@ -410,10 +262,7 @@ function updatefabric(para){
                 $('#taxamt_'+id[1]).val(0);
                 total = perrateamount;
                 $('#amount_'+id[1]).val(total);
-              }
-              
-            //  if( quantity!='' && price !='' ) $('#amount_'+id[1]).val( (parseFloat(price)*parseFloat(quantity)).toFixed(2) );	
-              
+              } 
               calculateTotal();
             });
             
@@ -453,23 +302,7 @@ function updatefabric(para){
               $('.totalWeight').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
               });
-              $('#total_weight').val( taxamtt.toFixed(2));  
-              
-
-             // $('#subTotal').val( subTotal.toFixed(2) );
-             // $('#tax').val( taxamtt.toFixed(2) );
-
-             // tax = $('#tax').val();
-              //if(tax != '' && typeof(tax) != "undefined" ){
-               // taxAmount = subTotal * ( parseFloat(tax) /100 );
-               // $('#taxAmount').val(taxAmount.toFixed(2));
-               // total = subTotal + taxAmount;
-              //}else{
-               // $('#taxAmount').val(0);
-               // total = subTotal;
-              //}
-
-              //$('#txtTotal').val( total.toFixed(2) );
+              $('#total_weight').val( taxamtt.toFixed(2));   
             }
              
             
@@ -484,15 +317,8 @@ function updatefabric(para){
             }
             
  </script>
-            
-            
-            <script>
-              
-            $(document).ready(function() {
-             
-                $('.jssingle').select2();
-                
-            });
-              </script>
+<script> 
+  $(document).ready(function() { $('.jssingle').select2();});
+</script>
                                     
 @endsection

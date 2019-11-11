@@ -43,8 +43,8 @@
                                                 <td>{{$d->inward_date}}</td>
                                                 <td>{{$d->name}}</td>
                                                 <td>{{$d->reference}}</td>
-                                                <td>{{$d->total_weight}}</td>                                                    
-                                                <td>{{$d->net_value}}</td>
+                                                <td> {{  number_format((float)$d->total_weight, 3, '.', '') }}</td>                                                    
+                                                <td>{{  number_format((float)$d->net_value, 2, '.', '') }}</td>
                                                 <td class="text-nowrap">
                                                     <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit-FRN"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
