@@ -35,9 +35,7 @@ class CreateTestTable extends Migration
              //  });
  
 
-                Schema::table('knitted_fab_details', function($table) {
-                  $table->integer('frnnumber')->nullable();   
-                  });
+              
 
 
         

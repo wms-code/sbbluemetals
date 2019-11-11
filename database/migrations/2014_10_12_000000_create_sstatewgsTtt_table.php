@@ -27,13 +27,13 @@ class CreateSstatewgstTtTable extends Migration
         $table->string('address2', 100)->nullable();             
         $table->string('address3', 100)->nullable();   
         $table->integer('subgroup_code')->nullable();   
-        $table->integer('stategst_code')->nullable();   
+       // $table->integer('stategst_code')->nullable();   
         $table->integer('group_code')->nullable();  
         $table->integer('reportgroup_code')->nullable();   
         $table->integer('opn_bal')->nullable();   
-        $table->string('active','3')->nullable();  
+        //$table->string('active','3')->nullable();  
+        $table->boolean('active')->default(0);
         $table->timestamps();   
-      //  $table->boolean('active')->default(0);
          
     });
     

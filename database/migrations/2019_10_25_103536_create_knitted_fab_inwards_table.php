@@ -48,7 +48,16 @@ class CreateKnittedFabInwardsTable extends Migration
             $table->double('weight',8,3)->nullable();  
             $table->double('delivery_weight',8,3)->nullable()->default(0);    
             $table->double('rate',8,2)->nullable();      
-            $table->double('amount',8,2)->nullable();  
+            $table->double('amount',8,2)->nullable(); 
+            $table->integer('inwardnumber')->nullable();
+            $table->dateTime('inwarddate')->nullable();
+            $table->double('total_weight')->nullable();
+            $table->double('perrateamount')->nullable();
+            $table->double('taxper')->nullable();
+            $table->double('taxamt')->nullable();
+            $table->double('roundoff')->nullable();
+            $table->integer('frnnumber')->nullable();    
+            $table->string('hsn', 200)->nullable();
             $table->timestamps();
 
                $table->foreign('knitted_fab_inward_number')

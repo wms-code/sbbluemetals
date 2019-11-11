@@ -23,7 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->string('address1', 100)->nullable(); 
             $table->string('address2', 100)->nullable(); 
             $table->string('address3', 100)->nullable();              
-          //  $table->boolean('active')->default(0);
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }
