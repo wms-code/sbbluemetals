@@ -85,37 +85,19 @@
             <div class="modal-body" id="attachment-body-content">
               <form id="edit-form" class="form-horizontal" method="POST" action="">
                 <div class="card text bg-dark mb-0">
-                  <div class="card-header">
-                    <h2 class="m-0">Edit</h2>
-                  </div>
+                   
                   <div class="card-body">
-                    <!-- id -->
-                    <div class="form-group">
-                            <label for="modal-input-id" class="control-label text-left col-md-3">Fabric Group Name</label>
-                            <input type="text" name="modal-input-id" class="col-md-3 form-control" id="modal-input-id" required>
-                    </div>
-                    <!-- /id -->
-                    <!-- name -->
-                    <div class="form-group">
-                            <label for="modal-input-name" class="control-label text-left col-md-3">Fabric Group Name</label>
-                            <input type="text" required autofocus name="modal-input-name" class="col-md-3 form-control" id="modal-input-name" required>
-                    </div>
-                    <!-- /name -->
-                    <!-- description -->
-                    <div class="form-group">
-                            <label for="modal-input-description" class="control-label text-left col-md-3">Fabric Group Name</label>
-                            <input type="text"   name="modal-input-description" class="col-md-3 form-control" id="modal-input-description" required>
-                    </div>
+                    
                     <div id="welcome">
 
                     </div>
-                    <!-- /description -->
+                    
                   </div>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+              <button type="button" class="btn btn-primary" id="#save-item"  onClick="savefrn()"  >Done</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -123,12 +105,41 @@
       </div>
       <!-- /Attachment Modal -->
 <script>
+      function savefrn()
+      {
+         
+            var id=2;
+             
+            var colourname = $('input[name="colourname[]"]').map(function(){ 
+                    return this.value; 
+                }).get();
+            alert(colourname);
+            var _token = $('input[name="_token"]').val();
+               $.ajax
+                ({
+                    url:"{{ route('knittedfabric.savefrn') }}",
+                    method:"POST",
+                    data:{colourname:colourname,id:id },                                  
+                    success: function(response)
+                    {      
+                        alert(data);
+                       $('#welcome').append('');  
+                        
+                    } ,                       
+                   headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                });
+            
+      }
+      
      $(document).on('click', "#edit-item", function()
     {
+        $('#welcome').html('');   
          $(this).addClass('edit-item-trigger-clicked'); 
           var options = {'backdrop': 'static'};
             $('#edit-modal').modal(options)
-            var html;
+            var html='';
             html +='<div class="table-responsive  m-t-40">';
             html +='<table id="myTable" class="table table-bordered table-striped">';
             html +='<tr> <th  width="5%">S.No</th> <th  width="5%" >Colour</th> ';
@@ -142,13 +153,14 @@
                                     
         //    $("#modal-input-id").val('welcome');
             updatecolour();
-            $('#welcome').append(''); 
+           
+        
     //////////////////////////////////////////////////////////////////////////////   
             function updatecolour()
             {
                 var _token = $('input[name="_token"]').val();
-                var id=1;
-                
+                var id=2;
+               
                 $.ajax
                 ({
                     url:"{{ route('knittedfabric.fetchfrn') }}",
@@ -158,13 +170,15 @@
                     {           
                        $.each(response,function(index)
                        {
+                        var x = parseFloat(response[index].weight);
+                        
 
     html +='<tr>';
-    html +='<td>'+response[index].indx+' <input type="hidden"  name="sno[]" value="'+response[index].indx+'"/></td>';
-    html +='<td>'+response[index].coloursname+'<input type="hidden"  name="colourname[]"  value="'+response[index].coloursid+'"/></td>';
+    html +='<td>'+response[index].indx+' <input type="hidden" class="sno" name="sno[]" value="'+response[index].indx+'"/></td>';
+    html +='<td>'+response[index].coloursname+'<input type="hidden"   name="colourname[]"  value="'+response[index].coloursid+'"/></td>';
     html +='<td>'+response[index].fabricsname+'<input type="hidden"  name="fabricname[]"  value="'+response[index].fabricsid+'"/></td>';
+    html +='<td>'+x+'</td>';
     html +='<td>'+response[index].weight+'</td>';
-    html +='<td><input type="text"  style=" width: 100px;"  name="weight[]"  value="'+response[index].weight+'"/></td>';
     html +='<td><input type="text"  style=" width: 100px;"  name="recdweight[]"  value=""/></td>';
     html +='</tr>';
                            

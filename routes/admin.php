@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::post('knittedfabric/fetchcolour', 'KnittedFabInwardController@fetchcolour')->name('knittedfabric.fetchcolour');
         Route::post('knittedfabric/fetchrack', 'KnittedFabInwardController@fetchrack')->name('knittedfabric.fetchrack');
         Route::post('knittedfabric/fetchfrn', 'KnittedFabInwardController@fetchfrn')->name('knittedfabric.fetchfrn');
-        
+        Route::post('knittedfabric/savefrn', 'KnittedFabInwardController@savefrn')->name('knittedfabric.savefrn');
         //Route::resource('admin/colour', 'ColourController');
     });
 

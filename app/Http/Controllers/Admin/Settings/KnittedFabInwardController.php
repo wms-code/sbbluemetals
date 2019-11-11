@@ -22,6 +22,24 @@ class KnittedFabInwardController extends Controller
     {
          
     }
+
+    public function savefrn(Request $request)
+    {
+        $i=0;
+        return $request;
+        foreach($request->sno as $arrcolour)
+            {
+                Knittedfabdetails::where(
+                   ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
+                   [ 'delivery_weight'=>$request->recdweight[$i] ]);
+                   $i=$i+1;
+            }             
+
+        $msg = [
+            'message' => 'Knitted Fabric Entry Updated successfully!' ];
+        return  redirect('admin/knittedfabric')->with($msg);
+    }
+
     public function fetchfrn(Request $request)
     {      
         
