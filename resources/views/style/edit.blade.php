@@ -15,7 +15,7 @@
                     <h4 class="m-b-0 text-white">Edit </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('admin/style') }}/{{ $unit->id }}" method="post" class="form-horizontal form-bordered">
+                    <form action="{{ url('admin/style') }}/{{ $style->id }}" method="post" class="form-horizontal form-bordered">
                         <div class="form-body">
                         <br>
                         @csrf
