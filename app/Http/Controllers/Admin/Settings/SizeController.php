@@ -51,7 +51,7 @@ class SizeController extends Controller
                 'size8'=>$request->size8
                  ]
         );       
-        $msg =['message' => 'Unit Updated successfully!'];
+        $msg =['message' => 'Size Updated successfully!'];
         return  redirect('admin/size')->with($msg);
     }
 

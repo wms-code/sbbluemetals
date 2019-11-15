@@ -35,7 +35,7 @@
                                             @foreach ($size as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->size1}}</td>                                               
+                                                <td>{{$d->name}}</td>                                               
                                                 <td class="text-nowrap">
                                                     <a href="{{ url('admin/size') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
