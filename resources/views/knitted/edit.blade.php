@@ -81,6 +81,7 @@
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    <?php $i=1;?>
                                         @foreach ($rsdepartmentData['rsdetails'] as $details)
                                       <tr>
                                         <th>{{$details->indx}} </th>
@@ -94,7 +95,7 @@
                                             value="{{$details->fabricsid}}" />  
                                         </td>
                                         <td>
-                                           <input type="text" name="hsn[]" id="hsn_1" 
+                                           <input type="text" name="hsn[]"  id='hsn_{{$i}}'
                                           value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
                                         </td>
                                         <td>
@@ -103,37 +104,41 @@
                                         </td>
                                         <td>
                                           <input type="text"
-                                          value='{{$details->rolls}}'   name="rolls[]" id="rolls_1" class="form-control">                                             
+                                          value='{{$details->rolls}}'   name="rolls[]" id="rolls_{{$i}}" class="form-control">                                             
                                         </td>
                                         <td>
-                                            <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
+                                            <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_{{$i}}"
+                                             class="form-control totalWeight changesNo" 
                                               autocomplete="off"  >
                                           </td>
                                         
                                         <td>
                                             <input type="text"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' 
-                                            name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            name="rate[]" id="rate_{{$i}}" class="form-control changesNo" 
                                               autocomplete="off" >
                                         <br>
                                          
-                                          <input type="number" value='{{  number_format((float)$details->perrateamount, 2, '.', '') }}' name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
+                                          <input type="number" value='{{  number_format((float)$details->perrateamount, 2, '.', '') }}' name="perrateamount[]"
+                                           id="perrateamount_{{$i}}" class="form-control totalSubTotal" readonly >
                                        </td>
                                       
                                         <td>
-                                          <input type="number" value='{{ number_format((float)$details->taxper, 2, '.', '') }}'  name="taxper[]" id="taxper_1" class="form-control  changesNo" 
+                                          <input type="number" value='{{ number_format((float)$details->taxper, 2, '.', '') }}'  name="taxper[]" 
+                                          id="taxper_{{$i}}" class="form-control  changesNo" 
                                             autocomplete="off" onkeypress="return IsNumeric(event);" >
                                        <br>
                                         
-                                        <input type="number" value='{{  number_format((float)$details->taxamt, 2, '.', '') }}' name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
+                                        <input type="number" value='{{  number_format((float)$details->taxamt, 2, '.', '') }}' name="taxamt[]" id="taxamt_{{$i}}" class="form-control totalLinetax"  readonly >
                                        <br>
                                       
-                                        <input type="number" value='{{ number_format((float)$details->roundoff ,2, '.', '') }}' name="roundoff[]" id="roundoff_1" class="form-control totalRoundOff" readonly >
+                                        <input type="number" value='{{ number_format((float)$details->roundoff ,2, '.', '') }}' name="roundoff[]" id="roundoff_{{$i}}" class="form-control totalRoundOff" readonly >
                                      </td>
                                         <td>
-                                              <input type="number" value='{{  number_format((float)$details->amount, 2, '.', '')}}'  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
+                                              <input type="number" value='{{  number_format((float)$details->amount, 2, '.', '')}}'  readonly name="amount[]" id="amount_{{$i}}" class="form-control totalLinePrice">
                                         </td>
                                         </tr>
                                        </tbody>
+                                       <?php $i=$i+1;?>
                                        @endforeach
                              </table>   
                             
