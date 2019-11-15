@@ -17,7 +17,8 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li>    
+                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li>
+                            <li><a href="{{ url('admin/style')}}">Style</a></li>        
                             <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
                             <li><a href="{{ url('admin/fabric')}}">FABRIC</a></li>
                             <li><a href="{{ url('admin/fabricgroup')}}">FABRIC-GROUP</a></li>
