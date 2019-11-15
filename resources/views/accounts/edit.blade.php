@@ -25,7 +25,7 @@
                         <form action="{{ url('admin/accounts') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
-                            @csrf @method('test')
+                            @csrf @method('PUT')
                             
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Accounts Name</label>
