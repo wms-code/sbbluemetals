@@ -125,12 +125,12 @@
                                           <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
                                         </td>
                                         <td>
-                                            <input type="text" value="5060" name="qty[]" id="qty_1" class="form-control changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                            <input type="text" value="" name="qty[]" id="qty_1" class="form-control changesNo" 
+                                              autocomplete="off"   >
                                           </td>
                                         
                                         <td>
-                                            <input type="number" value="34.40" name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            <input type="number" value="" name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                         <br>
                                          
