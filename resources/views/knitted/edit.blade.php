@@ -111,7 +111,8 @@
                                           </td>
                                         
                                         <td>
-                                            <input type="number"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            <input type="text"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' 
+                                            name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" >
                                         <br>
                                          
@@ -142,7 +143,7 @@
                          <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Total Weight:.</label>
                               <div class="col-md-2">
-                                  <input type="number" name="total_weight" readonly class="form-control"
+                                  <input type="text" name="total_weight" readonly class="form-control "
                                    id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} placeholder="Total Weight" >
                               </div>
                         </div>
