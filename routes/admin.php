@@ -18,7 +18,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('count', 'CountController');
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
-        
+        Route::resource('style', 'StyleController');
         Route::resource('companies', 'CompanyController');
         Route::resource('size', 'SizeController');
 
