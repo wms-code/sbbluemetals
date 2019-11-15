@@ -131,7 +131,7 @@
                                         
                                         <td>
                                             <input type="number" value="" name="rate[]" id="rate_1" class="form-control changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                              autocomplete="off"   >
                                         <br>
                                          
                                           <input type="number" name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
@@ -139,7 +139,7 @@
                                       
                                         <td>
                                           <input type="number" value="5" name="taxper[]" id="taxper_1" class="form-control  changesNo" 
-                                            autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                            autocomplete="off"  >
                                        <br>
                                         
                                         <input type="number" name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
