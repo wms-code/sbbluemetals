@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Style extends Model
 {
-    protected $table='units';
+    protected $table='style';
     protected $guarded=['active'];
   
 }
