@@ -18,8 +18,9 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('count', 'CountController');
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
-        //Route::resource('accounts', 'AccountController');
+        
         Route::resource('companies', 'CompanyController');
+        Route::resource('size', 'SizeController');
 
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         Route::put('knittedfabric', 'KnittedFabInwardController@update');

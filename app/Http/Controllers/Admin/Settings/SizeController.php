@@ -1,0 +1,57 @@
+<?php
+namespace App\Http\Controllers\Admin\Settings; 
+use Illuminate\Http\Request;
+use App\Model\Size; 
+use Illuminate\Routing\Controller;
+class SizeController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
+    public function index()
+    {
+        $size= Size::orderBy('name','asc')->paginate(5);
+        return view('size.list',compact('size'));
+    }
+
+    public function create()
+    {
+        return view('size.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        Size::create($request->all());
+        $msg = [ 'message' => 'Size created successfully!' ];
+        return  redirect('admin/size')->with($msg);
+    }
+
+  
+    public function edit(Size $size)
+    {
+        return  view('size.edit',compact('size'));
+    }
+
+   
+    public function update(Request $request)
+    {
+        Size::where('id', $request->id) ->update(['size1'=>$request->size1 ]);       
+        $msg =['message' => 'Unit Updated successfully!'];
+        return  redirect('admin/size')->with($msg);
+    }
+
+   
+    public function destroy(Size $size)
+    {
+       // $fabric->delete();
+       // $msg =['message' => 'Fabric Deleted successfully!',
+       //'type' => 'warning'];
+
+       $msg =['message' => 'Unable to Delete!',
+       'type' => 'warning'];
+        return  redirect('admin/size')->with($msg);
+    }
+}

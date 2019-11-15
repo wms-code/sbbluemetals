@@ -23,6 +23,7 @@
                             <li><a href="{{ url('admin/fabricgroup')}}">FABRIC-GROUP</a></li>
                             <li><a href="{{ url('admin/count')}}">COUNTS</a></li>
                             <li><a href="{{ url('admin/unit')}}">Unit</a></li>
+                            <li><a href="{{ url('admin/size')}}">Size</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">FABRIC Stock Floor</a></li> 
                             <li><a href="{{ url('admin/stockpoint')}}">Bank Accounts*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Employee Details*</a></li>
