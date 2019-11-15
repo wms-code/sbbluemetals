@@ -15,6 +15,7 @@ class CreateSizeTable extends Migration
     {
         Schema::create('size', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 100)->unique();
             $table->string('size1', 10)->nullable();
             $table->string('size2', 10)->nullable();
             $table->string('size3', 10)->nullable();

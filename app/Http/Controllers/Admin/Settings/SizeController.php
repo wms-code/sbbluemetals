@@ -38,7 +38,19 @@ class SizeController extends Controller
    
     public function update(Request $request)
     {
-        Size::where('id', $request->id) ->update(['size1'=>$request->size1 ]);       
+        Size::where('id', $request->id) ->update(
+            [
+                'name'=>$request->name,
+                'size1'=>$request->size1,
+                'size2'=>$request->size2,
+                'size3'=>$request->size3,
+                'size4'=>$request->size4,
+                'size5'=>$request->size5,
+                'size6'=>$request->size6,
+                'size7'=>$request->size7,
+                'size8'=>$request->size8
+                 ]
+        );       
         $msg =['message' => 'Unit Updated successfully!'];
         return  redirect('admin/size')->with($msg);
     }
