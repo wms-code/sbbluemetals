@@ -107,12 +107,12 @@
                                         </td>
                                         <td>
                                             <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                              autocomplete="off"  >
                                           </td>
                                         
                                         <td>
                                             <input type="number"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' name="rate[]" id="rate_1" class="form-control changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
+                                              autocomplete="off" >
                                         <br>
                                          
                                           <input type="number" value='{{  number_format((float)$details->perrateamount, 2, '.', '') }}' name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
