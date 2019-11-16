@@ -66,9 +66,7 @@
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
                                       <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc</th>
-                                      <th width="4%">H.S.N.</th>
-                                      <th width="5%">Particulars</th>
+                                      <th width="10%">Fabirc</th> 
                                       <th width="5%">Rolls</th>
                                       <th width="10%">Qty</th>
                                       <th width="10%">Rate</th>
@@ -118,23 +116,23 @@
                                              
                                               
                                                    
-                                        </td>
-                                        <td>
-                                           <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
-                                        </td>
-                                        <td>
-                                           <input type="text" name="particulars[]" id="particulars_1" class="form-control" >
+                                        
+                                         
+                                           <input type="hidden" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
+                                        
+                                         
+                                           <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
                                         </td>
                                         <td>
                                           <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
                                         </td>
                                         <td>
-                                            <input type="text" value="5060" name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
+                                            <input type="text" value="" name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                           </td>
                                         
                                         <td>
-                                            <input type="number" value="34.40" name="rate[]" id="rate_1" class="form-control changesNo" 
+                                            <input type="number" value="" name="rate[]" id="rate_1" class="form-control changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
                                         <br>
                                          
@@ -252,9 +250,9 @@
               html += '<td><input class="case" type="checkbox"/></td>';
               html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
               html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select></td>';
-              html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
-              html += '<td><input type="text" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
+              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
+              html += '<input type="hidden" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
+              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
               html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
               html += '<td><input type="number" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
               html += '<td><input type="number" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';

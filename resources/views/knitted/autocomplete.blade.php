@@ -62,9 +62,7 @@
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
                                       <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc</th>
-                                      <th width="4%">H.S.N.</th>
-                                      <th width="5%">Particulars</th>
+                                      <th width="10%">Fabirc</th>                                      
                                       <th width="5%">Rolls</th>
                                       <th width="10%">Qty</th>
                                       <th width="10%">Rate</th>
@@ -114,12 +112,10 @@
                                              
                                               
                                                    
-                                        </td>
-                                        <td>
-                                           <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
-                                        </td>
-                                        <td>
-                                           <input type="text" name="particulars[]" id="particulars_1" class="form-control" >
+                                         
+                                           <input type="hidden" name="hsn[]" id="hsn_1" class="form-control"  >
+                                         
+                                           <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
                                         </td>
                                         <td>
                                           <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
