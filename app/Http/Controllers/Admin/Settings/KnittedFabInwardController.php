@@ -68,7 +68,7 @@ class KnittedFabInwardController extends Controller
               ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
               ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
               ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
-                        'fabrics.name as fabricsname','hsn','packingtaxamount','packingtaxper',
+                        'fabrics.name as fabricsname','hsn',
                          'indx','particulars','rolls','weight','rate',
                          'amount','perrateamount','taxper','taxamt','roundoff',
                          'inwardnumber','inward_number')
@@ -79,7 +79,7 @@ class KnittedFabInwardController extends Controller
        $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
                ->join('accounts', 'accounts.id', '=', 'knitted_fab_inwards.party_code')
                ->select('accounts.name as acname','inward_number',
-                          'reference','remarks','sub_total','net_value','total_weight',
+                          'reference','remarks','sub_total','net_value','total_weight','packingtaxamount','packingtaxper',
                          'round_off','inward_date','inwarddate','party_code','tax_amount',
                           'inwardnumber')
                 ->orderBy('knitted_fab_inwards.inward_date', 'asc')              
