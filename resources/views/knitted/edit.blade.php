@@ -190,7 +190,7 @@
                            readonly class="form-control" id="totalpackingamount" placeholder="Total Packing Amount">
                         </div>
                      </div>
-                     
+
                       <div  style="margin-left: 0px;" class="form-group row">
                           <label class="control-label text-left col-md-3">Round Off</label>
                            <div class="col-md-3">
@@ -345,7 +345,7 @@
                 $('#totalpackingamount').val(0);              
               }
               
-              packingtaxamount = $('#packingtaxamount').val();
+              packingtaxamount = $('#totalpackingamount').val();
               subTotal +=parseFloat(packingtaxamount);
               $('#txtTotal').val( subTotal.toFixed(2));
               //////////////////////////////////////////////////////////// 
