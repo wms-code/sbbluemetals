@@ -26,12 +26,14 @@ class KnittedFabInwardController extends Controller
     public function savefrn(Request $request)
     {
         $i=0;$output='';
-           
-       foreach($request->sno as $arrcolour)
+        //return   $request->frnnumber;
+        foreach($request->sno as $arrcolour)
            { 
             Knittedfabdetails::where(
                     ['inwardnumber'=>$request->id,'indx'=>$i+1])->update(
-                    ['delivery_weight'=>$request->recdweight[$i]]); 
+                    ['delivery_weight'=>$request->recdweight[$i],
+                     'frnnumber'=>$request->frnnumber[$i]
+                    ]); 
                     $i=$i+1;
            }             
      
@@ -48,7 +50,7 @@ class KnittedFabInwardController extends Controller
         ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
                   'fabrics.name as fabricsname','hsn','delivery_weight',
                    'indx','particulars','rolls','weight','rate',
-                   'amount','perrateamount','taxper','taxamt','roundoff',
+                   'amount','perrateamount','taxper','taxamt','roundoff','frnnumber',
                    'inwardnumber','inward_number')
          ->orderBy('indx', 'asc')  
          ->where('inwardnumber',$request->id)
@@ -117,6 +119,7 @@ class KnittedFabInwardController extends Controller
                                         'hsn'=>$request->hsn[$i],
                                         'rolls'=>$request->rolls[$i],
                                         'weight'=>$request->qty[$i],
+                                        'delivery_weight'=>$request->qty[$i],
                                         'rate'=>$request->rate[$i],
                                         'amount'=>$request->amount[$i],
                                         'perrateamount'=>$request->perrateamount[$i],
@@ -194,7 +197,7 @@ class KnittedFabInwardController extends Controller
         
         $rsfabrics = DB::table('fabrics')        
                ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
-               ->select('fabrics.id','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+               ->select('fabrics.id','remarks','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
                ->orderBy('fabricgroup.name', 'asc')
                ->orderBy('fabrics.name', 'asc')
                ->get(); 

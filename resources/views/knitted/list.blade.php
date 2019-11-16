@@ -32,6 +32,7 @@
                                                 <th>Supplier Ref No</th>
                                                 <th>Total Weight</th>
                                                 <th>Total Amount</th>
+                                                <th>Remarks</th>
                                                 <th class="text-nowrap">FRN</th>
                                                 <th class="text-nowrap">Edit</th>
                                             </tr>
@@ -44,8 +45,10 @@
                                                 <td>{{$d->inward_date}}</td>
                                                 <td>{{$d->name}}</td>
                                                 <td>{{$d->reference}}</td>
+                                                
                                                 <td> {{  number_format((float)$d->total_weight, 3, '.', '') }}</td>                                                    
                                                 <td>{{  number_format((float)$d->net_value, 2, '.', '') }}</td>
+                                                <td>{{$d->remarks}}</td>
                                                 <td>
 
                                                         <button type="button" 
@@ -128,13 +131,17 @@
             var recdweight = $('input[name="recdweight[]"]').map(function(){ 
                     return this.value; 
                 }).get();    
-                
+
+             var frnnumber = $('input[name="frnnumber[]"]').map(function(){ 
+                    return this.value; 
+                }).get();  
+
             var _token = $('input[name="_token"]').val();
                $.ajax
                 ({
                     url:"{{ route('knittedfabric.savefrn') }}",
                     method:"POST",
-                    data:{'sno[]':sno,'recdweight[]':recdweight, id:id,_token:_token},                                  
+                    data:{'sno[]':sno,'recdweight[]':recdweight,'frnnumber[]':frnnumber, id:id,_token:_token},                                  
                     success: function(response)
                     {      
                        
@@ -191,7 +198,7 @@
     html +='<td>'+response[index].indx+' <input type="hidden" class="sno" name="sno[]" value="'+response[index].indx+'"/></td>';
     html +='<td>'+response[index].coloursname+'<input type="hidden"   name="colourname[]"  value="'+response[index].coloursid+'"/></td>';
     html +='<td>'+response[index].fabricsname+'<input type="hidden"  name="fabricname[]"  value="'+response[index].fabricsid+'"/></td>';
-    html +='<td>'+x+'</td>';
+    html +='<td><input type="text"  name="frnnumber[]"  value="'+response[index].frnnumber+'"/></td>';
     html +='<td>'+response[index].weight+'</td>';
     html +='<td><input type="number"  style=" width: 100px;"  name="recdweight[]"   value="'+response[index].delivery_weight+'"/></td>';
     html +='</tr>';
