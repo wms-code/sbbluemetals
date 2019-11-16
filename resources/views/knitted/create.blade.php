@@ -534,8 +534,8 @@ function updatefabric(para){
                 $('#totalpackingamount').val(0);              
               }
               
-              packingtaxamount = $('#totalpackingamount').val();
-              subTotal +=parseFloat(packingtaxamount);
+              totalpackingamount = $('#totalpackingamount').val();
+              subTotal +=parseFloat(totalpackingamount);
               $('#txtTotal').val( subTotal.toFixed(0));
               //////////////////////////////////////////////////////////// 
 

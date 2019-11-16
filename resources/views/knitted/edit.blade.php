@@ -345,9 +345,11 @@
                 $('#totalpackingamount').val(0);              
               }
               
-              packingtaxamount = $('#totalpackingamount').val();
-              subTotal +=parseFloat(packingtaxamount);
-              $('#txtTotal').val( subTotal.toFixed(0));
+              totalpackingamount = $('#totalpackingamount').val();
+              subTotal +=parseFloat(totalpackingamount);
+              console.log(subTotal);
+              subTotal=subTotal.toFixed(0);
+              $('#txtTotal').val(subTotal);
               //////////////////////////////////////////////////////////// 
     
         
@@ -358,13 +360,7 @@
               });
               $('#taxroundoff').val( taxamtt.toFixed(2));  
               
-              packingtaxamount = $('#packingtaxamount').val();
-              subTotal +=parseFloat(packingtaxamount);
-
-              $('#txtTotal').val( subTotal.toFixed(2));         
-
-
-
+              
 
               taxamtt=0;
               $('.totalWeight').each(function(){
