@@ -353,9 +353,17 @@ class KnittedFabInwardController extends Controller
     }
 
   
-    public function destroy(KnittedFabInward $knittedFabInward)
+    public function destroy($id)
     {
-         
+       
+       DB::table('knitted_fab_inwards')->where('id',$id)->delete();
+       DB::table('knitted_fab_details')->where('id',$id)->delete();
+       
+        $msg =['message' => 'Inward Fabric Deleted successfully!',
+       'type' => 'warning'];
+
+      
+        return  redirect('admin/knittedfabric')->with($msg); 
     }
     
 }
