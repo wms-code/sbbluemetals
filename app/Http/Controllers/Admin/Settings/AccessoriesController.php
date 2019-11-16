@@ -30,9 +30,9 @@ class AccessoriesController extends Controller
     }
 
   
-    public function edit(Accessories $accessories,$id)
+    public function edit($id)
     {
-         return $accessories;
+        $accessories = Accessories::find($id); 
         return  view('accessories.edit',compact('accessories'));
     }
 
@@ -49,7 +49,7 @@ class AccessoriesController extends Controller
     }
 
    
-    public function destroy(Accessories $size)
+    public function destroy(Accessories $accessories)
     {
        // $fabric->delete();
        // $msg =['message' => 'Fabric Deleted successfully!',
