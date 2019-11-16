@@ -32,7 +32,7 @@ class AccessoriesController extends Controller
   
     public function edit(Accessories $accessories,$id)
     {
-        return $id;
+         return $accessories;
         return  view('accessories.edit',compact('accessories'));
     }
 
