@@ -143,15 +143,15 @@
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Total Weight:.</label>
-                              <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                              <div class="col-md-3">
                                   <input type="text" name="total_weight" readonly class="form-control "
                                    id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} placeholder="Total Weight" >
                               </div>
                         </div>
                         <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Subtotal:.</label>
-                              <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Subtotal:.</label>
+                              <div class="col-md-3">
                                     <input type="number"value={{ number_format((float)$fabrics->sub_total, 2, '.', '')  }}
                                       name="sub_total" readonly class="form-control" id="subTotal" placeholder="Subtotal"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
@@ -159,16 +159,28 @@
                         </div>
 
                         <div  style="margin-left: 0px;" class="form-group row">
-                              <label class="control-label text-left col-md-2">Tax Amount %:.</label>
-                               <div class="col-md-2">
+                              <label class="control-label text-left col-md-3">Items Tax Amount %:.</label>
+                               <div class="col-md-3">
                                   <input type="number" value={{ number_format((float)$fabrics->tax_amount, 2, '.', '')  }}  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
                                    
                                 </div>
                         </div>
-                      
+                        <div  style="margin-left: 0px;" class="form-group row">
+                          <label class="control-label text-left col-md-3">Packing Tax %:.</label>
+                           <div class="col-md-3">
+                              <input type="number"  value={{ number_format((float)$fabrics->packingtaxper, 2, '.', '')  }}  name="packingtaxper"   class="form-control" id="packingtaxper" placeholder="Packing Tax">
+                            </div>
+                    </div>
+
+                    <div  style="margin-left: 0px;" class="form-group row">
+                      <label class="control-label text-left col-md-3">Packing Tax Amount %:.</label>
+                       <div class="col-md-3">
+                          <input type="number"  value={{ number_format((float)$fabrics->packingtaxamount, 2, '.', '')  }}   name="packingtaxamount"  readonly class="form-control" id="packingtaxamount" placeholder="Packing Amount">
+                        </div>
+                     </div>
                       <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-2">Round Off</label>
-                           <div class="col-md-2">
+                          <label class="control-label text-left col-md-3">Round Off</label>
+                           <div class="col-md-3">
                               <input type="number"  value={{ number_format((float)$fabrics->round_off, 2, '.', '')  }}  name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
                             </div>
                       </div>
@@ -177,7 +189,7 @@
                             
                         <div  style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-2"> Total:.</label>
-                              <div class="col-md-2">
+                              <div class="col-md-3">
                                     <input type="number"  value={{ number_format((float)$fabrics->net_value, 2, '.', '')  }}  name="net_value" readonly class="form-control" id="txtTotal" 
                                       placeholder="Total"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
@@ -187,8 +199,8 @@
                        
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
-                            <label class="control-label text-left col-md-2"> Remarks</label>
-                            <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Remarks</label>
+                            <div class="col-md-5">
                                   <input type="text"  value='{{ $fabrics->remarks }}'  name="remarks" class="form-control">
                             </div>
                         </div>
@@ -282,8 +294,8 @@
                 if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
 
-              $('#txtTotal').val( subTotal.toFixed(2));
-
+              //$('#txtTotal').val( subTotal.toFixed(2));
+              
               $('.totalSubTotal').each(function(){
                 if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
               });
@@ -294,13 +306,37 @@
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
               });
               $('#taxAmount').val( taxamtt.toFixed(2));  
-             
+                /////////////////////////////////////////////////////////////
+              packingtaxper = $('#packingtaxper').val();
+              packingtaxamount = $('#packingtaxamount').val();
+              if(packingtaxper != '' && typeof(packingtaxper) != "undefined" )
+              {
+                packingtaxamount = subTotal * ( parseFloat(packingtaxper) /100 );
+                $('#packingtaxamount').val(packingtaxamount.toFixed(2)); 
+              }
+              else
+              {
+                $('#packingtaxamount').val(0);               
+              }
+              //////////////////////////////////////////////////////////// 
+              
+    
+        
+
               taxamtt=0;
               $('.totalRoundOff').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
               });
               $('#taxroundoff').val( taxamtt.toFixed(2));  
-             
+              
+              packingtaxamount = $('#packingtaxamount').val();
+              subTotal +=parseFloat(packingtaxamount);
+
+              $('#txtTotal').val( subTotal.toFixed(2));         
+
+
+
+
               taxamtt=0;
               $('.totalWeight').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );

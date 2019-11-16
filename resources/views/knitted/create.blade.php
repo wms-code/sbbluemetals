@@ -197,7 +197,7 @@
                     <div  style="margin-left: 0px;" class="form-group row">
                       <label class="control-label text-left col-md-3">Packing Tax Amount %:.</label>
                        <div class="col-md-3">
-                          <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxAmount" placeholder="Packing Amount">
+                          <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxamount" placeholder="Packing Amount">
                         </div>
                      </div>
                       
@@ -446,7 +446,8 @@ function updatefabric(para){
 
               taxper = $('#taxper_'+id[1]).val();
               taxamt = $('#taxamt_'+id[1]).val();
-              
+
+            
               if(quantity!='' && price !='') 
               {
                 perrateamount= (parseFloat(price)*parseFloat(quantity)).toFixed(2);
@@ -486,15 +487,39 @@ function updatefabric(para){
             $(document).on('change keyup blur','#tax',function(){
               calculateTotal();
             });
+            $(document).on('change keyup blur','#packingtaxper',function(){
+              calculateTotal();
+            });
             
             //total price calculation 
             function calculateTotal(){
               subTotal = 0 ; total = 0; taxamtt = 0; 
               perrateamount=0;
+               
 
               $('.totalLinePrice').each(function(){
                 if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
+
+             
+
+              
+
+              /////////////////////////////////////////////////////////////
+              packingtaxper = $('#packingtaxper').val();
+              packingtaxamount = $('#packingtaxamount').val();
+              if(packingtaxper != '' && typeof(packingtaxper) != "undefined" )
+              {
+                packingtaxamount = subTotal * ( parseFloat(packingtaxper) /100 );
+                $('#packingtaxamount').val(packingtaxamount.toFixed(2)); 
+              }
+              else
+              {
+                $('#packingtaxamount').val(0);               
+              }
+              //////////////////////////////////////////////////////////// 
+              packingtaxamount = $('#packingtaxamount').val();
+              subTotal +=parseFloat(packingtaxamount);
 
               $('#txtTotal').val( subTotal.toFixed(2));
 
@@ -520,31 +545,13 @@ function updatefabric(para){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
               });
               $('#total_weight').val( taxamtt.toFixed(2));  
-              
-
-             // $('#subTotal').val( subTotal.toFixed(2) );
-             // $('#tax').val( taxamtt.toFixed(2) );
-
-             // tax = $('#tax').val();
-              //if(tax != '' && typeof(tax) != "undefined" ){
-               // taxAmount = subTotal * ( parseFloat(tax) /100 );
-               // $('#taxAmount').val(taxAmount.toFixed(2));
-               // total = subTotal + taxAmount;
-              //}else{
-               // $('#taxAmount').val(0);
-               // total = subTotal;
-              //}
-
-              //$('#txtTotal').val( total.toFixed(2) );
             }
              
-            
-            //It restrict the non-numbers
-            var specialKeys = new Array();
-            specialKeys.push(8,46); //Backspace
-            function IsNumeric(e) {
-                var keyCode = e.which ? e.which : e.keyCode;
-            //    console.log( keyCode );
+ 
+             var specialKeys = new Array();
+             specialKeys.push(8,46);  
+             function IsNumeric(e) {
+                var keyCode = e.which ? e.which : e.keyCode;            
                 var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
                 return ret;
             }
