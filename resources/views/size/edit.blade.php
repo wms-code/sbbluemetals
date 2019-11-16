@@ -45,7 +45,7 @@
                                 <label class="control-label text-right col-md-3">Size II</label>
                                 <div class="col-md-6">
                                     
-                                    <input type="text" name="size3" maxlength="50" value="{{ $size->size3 }}" class="form-control">
+                                    <input type="text" name="size2" maxlength="50" value="{{ $size->size3 }}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
