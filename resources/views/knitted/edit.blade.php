@@ -71,8 +71,7 @@
                                        <th width="4%">SNo</th>
                                       <th width="10%">Colour</th>
                                       <th width="10%">Fabirc</th>
-                                      <th width="4%">H.S.N.</th>
-                                      <th width="5%">Particulars</th>
+                                     
                                       <th width="5%">Rolls</th>
                                       <th width="10%">Weight</th>
                                       <th width="10%">Rate</th>
@@ -93,13 +92,11 @@
                                         <td>{{$details->fabricsname}} 
                                             <input type ="hidden" readonly name="selfabric[]"
                                             value="{{$details->fabricsid}}" />  
-                                        </td>
-                                        <td>
-                                           <input type="text" name="hsn[]"  id='hsn_{{$i}}'
+                                         
+                                           <input type="hidden" name="hsn[]"  id='hsn_{{$i}}'
                                           value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
-                                        </td>
-                                        <td>
-                                           <input type="text" name="particulars[]"
+                                        
+                                           <input type="hidden" name="particulars[]"
                                            value='{{$details->particulars}}'  id="particulars_1" class="form-control" >
                                         </td>
                                         <td>
