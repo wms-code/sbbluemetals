@@ -15,6 +15,7 @@ class KnittedFabInward extends Model
               ->leftJoin('accounts', 'knitted_fab_inwards.party_code', '=', 'accounts.id')
               ->select('inward_number','inward_date','net_value',
               'sub_total','total_weight','reference','name','inwardnumber')  
+              ->orderBy('inwardnumber', 'asc')
               ->orderBy('inward_date', 'asc')
               ->paginate(10);    
 

@@ -40,7 +40,7 @@
                                             @foreach ($rsdepartmentData['data'] as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->inward_number}}</td>
+                                                <td>{{$d->inwardnumber}}</td>
                                                 <td>{{$d->inward_date}}</td>
                                                 <td>{{$d->name}}</td>
                                                 <td>{{$d->reference}}</td>
