@@ -166,31 +166,44 @@
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Total Weight:.</label>
-                              <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                              <div class="col-md-3">
                                   <input type="number" name="total_weight" readonly class="form-control"
                                    id="total_weight" placeholder="Total Weight" >
                               </div>
                         </div>
                         <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Subtotal:.</label>
-                              <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Subtotal:.</label>
+                              <div class="col-md-3">
                                     <input type="number" name="sub_total" readonly class="form-control" id="subTotal" placeholder="Subtotal"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
                               </div>
                         </div>
 
                         <div  style="margin-left: 0px;" class="form-group row">
-                              <label class="control-label text-left col-md-2">Tax Amount %:.</label>
-                               <div class="col-md-2">
+                              <label class="control-label text-left col-md-3">Items Tax Amount %:.</label>
+                               <div class="col-md-3">
                                   <input type="number"  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
-                                   
                                 </div>
                         </div>
+                       
+                        <div  style="margin-left: 0px;" class="form-group row">
+                          <label class="control-label text-left col-md-3">Packing Tax %:.</label>
+                           <div class="col-md-3">
+                              <input type="number"  name="packingtaxper"   class="form-control" id="packingtaxper" placeholder="Packing Tax">
+                            </div>
+                    </div>
+
+                    <div  style="margin-left: 0px;" class="form-group row">
+                      <label class="control-label text-left col-md-3">Packing Tax Amount %:.</label>
+                       <div class="col-md-3">
+                          <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxAmount" placeholder="Packing Amount">
+                        </div>
+                     </div>
                       
                       <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-2">Round Off</label>
-                           <div class="col-md-2">
+                          <label class="control-label text-left col-md-3">Round Off</label>
+                           <div class="col-md-3">
                               <input type="number" name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
                             </div>
                       </div>
@@ -198,8 +211,8 @@
                       
                             
                         <div  style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-2"> Total:.</label>
-                              <div class="col-md-2">
+                            <label class="control-label text-left col-md-3"> Total:.</label>
+                              <div class="col-md-3">
                                     <input type="number" name="net_value" readonly class="form-control" id="txtTotal" 
                                       placeholder="Total"
                                      onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
@@ -209,9 +222,9 @@
                        
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
-                            <label class="control-label text-left col-md-2"> Remarks</label>
-                            <div class="col-md-2">
-                                  <input type="text" name="remarks" maxlength="50" class="form-control">
+                            <label class="control-label text-left col-md-3"> Remarks</label>
+                            <div class="col-md-5">
+                                  <input type="text" name="remarks" maxlength="250" class="form-control">
                             </div>
                         </div>
 

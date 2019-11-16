@@ -45,7 +45,6 @@
                                                 <td>{{$d->inward_date}}</td>
                                                 <td>{{$d->name}}</td>
                                                 <td>{{$d->reference}}</td>
-                                                
                                                 <td> {{  number_format((float)$d->total_weight, 3, '.', '') }}</td>                                                    
                                                 <td>{{  number_format((float)$d->net_value, 2, '.', '') }}</td>
                                                 <td>{{$d->remarks}}</td>

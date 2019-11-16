@@ -101,6 +101,8 @@ class KnittedFabInwardController extends Controller
                                     'sub_total'=>$request->sub_total,
                                     'total_weight'=>$request->total_weight,
                                     'tax_amount'=>$request->tax_amount,
+                                    'packingtaxper'=>$request->packingtaxper,
+                                    'packingtaxamount'=>$request->packingtaxamount,
                                     'round_off'=>$request->round_off,
                                     'net_value'=>$request->net_value,
                                     'remarks'=>$request->remarks ]);
