@@ -68,7 +68,7 @@ class KnittedFabInwardController extends Controller
               ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
               ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
               ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
-                        'fabrics.name as fabricsname','hsn',
+                        'fabrics.name as fabricsname','hsn','packingtaxamount','packingtaxper',
                          'indx','particulars','rolls','weight','rate',
                          'amount','perrateamount','taxper','taxamt','roundoff',
                          'inwardnumber','inward_number')
