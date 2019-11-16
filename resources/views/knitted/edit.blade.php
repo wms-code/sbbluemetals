@@ -347,7 +347,7 @@
               
               packingtaxamount = $('#totalpackingamount').val();
               subTotal +=parseFloat(packingtaxamount);
-              $('#txtTotal').val( subTotal.toFixed(2));
+              $('#txtTotal').val( subTotal.toFixed(0));
               //////////////////////////////////////////////////////////// 
     
         
