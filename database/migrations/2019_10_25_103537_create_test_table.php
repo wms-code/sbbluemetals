@@ -42,8 +42,12 @@ class CreateTestTable extends Migration
               // Schema::table('knitted_fab_inwards', function($table) {
               //    $table->double('totalpackingamount')->nullable();              
               // });
-                 Schema::table('knitted_fab_inwards', function($table) {
-                  $table->double('packingamount')->nullable();              
+                // Schema::table('knitted_fab_inwards', function($table) {
+                //  $table->double('packingamount')->nullable();              
+               //});
+
+               Schema::table('style', function($table) {
+                  $table->double('size_code')->nullable();              
                });
              
                

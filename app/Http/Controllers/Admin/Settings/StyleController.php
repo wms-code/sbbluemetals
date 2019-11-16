@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Settings; 
 use Illuminate\Http\Request;
 use App\Model\Style; 
+use App\Model\Size; 
 use Illuminate\Routing\Controller;
 class StyleController extends Controller
 {
@@ -18,7 +19,9 @@ class StyleController extends Controller
 
     public function create()
     {
-        return view('style.create');
+        $size = Size::getall(); 
+        return view('style.create',compact(['size']));
+       // return view('style.create');
     }
 
 

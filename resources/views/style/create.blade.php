@@ -25,7 +25,19 @@
                                         <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>
                                 </div>
-                                
+                                <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Size Name</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control js-example-basic-single"
+                                             id='size_code'
+                                            name='size_code'>                                
+                                            @foreach($size as $department)
+                                              <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                            @endforeach
+                                         </select>
+                                        </div>
+                                    </div>
+
                     
                             </div>
                             <div class="form-actions">
