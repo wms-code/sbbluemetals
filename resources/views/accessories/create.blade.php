@@ -22,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Accessories </label>
                                     <div class="col-md-6">
-                                        <input type="text" name="name" maxlength="50" class="form-control">
+                                        <input type="text" name="name" maxlength="150" class="form-control">
                                     </div>
                                 </div>
                                 

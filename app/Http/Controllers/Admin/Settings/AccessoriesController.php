@@ -30,8 +30,9 @@ class AccessoriesController extends Controller
     }
 
   
-    public function edit(Accessories $accessories)
+    public function edit(Accessories $accessories,$id)
     {
+        return $id;
         return  view('accessories.edit',compact('accessories'));
     }
 

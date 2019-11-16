@@ -1,7 +1,7 @@
 
 @extends('layouts.admin')
 
-@section('pagetitle','Edit Accessories Group')
+@section('pagetitle','Edit Accessories')
     
 
 
@@ -31,7 +31,7 @@
                                 <label class="control-label text-right col-md-3">Accessories Name</label>
                                 <div class="col-md-6">
                                     
-                                    <input type="text" name="name" maxlength="50" value="{{ $accessories->name }}" class="form-control">
+                                    <input type="text" name="name" maxlength="150" value="{{ $accessories->name }}" class="form-control">
                                 </div>
                             </div>
                             
