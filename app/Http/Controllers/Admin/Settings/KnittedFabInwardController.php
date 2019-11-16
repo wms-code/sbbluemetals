@@ -79,7 +79,8 @@ class KnittedFabInwardController extends Controller
        $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
                ->join('accounts', 'accounts.id', '=', 'knitted_fab_inwards.party_code')
                ->select('accounts.name as acname','inward_number',
-                          'reference','remarks','sub_total','net_value','total_weight','packingtaxamount','packingtaxper',
+                          'reference','remarks','sub_total','net_value','total_weight',
+                          'packingtaxamount','packingtaxper','totalpackingamount','packingamount',
                          'round_off','inward_date','inwarddate','party_code','tax_amount',
                           'inwardnumber')
                 ->orderBy('knitted_fab_inwards.inward_date', 'asc')              
@@ -101,8 +102,10 @@ class KnittedFabInwardController extends Controller
                                     'sub_total'=>$request->sub_total,
                                     'total_weight'=>$request->total_weight,
                                     'tax_amount'=>$request->tax_amount,
-                                    'packingtaxper'=>$request->packingtaxper,
+                                    'packingamount'=>$request->packingamount,
                                     'packingtaxamount'=>$request->packingtaxamount,
+                                    'packingtaxper'=>$request->packingtaxper,
+                                    'totalpackingamount'=>$request->totalpackingamount,
                                     'round_off'=>$request->round_off,
                                     'net_value'=>$request->net_value,
                                     'remarks'=>$request->remarks ]);
@@ -325,8 +328,10 @@ class KnittedFabInwardController extends Controller
         'sub_total'=>$request->sub_total,
         'total_weight'=>$request->total_weight,
         'tax_amount'=>$request->tax_amount,
+        'packingamount'=>$request->packingamount,
         'packingtaxamount'=>$request->packingtaxamount,
         'packingtaxper'=>$request->packingtaxper,
+        'totalpackingamount'=>$request->totalpackingamount,
         'round_off'=>$request->round_off,
         'net_value'=>$request->net_value,
         'remarks'=>$request->remarks ]);

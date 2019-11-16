@@ -188,16 +188,24 @@
                         </div>
                        
                         <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-3">Packing Tax %:.</label>
+                          <label class="control-label text-left col-md-3">Packing Amount-Before Tax:.</label>
+                           <div class="col-md-3">
+                              <input type="number"  name="packingamount"   class="form-control" id="packingamount" placeholder="Packing Amount">
+                            </div>
+                          </div>
+
+                          <div  style="margin-left: 0px;" class="form-group row">
+                         <label class="control-label text-left col-md-3">Packing Tax %:.</label>
                            <div class="col-md-3">
                               <input type="number"  name="packingtaxper"   class="form-control" id="packingtaxper" placeholder="Packing Tax">
+                              <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxamount" placeholder="Packing Tax Amount">
                             </div>
-                    </div>
+                         </div>
 
                     <div  style="margin-left: 0px;" class="form-group row">
-                      <label class="control-label text-left col-md-3">Packing Tax Amount %:.</label>
+                      <label class="control-label text-left col-md-3">Packing Amount (With Tax):.</label>
                        <div class="col-md-3">
-                          <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxamount" placeholder="Packing Amount">
+                          <input type="number"  name="totalpackingamount"  readonly class="form-control" id="totalpackingamount" placeholder="Total Packing Amount">
                         </div>
                      </div>
                       
@@ -490,6 +498,10 @@ function updatefabric(para){
             $(document).on('change keyup blur','#packingtaxper',function(){
               calculateTotal();
             });
+            $(document).on('change keyup blur','#packingamount',function(){
+              calculateTotal();
+            });
+            
             
             //total price calculation 
             function calculateTotal(){
@@ -500,28 +512,32 @@ function updatefabric(para){
               $('.totalLinePrice').each(function(){
                 if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
-
-             
-
-              
-
-              /////////////////////////////////////////////////////////////
+            
+            /////////////////////////////////////////////////////////////
+            
+              packingamount= $('#packingamount').val();
               packingtaxper = $('#packingtaxper').val();
               packingtaxamount = $('#packingtaxamount').val();
               if(packingtaxper != '' && typeof(packingtaxper) != "undefined" )
               {
-                packingtaxamount = subTotal * ( parseFloat(packingtaxper) /100 );
+                packingtaxamount = packingamount * ( parseFloat(packingtaxper) /100 );
                 $('#packingtaxamount').val(packingtaxamount.toFixed(2)); 
+                var n1 = parseFloat($('#packingamount').val());
+                var n2 = parseFloat($('#packingtaxamount').val()); 
+                var n3=n1+n2;
+                n3=n3.toFixed(0);
+                $('#totalpackingamount').val(n3); 
               }
               else
               {
-                $('#packingtaxamount').val(0);               
+                $('#packingtaxamount').val(0); 
+                $('#totalpackingamount').val(0);              
               }
-              //////////////////////////////////////////////////////////// 
+              
               packingtaxamount = $('#packingtaxamount').val();
               subTotal +=parseFloat(packingtaxamount);
-
               $('#txtTotal').val( subTotal.toFixed(2));
+              //////////////////////////////////////////////////////////// 
 
               $('.totalSubTotal').each(function(){
                 if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
@@ -540,6 +556,7 @@ function updatefabric(para){
               });
               $('#taxroundoff').val( taxamtt.toFixed(2));  
              
+              
               taxamtt=0;
               $('.totalWeight').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );

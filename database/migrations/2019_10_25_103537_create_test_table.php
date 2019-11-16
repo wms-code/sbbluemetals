@@ -34,11 +34,16 @@ class CreateTestTable extends Migration
               //  $table->string('hsn', 200)->nullable();             
              //  });
                 
-                Schema::table('knitted_fab_inwards', function($table) {
-                  $table->double('packingtaxper')->nullable();
-                  $table->double('packingtaxamount')->nullable();
-               });
+             //   Schema::table('knitted_fab_inwards', function($table) {
+             //     $table->double('packingtaxper')->nullable();
+              //    $table->double('packingtaxamount')->nullable();
+             //  });
 
+               Schema::table('knitted_fab_inwards', function($table) {
+                  $table->double('totalpackingamount')->nullable();              
+               });
+             
+               
               
 
 
