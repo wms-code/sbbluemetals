@@ -111,17 +111,8 @@
     } 
 ?>                                                   
  @endforeach
-</select><br>
-                                        
-                                             
-                                              
-                                                   
-                                        
-                                         
-                                           <input type="hidden" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
-                                        
-                                         
-                                           <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
+</select><br>          <input type="hidden" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
+      <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
                                         </td>
                                         <td>
                                           <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             

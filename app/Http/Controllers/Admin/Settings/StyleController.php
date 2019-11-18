@@ -17,6 +17,8 @@ class StyleController extends Controller
         return view('style.list',compact('style'));
     }
 
+  
+
     public function create()
     {
         $size = Size::getall(); 

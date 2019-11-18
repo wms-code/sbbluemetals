@@ -19,10 +19,11 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('unit', 'UnitController');
         Route::resource('stockpoint', 'StockpointController');
         Route::resource('style', 'StyleController');
+        Route::post('size/fetchtable', 'SizeController@fetchtable')->name('size.fetchtable');
         Route::resource('accessories', 'AccessoriesController');
         Route::resource('companies', 'CompanyController');
         Route::resource('size', 'SizeController');
-
+   
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         Route::put('knittedfabric', 'KnittedFabInwardController@update');
         

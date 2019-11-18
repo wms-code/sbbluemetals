@@ -37,9 +37,11 @@
                                          </select>
                                         </div>
                                     </div>
-
-                    
+                            <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                                    <div id='d'>
+                                   </div>
                             </div>
+
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -63,5 +65,115 @@
 
 
 
-                                    
+<script>
+    $('#size_code').on('change',function()
+    {
+         html='<table border="1" class="form-control table"><thead><tr>';
+         html+='<th width="2%">S.No</th>';        
+        var total=0;
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+        var size_code=$('#size_code').val();
+        var _token = $('input[name="_token"]').val(); 
+        var size1,size2,size3,size4,size5,size6,size7,size8;
+        $.ajax({
+              url:"{{ route('size.fetchtable') }}",
+              method:"POST", 
+              data:{_token:_token,size_code:size_code},  
+              success: function(response){   
+                $.each(response, function (index, value) {
+                    total=0;
+
+
+                    // console.log(response.size1);
+                   //  console.log(JSON.stringify(response));
+                     //console.log(JSON.stringify(response)->size1);
+                    //console.log(response.GetDataResult.size1);
+                    size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
+                    size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
+                    if (!!size1) 
+                    {
+                       total=1;
+                       html+='<th width="5%">'+size1+'</th>';
+                    }
+                    if (!!size2) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size2+'</th>';
+                    }
+                    if (!!size3) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size3+'</th>';
+                    }
+                    if (!!size4) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size4+'</th>';
+                    }
+                    if (!!size5) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size5+'</th>';
+                    }
+                    if (!!size6) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size6+'</th>';
+                    }
+                    if (!!size7) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size7+'</th>';
+                    }
+                    if (!!size8) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%">'+size8+'</th>';
+                    }
+                   
+                    html+='</tr></thead>';
+                    html+='<tr><td>Weight</td>';
+                    var i=0;
+                    for(i = 0;i < total;i++)
+                    {
+ html+='<td><input type="text" name="weight[]"  id="weight_'+i+'" class="form-control"></td>';
+                    }
+                    html+='</tr></table>';
+                    
+                    $('#d').html(html);
+                })
+               // var dataa = response.split("$");
+			  //   $("#remarks").val(dataa[0]);
+              }, 
+              error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+                 
+                  
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+       
+        
+    });
+</script>                                    
 @endsection

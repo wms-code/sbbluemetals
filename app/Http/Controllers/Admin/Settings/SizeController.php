@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Settings;
 use Illuminate\Http\Request;
 use App\Model\Size; 
 use Illuminate\Routing\Controller;
+use DB;
 class SizeController extends Controller
 {
     public function __construct()
@@ -15,7 +16,18 @@ class SizeController extends Controller
         $size= Size::orderBy('name','asc')->paginate(5);
         return view('size.list',compact('size'));
     }
-
+    public function fetchtable(Request $request)
+    {
+       $size_code= $request->get('size_code');
+       if($request->get('size_code'))
+        { 
+          $rsdepartmentData = DB::table('size')      
+           ->select('size1','size2','size3','size4','size5','size6','size7','size8')
+           ->where('id',$size_code)
+           ->get(); 
+        }
+        return $rsdepartmentData;
+    }
     public function create()
     {
         return view('size.create');
