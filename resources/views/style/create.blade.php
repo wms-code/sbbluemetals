@@ -32,6 +32,7 @@
                                              id='size_code'
                                             name='size_code'>                                
                                             @foreach($size as $department)
+                                            <option value="0">--Select--</option>
                                               <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                             @endforeach
                                          </select>
