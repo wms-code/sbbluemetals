@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Settings; 
 use Illuminate\Http\Request;
 use App\Model\Size; 
+
 use Illuminate\Routing\Controller;
 use DB;
 class SizeController extends Controller

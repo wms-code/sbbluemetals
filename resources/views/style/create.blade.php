@@ -30,15 +30,15 @@
                                         <div class="col-md-6">
                                             <select class="form-control js-example-basic-single"
                                              id='size_code'
-                                            name='size_code'>                                
+                                            name='size_code'>    
+                                            <option value="0">--Select--</option>                            
                                             @foreach($size as $department)
-                                            <option value="0">--Select--</option>
                                               <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                             @endforeach
                                          </select>
                                         </div>
                                     </div>
-                            <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                            <div class='col-md-10'>
                                     <div id='d'>
                                    </div>
                             </div>
@@ -76,6 +76,7 @@
         var size_code=$('#size_code').val();
         var _token = $('input[name="_token"]').val(); 
         var size1,size2,size3,size4,size5,size6,size7,size8;
+        var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
         $.ajax({
               url:"{{ route('size.fetchtable') }}",
               method:"POST", 
@@ -83,53 +84,47 @@
               success: function(response){   
                 $.each(response, function (index, value) {
                     total=0;
-
-
-                    // console.log(response.size1);
-                   //  console.log(JSON.stringify(response));
-                     //console.log(JSON.stringify(response)->size1);
-                    //console.log(response.GetDataResult.size1);
                     size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
                     size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
                     if (!!size1) 
                     {
                        total=1;
-                       html+='<th width="5%">'+size1+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size1" value='+size1+' width="5%"/></th>';
                     }
                     if (!!size2) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size2+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size2" value='+size2+' width="5%"/></th>';
                     }
                     if (!!size3) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size3+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size3" value='+size3+' width="5%"/></th>';
                     }
                     if (!!size4) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size4+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size4" value='+size4+' width="5%"/></th>';
                     }
                     if (!!size5) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size5+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size5" value='+size5+' width="5%"/></th>';
                     }
                     if (!!size6) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size6+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size6" value='+size6+' width="5%"/></th>';
                     }
                     if (!!size7) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size7+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size7" value='+size7+' width="5%"/></th>';
                     }
                     if (!!size8) 
                     {
                        total=total+1;
-                       html+='<th width="5%">'+size8+'</th>';
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size8" value='+size8+' width="5%"/></th>';
                     }
                    
                     html+='</tr></thead>';
@@ -137,7 +132,8 @@
                     var i=0;
                     for(i = 0;i < total;i++)
                     {
- html+='<td><input type="text" name="weight[]"  id="weight_'+i+'" class="form-control"></td>';
+ 
+                          html+='<td><input type="text"   name="weight_'+i+'" class="form-control"></td>';
                     }
                     html+='</tr></table>';
                     

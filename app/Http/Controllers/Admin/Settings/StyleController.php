@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Settings; 
 use Illuminate\Http\Request;
 use App\Model\Style; 
+use App\Model\Styledetail;
 use App\Model\Size; 
 use Illuminate\Routing\Controller;
 class StyleController extends Controller
@@ -23,13 +24,44 @@ class StyleController extends Controller
     {
         $size = Size::getall(); 
         return view('style.create',compact(['size']));
-       // return view('style.create');
     }
-
-
     public function store(Request $request)
     {
-        Style::create($request->all());
+          
+        
+         $user =Style::create([
+            'name'=>$request->name,
+            'size_code'=>$request->size_code
+             ]); 
+
+          $styleid= $user->id;     
+        Styledetail::create([
+                    'styleid'=>$styleid,  
+                    'size_code'=>$request->size_code,
+                    'size1'=>$request->size1,
+                    'size2'=>$request->size2,
+                    'size3'=>$request->size3,
+                    'size4'=>$request->size4,
+                    'size5'=>$request->size5,
+                    'size6'=>$request->size6,
+                    'size7'=>$request->size7,
+                    'size8'=>$request->size8,
+                     'indx'=>1
+                     ]);
+        Styledetail::create([
+                        'styleid'=>$styleid,  
+                        'size_code'=>$request->size_code,
+                        'size1'=>$request->weight_0,
+                        'size2'=>$request->weight_1,
+                        'size3'=>$request->weight_2,
+                        'size4'=>$request->weight_3,
+                        'size5'=>$request->weight_4,
+                        'size6'=>$request->weight_5,
+                        'size7'=>$request->weight_6,
+                        'size8'=>$request->weight_7,
+                         'indx'=>2
+                         ]);
+           
         $msg = [ 'message' => 'Style created successfully!' ];
         return  redirect('admin/style')->with($msg);
     }
