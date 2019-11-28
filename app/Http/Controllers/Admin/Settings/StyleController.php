@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Model\Style; 
 use App\Model\Styledetail;
 use App\Model\Size; 
+use App\Model\Fabric;
+use App\Model\Colour;
 use Illuminate\Routing\Controller;
 class StyleController extends Controller
 {
@@ -23,7 +25,9 @@ class StyleController extends Controller
     public function create()
     {
         $size = Size::getall(); 
-        return view('style.create',compact(['size']));
+        $fabric=Fabric::getall();
+        $colour=Colour::getall();
+        return view('style.create',compact(['size','fabric','colour']));
     }
     public function store(Request $request)
     {
@@ -31,8 +35,18 @@ class StyleController extends Controller
         
          $user =Style::create([
             'name'=>$request->name,
-            'size_code'=>$request->size_code
-             ]); 
+            'size_code'=>$request->size_code,
+            'fabric_code1'=>$request->fabric_code1,
+            'fabric_code2'=>$request->fabric_code2,
+            'fabric_code3'=>$request->fabric_code3,
+            'fabric_code4'=>$request->fabric_code4,
+            'fabric_code5'=>$request->fabric_code5,
+            'colour_code1'=>$request->colour_code1,
+            'colour_code2'=>$request->colour_code2,
+            'colour_code3'=>$request->colour_code3,
+            'colour_code4'=>$request->colour_code4,
+            'colour_code5'=>$request->colour_code5
+                        ]); 
 
           $styleid= $user->id;     
         Styledetail::create([

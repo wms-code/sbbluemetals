@@ -25,6 +25,15 @@
                                         <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>
                                 </div>
+
+                              
+
+
+               
+
+
+
+
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Size Name</label>
                                         <div class="col-md-6">
@@ -38,10 +47,136 @@
                                          </select>
                                         </div>
                                     </div>
-                            <div class='col-md-10'>
+                                                                <div class='col-md-10'>
                                     <div id='d'>
                                    </div>
                             </div>
+                          
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-2">Fabric Name -I</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                             id='fabric_code1'
+                                            name='fabric_code1'>    
+                                            <option value="0">--Select--</option>                            
+                                            @foreach($fabric as $department)
+                                              <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                            @endforeach
+                                         </select>
+                                </div>
+                           
+                                <label class="control-label text-right col-md-2">Colour Name-I</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='colour_code1'
+                                   name='colour_code1'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($colour as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-2">Fabric Name -II</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='fabric_code2'
+                                   name='fabric_code2'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($fabric as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                           
+                                <label class="control-label text-right col-md-2">Colour Name-II</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='colour_code2'
+                                   name='colour_code2'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($colour as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-2">Fabric Name -III</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='fabric_code3'
+                                   name='fabric_code3'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($fabric as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                           
+                                <label class="control-label text-right col-md-2">Colour Name-III</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='colour_code3'
+                                   name='colour_code3'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($colour as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-2">Fabric Name -IV</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='fabric_code4'
+                                   name='fabric_code4'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($fabric as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                           
+                                <label class="control-label text-right col-md-2">Colour Name-IV</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='colour_code4'
+                                   name='colour_code4'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($colour as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                            </div>  
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-2">Fabric Name -V</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='fabric_code5'
+                                   name='fabric_code5'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($fabric as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                           
+                                <label class="control-label text-right col-md-2">Colour Name-V</label>
+                                <div class="col-md-2">
+                                    <select class="form-control js-example-basic-single"
+                                    id='colour_code5'
+                                   name='colour_code5'>    
+                                   <option value="0">--Select--</option>                            
+                                   @foreach($colour as $department)
+                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                   @endforeach
+                                </select>
+                                </div>
+                            </div>        
 
                             <div class="form-actions">
                                 <div class="row">

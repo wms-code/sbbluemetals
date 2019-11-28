@@ -46,8 +46,22 @@ class CreateTestTable extends Migration
                 //  $table->double('packingamount')->nullable();              
                //});
 
+              // Schema::table('style', function($table) {
+                //  $table->double('size_code')->nullable();              
+              // });
+         //     $table->integer('inwardnumber')->nullable();
+//table 28 nov 2:32 pm
                Schema::table('style', function($table) {
-                  $table->double('size_code')->nullable();              
+                  $table->integer('fabric_code1')->nullable();        
+                  $table->integer('fabric_code2')->nullable();        
+                  $table->integer('fabric_code3')->nullable();        
+                  $table->integer('fabric_code4')->nullable();        
+                  $table->integer('fabric_code5')->nullable();  
+                  $table->integer('colour_code1')->nullable();        
+                  $table->integer('colour_code2')->nullable();        
+                  $table->integer('colour_code3')->nullable();        
+                  $table->integer('colour_code4')->nullable();        
+                  $table->integer('colour_code5')->nullable();                    
                });
              
                
