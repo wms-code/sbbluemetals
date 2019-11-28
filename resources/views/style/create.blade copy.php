@@ -40,34 +40,8 @@
                                         </div>
                                     </div>
                                                                 <div class='col-md-10'>
-                                                                        <div class='col-md-10'>
-                                                                                <div id='d'>
-                                                                                     <table border="1" class="formcontrol table"><thead><tr>
-                                                                                         <th width="2%">S.No</th>
-                                                                                         <th width="5%"> <input type ="text" id="size1"  class="form-control" readonly name="size1"  width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size2"  class="form-control" readonly name="size2"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size3"  class="form-control" readonly name="size3"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size4" class="form-control" readonly name="size4"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size5"  class="form-control" readonly name="size5"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size6"  class="form-control" readonly name="size6"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text"  id="size7" class="form-control" readonly name="size7"   width="5%"/></th>
-                                                                                         <th width="5%"> <input type ="text" id="size8"  class="form-control" readonly name="size8"   width="5%"/></th>
-                                                                                         </tr></thead>
-                                                                                         <tr><td>Weight</td>
-                                                                                             <td><input type="text"   name="weight_0" class="form-control"></td>
-                                                                                             <td><input type="text"   name="weight_1" class="form-control"></td>
-                                                                                             <td><input type="text"    name="weight_2" class="form-control"></td>
-                                                                                             <td><input type="text"    name="weight_3" class="form-control"></td>
-                                                                                             <td><input type="text"   name="weight_4" class="form-control"></td>
-                                                                                             <td><input type="text"    name="weight_5" class="form-control"></td>
-                                                                                             <td><input type="text"   name="weight_6" class="form-control"></td>
-                                                                                             <td><input type="text"   name="weight_7" class="form-control"></td>
-                                                                                         </tr></table>
-                                                                                         
-                                                 
-                                                                                 </div>
-                                                                         </div>
-                                                 
+                                    <div id='d'>
+                                   </div>
                             </div>
                           
                             <div class="form-group row">
@@ -218,67 +192,112 @@
         </div>
 
 
-        <script>
-                $('#size_code').on('change',function()
-                {
-                       
-                    var total=0;
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-                    var size_code=$('#size_code').val();
-                    var _token = $('input[name="_token"]').val(); 
-                    var size1,size2,size3,size4,size5,size6,size7,size8;
-                    var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
-                    $.ajax({
-                          url:"{{ route('size.fetchtable') }}",
-                          method:"POST", 
-                          data:{_token:_token,size_code:size_code},  
-                          success: function(response){   
-                            $.each(response, function (index, value) {
-                                total=0;
-                                size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
-                                size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
-                                $("#size1").val(size1);
-                                $("#size2").val(size2);
-                                $("#size3").val(size3);
-                                $("#size4").val(size4);
-                                $("#size5").val(size5);
-                                $("#size6").val(size6);
-                                $("#size7").val(size7);
-                                $("#size8").val(size8);
-                              
-                            })
-                          
-                          }, 
-                          error: function (jqXHR, exception) {
-                                var msg = '';
-                                if (jqXHR.status === 0) {
-                                    msg = 'Not connect.\n Verify Network.';
-                                } else if (jqXHR.status == 404) {
-                                    msg = 'Requested page not found. [404]';
-                                } else if (jqXHR.status == 500) {
-                                    msg = 'Internal Server Error [500].';
-                                } else if (exception === 'parsererror') {
-                                    msg = 'Requested JSON parse failed.';
-                                } else if (exception === 'timeout') {
-                                    msg = 'Time out error.';
-                                } else if (exception === 'abort') {
-                                    msg = 'Ajax request aborted.';
-                                } else {
-                                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                                }
-                                 alert(msg);
-                               },
-                               
-                                headers: {
-                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                                } 
-                              });
-                             
-                              
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+<script>
+    $('#size_code').on('change',function()
+    {
+         html='<table border="1" class="formcontrol table"><thead><tr>';
+         html+='<th width="2%">S.No</th>';        
+        var total=0;
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+        var size_code=$('#size_code').val();
+        var _token = $('input[name="_token"]').val(); 
+        var size1,size2,size3,size4,size5,size6,size7,size8;
+        var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
+        $.ajax({
+              url:"{{ route('size.fetchtable') }}",
+              method:"POST", 
+              data:{_token:_token,size_code:size_code},  
+              success: function(response){   
+                $.each(response, function (index, value) {
+                    total=0;
+                    size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
+                    size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
+                    if (!!size1) 
+                    {
+                       total=1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size1" value='+size1+' width="5%"/></th>';
+                    }
+                    if (!!size2) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size2" value='+size2+' width="5%"/></th>';
+                    }
+                    if (!!size3) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size3" value='+size3+' width="5%"/></th>';
+                    }
+                    if (!!size4) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size4" value='+size4+' width="5%"/></th>';
+                    }
+                    if (!!size5) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size5" value='+size5+' width="5%"/></th>';
+                    }
+                    if (!!size6) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size6" value='+size6+' width="5%"/></th>';
+                    }
+                    if (!!size7) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size7" value='+size7+' width="5%"/></th>';
+                    }
+                    if (!!size8) 
+                    {
+                       total=total+1;
+                       html+='<th width="5%"> <input type ="text" class="form-control" readonly name="size8" value='+size8+' width="5%"/></th>';
+                    }
                    
+                    html+='</tr></thead>';
+                    html+='<tr><td>Weight</td>';
+                    var i=0;
+                    for(i = 0;i < total;i++)
+                    {
+ 
+                          html+='<td><input type="text"   name="weight_'+i+'" class="form-control"></td>';
+                    }
+                    html+='</tr></table>';
                     
-                });
-            </script>                
-                                   
+                    $('#d').html(html);
+                })
+               // var dataa = response.split("$");
+			  //   $("#remarks").val(dataa[0]);
+              }, 
+              error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+                 
+                  
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+       
+        
+    });
+</script>                                    
 @endsection
