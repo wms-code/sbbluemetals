@@ -124,12 +124,8 @@
                                           id="taxper_{{$i}}" class="form-control  changesNo" 
                                             autocomplete="off" onkeypress="return IsNumeric(event);" >
                                        <br>
-                                        
                                         <input type="number" value='{{  number_format((float)$details->taxamt, 2, '.', '') }}' name="taxamt[]" id="taxamt_{{$i}}" class="form-control totalLinetax"  readonly >
-                                       <br>
-                                      
-                                        <input type="number" value='{{ number_format((float)$details->roundoff ,2, '.', '') }}' name="roundoff[]" id="roundoff_{{$i}}" class="form-control totalRoundOff" readonly >
-                                     </td>
+                                       </td>
                                         <td>
                                               <input type="number" value='{{  number_format((float)$details->amount, 2, '.', '')}}'  readonly name="amount[]" id="amount_{{$i}}" class="form-control totalLinePrice">
                                         </td>
@@ -256,7 +252,7 @@
               price = $('#rate_'+id[1]).val();
               $('#amount_'+id[1]).val(0);
               $('#perrateamount_'+id[1]).val(0);
-              $('#roundoff_'+id[1]).val(0);
+              
 
               taxper = $('#taxper_'+id[1]).val();
               taxamt = $('#taxamt_'+id[1]).val();
@@ -272,18 +268,8 @@
               {
                 taxamt = perrateamount * ( parseFloat(taxper) /100 );
                 $('#taxamt_'+id[1]).val(taxamt.toFixed(2)); //$('#taxAmount').val(taxamt.toFixed(2));
-                total=(parseFloat(perrateamount)+parseFloat(taxamt)).toFixed(2);
-                //ROUND OFF 
-                var round =Math.round(total); 
-                console.log(total);
-                round =total-round; 
-                round =parseFloat(round).toFixed(2);
-                $('#roundoff_'+id[1]).val(round);  
-
-                total =Math.round(total);                                
-                $('#amount_'+id[1]).val(total);
-
-                 
+                total=(parseFloat(perrateamount)+parseFloat(taxamt)).toFixed(2); 
+                $('#amount_'+id[1]).val(total); 
               }
               else
               {
@@ -351,14 +337,14 @@
               subTotal=subTotal.toFixed(0);
               $('#txtTotal').val(subTotal);
               //////////////////////////////////////////////////////////// 
-    
-        
+                 //ROUND OFF 
+                 var round =Math.round(subTotal); 
+                round =subTotal-round; 
+                round =parseFloat(round).toFixed(2);
+                $('#taxroundoff').val(round);  //$('#roundoff_'+id[1]).val(round); 
+                //ROUND OFF    
 
-              taxamtt=0;
-              $('.totalRoundOff').each(function(){
-                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
-              });
-              $('#taxroundoff').val( taxamtt.toFixed(2));  
+         
               
               
 

@@ -136,9 +136,7 @@
                                        <br>
                                         
                                         <input type="number" name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
-                                       <br>
-                                      
-                                        <input type="number" name="roundoff[]" id="roundoff_1" class="form-control totalRoundOff" readonly >
+                                     
                                      </td>
                                         <td>
                                               <input type="number"  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
@@ -198,16 +196,7 @@
                        <div class="col-md-3">
                           <input type="number"  name="totalpackingamount"  readonly class="form-control" id="totalpackingamount" placeholder="Total Packing Amount">
                         </div>
-                     </div>
-                      
-                      <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-3">Round Off</label>
-                           <div class="col-md-3">
-                              <input type="number" name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
-                            </div>
-                      </div>
-
-                      
+                     </div> 
                             
                         <div  style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-3"> Total:.</label>
@@ -270,8 +259,8 @@
               html += '<td><input type="text" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
               html += '<input type="text" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
               html += '<td><input type="text" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly><br>';
-              html += '<input type="number" name="roundoff[]" id="roundoff_'+i+'" class="form-control totalRoundOff" readonly </td>';
+              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly>';
+              html += ' </td>';
               html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
               html += '</tr>';
              
@@ -459,14 +448,7 @@ function updatefabric(para){
                 taxamt = perrateamount * ( parseFloat(taxper) /100 );
                 $('#taxamt_'+id[1]).val(taxamt.toFixed(2)); //$('#taxAmount').val(taxamt.toFixed(2));
                 total=(parseFloat(perrateamount)+parseFloat(taxamt)).toFixed(2);
-                //ROUND OFF 
-                var round =Math.round(total); 
-                console.log(total);
-                round =total-round; 
-                round =parseFloat(round).toFixed(2);
-                $('#roundoff_'+id[1]).val(round);  
-
-                total =Math.round(total);                                
+                                       
                 $('#amount_'+id[1]).val(total);
 
                  
@@ -499,7 +481,18 @@ function updatefabric(para){
               subTotal = 0 ; total = 0; taxamtt = 0; 
               perrateamount=0;
                
-
+               
+              $('.totalSubTotal').each(function(){
+                if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
+              });
+              $('#subTotal').val( perrateamount.toFixed(2));              
+               /////////////////////////////////////////////////////////////
+              taxamtt=0;   
+              $('.totalLinetax').each(function(){
+                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
+              });
+              $('#taxAmount').val( taxamtt.toFixed(2));  
+              /////////////////////////////////////////////////////////////
               $('.totalLinePrice').each(function(){
                 if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
               });
@@ -527,27 +520,19 @@ function updatefabric(para){
               
               totalpackingamount = $('#totalpackingamount').val();
               subTotal +=parseFloat(totalpackingamount);
-              $('#txtTotal').val( subTotal.toFixed(0));
-              //////////////////////////////////////////////////////////// 
+              $('#txtTotal').val( subTotal.toFixed(0));//subTotal =Math.round(subTotal);      
+               //////////////////////////////////////////////////////////// 
+               //ROUND OFF 
+                var round =Math.round(subTotal); 
+                round =subTotal-round; 
+                round =parseFloat(round).toFixed(2);
+                $('#taxroundoff').val(round);  //$('#roundoff_'+id[1]).val(round); 
+                //ROUND OFF    
 
-              $('.totalSubTotal').each(function(){
-                if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
-              });
-              $('#subTotal').val( perrateamount.toFixed(2));              
-
-              taxamtt=0;   
-              $('.totalLinetax').each(function(){
-                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
-              });
-              $('#taxAmount').val( taxamtt.toFixed(2));  
-             
               taxamtt=0;
-              $('.totalRoundOff').each(function(){
-                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
-              });
-              $('#taxroundoff').val( taxamtt.toFixed(2));  
-             
-              
+              //$('.totalRoundOff').each(function(){
+                //if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
+              //});
               taxamtt=0;
               $('.totalWeight').each(function(){
                 if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
