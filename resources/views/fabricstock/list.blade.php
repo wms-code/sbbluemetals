@@ -24,8 +24,8 @@
                                                 <thead>
                                                     <tr>
                                                          
-                                                        <th>Colour Name</th>
-                                                        <th>Fabric Name</th>                                                        
+                                                        <th>Fabric Name</th>
+                                                        <th>Colour Name</th>                                                        
                                                          <th>Weight</th>
                                                        
                                                     </tr>
@@ -34,9 +34,9 @@
                                                     @foreach ($accounts as $d)
                                                     <tr>
                                                 
-                                                        <td>{{$d->colourssname}}</td>                                               
+                                                                                                  
                                                         <td>{{$d->fabricsname}}</td>                                               
-                                                                                   
+                                                        <td>{{$d->colourssname}}</td>                 
                                                         <td>{{$d->total}}</td>  
                                                                     
                                                       

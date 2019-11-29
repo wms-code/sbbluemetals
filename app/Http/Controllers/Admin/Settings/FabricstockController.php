@@ -19,8 +19,9 @@ class FabricstockController extends Controller
         ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
         ->select('fabrics.name as fabricsname','colours.name as colourssname',
                   DB::raw('SUM(weight) as total'))
+                  ->orderBy('fabrics.name', 'asc')   
          ->orderBy('colours.name', 'asc')            
-         ->orderBy('fabrics.name', 'asc')    
+         
          ->groupBy('fabrics.name','colours.name')          
          //->where('inwardnumber',$id)
          ->get(); 
