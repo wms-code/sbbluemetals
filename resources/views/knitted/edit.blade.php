@@ -65,7 +65,7 @@
                             </div>
                             
                           <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                            <table  border="1" class="table">
+                            <table id="myTable"  border="1" class="table">
                                   <thead>
                                     <tr>
                                        <th width="4%">SNo</th>
@@ -83,15 +83,36 @@
                                     <?php $i=1;?>
                                         @foreach ($rsdepartmentData['rsdetails'] as $details)
                                       <tr>
-                                        <th>{{$details->indx}} </th>
+                                        <th>
+                                            <INPUT class="form-control" type='text' readonly  id='sno_{{$i}}'	 value={{$details->indx}}  size='4'  
+                                            readonly name='sno[]'/>
+                                           </th>
                                         <td>
-                                           {{$details->coloursname}} 
-                                           <input type ="hidden" readonly name="selcolour[]"
-                                           value="{{$details->coloursid}}" />  
+                                           
+                                           <select class="jssingle" id='selcolour{{$i}}' name='selcolour[]'>
+                                      
+                                    <option value="0">--Select--</option>                            
+                                    @foreach($rscolour as $department)
+                                    <option value='{{ $department->id }}'
+                                        {{ $department->id== $details->coloursid ? 'selected' : ''}}>
+                                        {{ $department->name }}</option>
+
+                                      
+                                    @endforeach
+                                 </select> 
                                           </td>
-                                        <td>{{$details->fabricsname}} 
-                                            <input type ="hidden" readonly name="selfabric[]"
-                                            value="{{$details->fabricsid}}" />  
+                                        <td>
+                                            <select class="jssingle" id='selfabric{{$i}}' name='selfabric[]'>
+                                                <option value='0'>-- Select Fabric --</option>
+      
+        @foreach($rsfabrics as $department)
+                                                <option value='{{ $department->id }}'
+                                                    {{ $department->id== $details->fabricsid ? 'selected' : ''}}>
+                                                    {{ $department->fabricname }}</option>
+            
+                                                  
+                                                @endforeach
+                                             </select>                       
                                          
                                            <input type="hidden" name="hsn[]"  id='hsn_{{$i}}'
                                           value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
@@ -135,7 +156,13 @@
                                        @endforeach
                              </table>   
                             
-                              
+                             <div class='row'>
+                                <div class='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                                   
+                                  <button class="btn btn-success addmore" type="button">+ Add More</button>
+                              </div>
+                         </div>
+                         <br> 
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
@@ -241,7 +268,182 @@
             </div>
         </div>
 
-        <script> 
+        <script>  
+          
+            $(".addmore").on('click',function(){
+              var i=$('table tr').length;
+             
+              html = '<tr>';           
+              html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
+              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
+              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
+              html += '<input type="hidden" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
+              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
+              html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
+              html += '<td><input type="text" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
+              html += '<td><input type="text" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
+              html += '<input type="text" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
+              html += '<td><input type="text" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
+              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly>';
+              html += ' </td>';
+              html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
+              html += '</tr>';
+             
+              updatecolour('selcolour'+i);
+              updatefabric('selfabric'+i);
+              
+              $('#myTable tr:last').after(html);
+             // $('table').append(html);
+              
+              setrowvalue();
+             
+               i++;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+function updaterack(para){
+  para='#'+para;
+  var _token = $('input[name="_token"]').val();
+    $.ajax({
+              url:"{{ route('knittedfabric.fetchrack') }}",
+              method:"POST", 
+              data:{_token:_token},  
+              success: function(response){                   
+              var len = response.length;
+              $(para).append(response);
+              $(para).select2();
+              },//sucess
+              error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+                 
+            }               
+            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+              function updatecolour(para){
+                para='#'+para;
+                var _token = $('input[name="_token"]').val();
+                       ///////////////////////////////////
+                       $.ajax({
+                       url:"{{ route('knittedfabric.fetchcolour') }}",
+                       method:"POST", 
+                       data:{_token:_token},  
+                       success: function(response){                   
+                        var len = response.length;
+                        $(para).append(response);
+                        $(para).select2();
+                       },//sucess
+                       error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+            }               
+            
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+function updatefabric(para){
+                para='#'+para;
+                var _token = $('input[name="_token"]').val();
+                       ///////////////////////////////////
+                       $.ajax({
+                       url:"{{ route('knittedfabric.fetchfabric') }}",
+                       method:"POST", 
+                       data:{_token:_token},  
+                       success: function(response){                   
+                        var len = response.length;
+                        $(para).append(response);
+                        $(para).select2();
+                       },//sucess
+                       error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+            }               
+            });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+            //to check all checkboxes
+            $(document).on('change','#check_all',function(){	
+              $('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
+              setrowvalue();
+            });
+            
+            //deletes the selected table rows
+            $(".delete").on('click', function() {
+              $('.case:checkbox:checked').parents("tr").remove();
+              $('#check_all').prop("checked", false); 
+              calculateTotal();
+              setrowvalue();
+            });
+            
+             
+            function setrowvalue()
+            {
+              
+              var names = document.getElementsByName('sno[]');
+              for (var j = 0, iLen = names.length; j < iLen; j++) {
+	               names[j].value=j+1;
+                }
+            }
             $(document).on('change keyup blur','.changesNo',function(){
               var perrateamount=0.0;
               var subtotal = 0; var total = 0; 

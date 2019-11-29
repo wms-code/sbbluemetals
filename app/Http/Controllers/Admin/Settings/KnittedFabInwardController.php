@@ -64,11 +64,9 @@ class KnittedFabInwardController extends Controller
          
         $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
 
-        $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')        
-              ->join('colours', 'colours.id', '=', 'knitted_fab_details.colour_id')
-              ->join('fabrics', 'fabrics.id', '=', 'knitted_fab_details.fabric_id')
-              ->select( 'colours.name as coloursname','colours.id as coloursid','fabrics.id as fabricsid',
-                        'fabrics.name as fabricsname','hsn',
+        $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')  
+              ->select( 'fabric_id as fabricsid','colour_id as coloursid',
+                         'hsn',
                          'indx','particulars','rolls','weight','rate',
                          'amount','perrateamount','taxper','taxamt','roundoff',
                          'inwardnumber','inward_number')
@@ -76,7 +74,7 @@ class KnittedFabInwardController extends Controller
                ->where('inwardnumber',$id)
                ->get(); 
 
-       $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
+        $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
                ->join('accounts', 'accounts.id', '=', 'knitted_fab_inwards.party_code')
                ->select('accounts.name as acname','inward_number',
                           'reference','remarks','sub_total','net_value','total_weight',
@@ -87,8 +85,15 @@ class KnittedFabInwardController extends Controller
                 ->where('inwardnumber',$id)
                 ->get();       
        
-      
-       return view('knitted.edit',compact(['rsdepartmentData']));
+        $rsfabrics = DB::table('fabrics')        
+                ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
+                ->select('fabrics.id','remarks','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
+                ->orderBy('fabricgroup.name', 'asc')
+                ->orderBy('fabrics.name', 'asc')
+                ->get(); 
+        
+        $rscolour = Colour::getall(); 
+       return view('knitted.edit',compact(['rsdepartmentData','rsfabrics','rscolour']));
     }
 
     public function store(Request $request)
@@ -129,8 +134,7 @@ class KnittedFabInwardController extends Controller
                                         'amount'=>$request->amount[$i],
                                         'perrateamount'=>$request->perrateamount[$i],
                                         'taxper'=>$request->taxper[$i],
-                                        'taxamt'=>$request->taxamt[$i],
-                                        'roundoff'=>$request->roundoff[$i] ]);
+                                        'taxamt'=>$request->taxamt[$i] ]);
             $i=$i+1;
             }                            
         $msg = [
@@ -335,29 +339,52 @@ class KnittedFabInwardController extends Controller
         'round_off'=>$request->round_off,
         'net_value'=>$request->net_value,
         'remarks'=>$request->remarks ]);
-    
-        
+       
+        DB::table('knitted_fab_details')->where('inwardnumber',$request->inwardnumber)->delete();
+
         $i=0;
         foreach($request->selcolour as $arrcolour)
             {
- Knittedfabdetails::where(
-     ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
-         ['inward_date'=>$request->inward_date,
-                           'party_code'=>$request->pty_code,
+                Knittedfabdetails::create(['knitted_fab_inward_number'=>$request->inward_number,
+                                        'inward_date'=>$request->inward_date,
+                                        'inwardnumber'=>$request->inwardnumber,
+                                        'party_code'=>$request->pty_code,
+                                        'indx'=>$i+1,
                                         'colour_id'=>$arrcolour,
                                         'fabric_id'=>$request->selfabric[$i],
                                         'particulars'=>$request->particulars[$i],
                                         'hsn'=>$request->hsn[$i],
                                         'rolls'=>$request->rolls[$i],
                                         'weight'=>$request->qty[$i],
+                                        'delivery_weight'=>$request->qty[$i],
                                         'rate'=>$request->rate[$i],
                                         'amount'=>$request->amount[$i],
                                         'perrateamount'=>$request->perrateamount[$i],
                                         'taxper'=>$request->taxper[$i],
-                                        'taxamt'=>$request->taxamt[$i],
-                                        'roundoff'=>$request->roundoff[$i] ]);
+                                        'taxamt'=>$request->taxamt[$i]  ]);
             $i=$i+1;
-            }             
+            }               
+//         $i=0;
+//         foreach($request->selcolour as $arrcolour)
+//             {
+//  Knittedfabdetails::where(
+//      ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
+//          ['inward_date'=>$request->inward_date,
+//                            'party_code'=>$request->pty_code,
+//                                         'colour_id'=>$arrcolour,
+//                                         'fabric_id'=>$request->selfabric[$i],
+//                                         'particulars'=>$request->particulars[$i],
+//                                         'hsn'=>$request->hsn[$i],
+//                                         'rolls'=>$request->rolls[$i],
+//                                         'weight'=>$request->qty[$i],
+//                                         'rate'=>$request->rate[$i],
+//                                         'amount'=>$request->amount[$i],
+//                                         'perrateamount'=>$request->perrateamount[$i],
+//                                         'taxper'=>$request->taxper[$i],
+//                                         'taxamt'=>$request->taxamt[$i],
+//                                         'roundoff'=>$request->roundoff[$i] ]);
+//             $i=$i+1;
+//             }             
 
         $msg = [
             'message' => 'Knitted Fabric Entry Updated successfully!' ];

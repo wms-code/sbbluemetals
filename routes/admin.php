@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::put('knittedfabric', 'KnittedFabInwardController@update');
         
        // Route::get('knittedfabric/{id}/editfrn','KnittedFabInwardController@editfrn');
-
+        Route::resource('fabricstock', 'FabricstockController');  
         Route::resource('fabricgroup', 'FabricGroupController');
         //Route::get('searchajax', ['as'=>'searchajax','fetch'=>'KnittedFabInwardController@fetch']);
         Route::post('knittedfabric/fetchfabric', 'KnittedFabInwardController@fetchfabric')->name('knittedfabric.fetchfabric');
