@@ -46,7 +46,56 @@
                                 </div>
                             </div>
 
-                          
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Cutting Price</label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->cuttingprice }}"  name="cuttingprice" maxlength="50" class="form-control">
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Power Table Price</label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->pprice }}"  name="pprice" maxlength="50" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Singer Price</label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->singerprice }}"  name="singerprice" maxlength="50" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Kaja Button Price</label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->kajaprice }}"  name="kajaprice" maxlength="50" class="form-control">
+                                </div>
+                            </div> 
+        
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Checking Price</label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->checkingprice }}"  name="checkingprice" maxlength="50" class="form-control">
+                                </div>
+                            </div> 
+        
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Ironing Price </label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->ironprice }}"  name="ironprice" maxlength="50" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Packing Price </label>
+                                <div class="col-md-6">
+                                    <input type="text" value="{{ $style->packingprice }}"   name="packingprice" maxlength="50" class="form-control">
+                                </div>
+                            </div>
                             
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Size Name</label>
@@ -58,9 +107,7 @@
                                     @foreach($size as $department)
                                     <option value='{{ $department->id }}'
                                         {{ $department->id== $style->size_code ? 'selected' : ''}}>
-                                        {{ $department->name }}</option>
-
-                                      
+                                        {{ $department->name }}</option> 
                                     @endforeach
                                  </select>
                                 </div>

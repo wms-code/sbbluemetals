@@ -27,7 +27,7 @@
                                             <tr>
                                                  
                                                 <th>Style Name</th>
-                                            
+                                                <th>Image</th>
                                                 <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
@@ -35,7 +35,10 @@
                                             @foreach ($style as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->name}}</td>                                               
+                                                <td>{{$d->name}}</td>     
+                                                <td> <img class="card-img-top" width="100" height="100"
+                                                     src="{{url('uploads/'.$d->filename)}}" alt="{{$d->filename}}">
+                                                </div></td>                                                
                                                 <td class="text-nowrap">
                                                     <a href="{{ url('admin/style') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>

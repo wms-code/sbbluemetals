@@ -33,6 +33,55 @@
                                          <input type="file" class="form-control" name="bookcover"/>
                                     </div>
                                 </div>
+                                
+
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Cutting Price</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="cuttingprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div> 
+
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Power Table Price</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="pprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Singer Price</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="singerprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Kaja Button Price</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="kajaprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div> 
+
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Checking Price</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="checkingprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div> 
+            
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Ironing Price </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="ironprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Packing Price </label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="packingprice" maxlength="50" class="form-control">
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Size Name</label>

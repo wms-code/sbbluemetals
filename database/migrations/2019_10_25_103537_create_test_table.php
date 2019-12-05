@@ -63,11 +63,22 @@ class CreateTestTable extends Migration
             //      $table->integer('colour_code4')->nullable();        
            //       $table->integer('colour_code5')->nullable();                    
            //    });
-           Schema::table('style', function($table) {
-               $table->string('filename')->nullable();
-               $table->string('mime')->nullable();
-               $table->string('original_filename')->nullable();    
-              });
+          // Schema::table('style', function($table) {
+              // $table->string('filename')->nullable();
+              // $table->string('mime')->nullable();
+              // $table->string('original_filename')->nullable();    
+             // });
+
+              Schema::table('style', function($table) {
+                  $table->double('cuttingprice')->nullable();     
+                  $table->double('singerprice')->nullable();       
+                  $table->double('pprice')->nullable();       
+                  $table->double('kajaprice')->nullable();       
+                  $table->double('checkingprice')->nullable();       
+                  $table->double('ironprice')->nullable();                
+                  $table->double('packingprice')->nullable();       
+                      
+               });
 
 
         
