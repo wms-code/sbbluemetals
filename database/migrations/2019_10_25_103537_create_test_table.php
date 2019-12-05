@@ -51,21 +51,23 @@ class CreateTestTable extends Migration
               // });
          //     $table->integer('inwardnumber')->nullable();
 //table 28 nov 2:32 pm
-               Schema::table('style', function($table) {
-                  $table->integer('fabric_code1')->nullable();        
-                  $table->integer('fabric_code2')->nullable();        
-                  $table->integer('fabric_code3')->nullable();        
-                  $table->integer('fabric_code4')->nullable();        
-                  $table->integer('fabric_code5')->nullable();  
-                  $table->integer('colour_code1')->nullable();        
-                  $table->integer('colour_code2')->nullable();        
-                  $table->integer('colour_code3')->nullable();        
-                  $table->integer('colour_code4')->nullable();        
-                  $table->integer('colour_code5')->nullable();                    
-               });
-             
-               
-              
+               //Schema::table('style', function($table) {
+            //      $table->integer('fabric_code1')->nullable();        
+            //      $table->integer('fabric_code2')->nullable();        
+            //      $table->integer('fabric_code3')->nullable();        
+            //      $table->integer('fabric_code4')->nullable();        
+            //      $table->integer('fabric_code5')->nullable();  
+            //      $table->integer('colour_code1')->nullable();        
+            //      $table->integer('colour_code2')->nullable();        
+           ////       $table->integer('colour_code3')->nullable();        
+            //      $table->integer('colour_code4')->nullable();        
+           //       $table->integer('colour_code5')->nullable();                    
+           //    });
+           Schema::table('style', function($table) {
+               $table->string('filename')->nullable();
+               $table->string('mime')->nullable();
+               $table->string('original_filename')->nullable();    
+              });
 
 
         

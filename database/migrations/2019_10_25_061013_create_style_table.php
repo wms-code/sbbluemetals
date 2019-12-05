@@ -18,6 +18,8 @@ class CreateStyleTable extends Migration
             $table->string('name')->unique(); 
             $table->boolean('active')->default(FALSE);
             $table->integer('size_code')->unsigned()->nullable();
+
+          
             $table->timestamps();
         });
     }

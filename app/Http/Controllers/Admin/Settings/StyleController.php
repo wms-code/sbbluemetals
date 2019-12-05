@@ -8,6 +8,8 @@ use App\Model\Fabric;
 use App\Model\Colour;
 use DB;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 class StyleController extends Controller
 {
     public function __construct()
@@ -32,8 +34,10 @@ class StyleController extends Controller
     }
     public function store(Request $request)
     {
-          
-        
+         $cover = $request->file('bookcover');
+         $extension = $cover->getClientOriginalExtension();
+         Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+     
          $user =Style::create([
             'name'=>$request->name,
             'size_code'=>$request->size_code,
@@ -46,6 +50,9 @@ class StyleController extends Controller
             'colour_code2'=>$request->colour_code2,
             'colour_code3'=>$request->colour_code3,
             'colour_code4'=>$request->colour_code4,
+            'mime' => $cover->getClientMimeType(),
+            'original_filename' => $cover->getClientOriginalName(),
+            'filename' => $cover->getFilename().'.'.$extension,
             'colour_code5'=>$request->colour_code5
                         ]); 
 

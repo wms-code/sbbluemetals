@@ -38,7 +38,16 @@
                                     <input type="text" name="name" maxlength="50" value="{{ $style->name }}" class="form-control">
                                 </div>
                             </div>
-                           
+
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Image</label>
+                                <div class="col-md-6">               
+                                    <img class="card-img-top" width="200" height="200" src="{{url('uploads/'.$style->filename)}}" alt="{{$style->filename}}">
+                                </div>
+                            </div>
+
+                          
+                            
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Size Name</label>
                                 <div class="col-md-6">

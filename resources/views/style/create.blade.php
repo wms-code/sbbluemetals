@@ -14,7 +14,8 @@
                         <h4 class="m-b-0 text-white">New </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('admin/style') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/style') }}" enctype="multipart/form-data"
+                         method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -23,6 +24,13 @@
                                     <label class="control-label text-right col-md-3">Style Name</label>
                                     <div class="col-md-6">
                                         <input type="text" name="name" maxlength="50" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row ">
+                                    <label class="control-label text-right col-md-3"  for="author">Image</label>
+                                    <div class="col-md-6">
+                                         <input type="file" class="form-control" name="bookcover"/>
                                     </div>
                                 </div>
 
