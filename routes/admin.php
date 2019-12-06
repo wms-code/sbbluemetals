@@ -27,16 +27,18 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('knittedfabric', 'KnittedFabInwardController');
         Route::put('knittedfabric', 'KnittedFabInwardController@update');
         
-       // Route::get('knittedfabric/{id}/editfrn','KnittedFabInwardController@editfrn');
+       
         Route::resource('fabricstock', 'FabricstockController');  
         Route::resource('fabricgroup', 'FabricGroupController');
-        //Route::get('searchajax', ['as'=>'searchajax','fetch'=>'KnittedFabInwardController@fetch']);
+        
+        Route::resource('cuttingproduction', 'CuttingProductionController');
+
         Route::post('knittedfabric/fetchfabric', 'KnittedFabInwardController@fetchfabric')->name('knittedfabric.fetchfabric');
         Route::post('knittedfabric/fetchcolour', 'KnittedFabInwardController@fetchcolour')->name('knittedfabric.fetchcolour');
         Route::post('knittedfabric/fetchrack', 'KnittedFabInwardController@fetchrack')->name('knittedfabric.fetchrack');
         Route::post('knittedfabric/fetchfrn', 'KnittedFabInwardController@fetchfrn')->name('knittedfabric.fetchfrn');
         Route::post('knittedfabric/savefrn', 'KnittedFabInwardController@savefrn')->name('knittedfabric.savefrn');
-        //Route::resource('admin/colour', 'ColourController');
+         
     });
 
  

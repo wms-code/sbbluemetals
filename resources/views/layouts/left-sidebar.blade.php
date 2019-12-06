@@ -9,8 +9,8 @@
                         <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ url('admin/fabricstock')}}">FABRIC STOCK</a></li>
                             <li><a href="{{ url('admin/knittedfabric')}}">KNITTED FABRIC INWARD</a></li>
-                            <li><a href="{{ url('items')}}">Cutting Production</a></li>
-                            <li><a href="{{ url('itemsgroup')}}">CUTTING-PRODUCTION</a></li>
+                            <li><a href="{{ url('admin/cuttingproduction')}}">Cutting Production</a></li>
+                            <li><a href="{{ url('admin/cuttinginward')}}">CUTTING-Inward</a></li>
                        
                         </ul>
                     </li>
