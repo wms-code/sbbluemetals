@@ -21,12 +21,20 @@ class Cuttingproduction extends Model
  
     }
 
-     protected function getsupplier()
+     protected function getstaff()
      {
         $value=DB::table('accounts') 
          ->select('id','name') 
-         //->whereIn('id', array(11,12,14,15))
+         ->whereIn('id', array(30,31,32))
          ->orderBy('name')
+         ->get();
+         return $value;
+     }
+     protected function getfrn()
+     {
+        $value=DB::table('knitted_fab_details') 
+         ->select('inwardnumber','frnnumber')           
+         ->orderBy('frnnumber')
          ->get();
          return $value;
      }

@@ -15,7 +15,7 @@
                                                 <h4 class="card-title">Cutting Program</h4>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/knittedfabric/create') }}">Add New</a></div>
+                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/cuttingproduction/create') }}">Add New</a></div>
                                                 
                                             </div>
                                           </div>

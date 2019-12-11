@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Knitted Fabric Inward ')
+@section('pagetitle','Cutting Program ')
  
 @section('content')               
   <div class="row">
@@ -13,65 +13,94 @@
                 <div class="card card-outline-info">
                    
                     <div class="card-body">
-                        <form action="{{ url('admin/knittedfabric') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/cuttingproduction') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
                             @method('post')
                             <div  style="margin-left: 0px;" class="form-group row">
-                                <label class="control-label text-left col-md-2"> Inward No:.</label>
+                                <label class="control-label text-left col-md-2"> Program No:.</label>
                                   <div class="col-md-3">
-                                        <input type="text" name="inward_number" 
-                                        value ={{ $rsdepartmentData['inward_number'] }}
+                                        <input type="text" name="production_number" 
+                                        value ={{ $rsdepartmentData['production_number'] }}
                                         readonly class="form-control">
                                       
-                                        <input type="text" name="inwardnumber" 
-                                        value ={{ $rsdepartmentData['inwardnumber'] }}
+                                        <input type="text" name="productionnumber" 
+                                        value ={{ $rsdepartmentData['productionnumber'] }}
                                         readonly  class="form-control">
                                   </div>
-                                  <label class="control-label text-left col-md-2">Inward Date:.</label>
+                                  <label class="control-label text-left col-md-2">Program Date:.</label>
                                    <div class="col-md-2">
                                       <input type="date" name="inward_date" maxlength="12" class="form-control">
                                     </div>
                             </div>
                             
                             <div style="margin-left: 0px;" class="form-group row">
-                                <label class="control-label text-left col-md-2"> Supplier </label>
+                                <label class="control-label text-left col-md-2"> Supervisor </label>
                                  <div class="col-md-3">
-                                    <select class="form-control jssingle" id='pty_code' name='pty_code'>
-                                        <option value='0'>-- Select Supplier --</option>
-                                        @foreach($rsdepartmentData['data'] as $department)
+                                    <select class="form-control jssingle" id='emp_code' name='emp_code'>
+                                        <option value='0'>-- Select Supervisor --</option>
+                                        @foreach($rsdepartmentData['staff'] as $department)
                                           <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                         @endforeach
                                      </select>
                                   </div>
-                                  
+                                 
                             </div>
     
-                           <div style="margin-left: 0px;" class="form-group row">                                  
-                                <label class="control-label text-left col-md-2"> Supplier Inovice No</label>
-                                <div class="col-md-3">
-                                      <input type="text" name="reference"  class="form-control">
+                            <div style="margin-left: 0px;" class="form-group row">
+                              <label class="control-label text-left col-md-2"> Style </label>
+                               <div class="col-md-3">
+                                  <select class="form-control jssingle" id='style_code' name='style_code'>
+                                      <option value='0'>-- Select Style --</option>
+                                      @foreach($rsdepartmentData['style'] as $department)
+                                        <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                      @endforeach
+                                   </select>
                                 </div>
-                                <label class="control-label text-left col-md-2"> Supplier Inovice Date</label>
-                                <div class="col-md-2">
-                                      <input type="date" name="inwarddate"  class="form-control">
-                                </div>
-                            </div>
-                            
+                                
+                          </div>
+                           
+                          <div style="margin-left: 0px;" class="form-group row">
+                          <label class="control-label text-left col-md-2"> Fabric & Colour </label> 
+                                  <div class="col-md-3">
+                                    <table  border="1" class="table">
+                                      <thead>
+                                        <tr> 
+                                          <th width="4%">S.No</th>
+                                          <th width="10%">Colour</th>
+                                          <th width="10%">Fabirc</th>
+                                          <th width="10%">Weight</th> 
+                                        </tr>  
+                                      </thead>
+                                        <tr>   
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        </tr>
+                                      </table>
+                                  </div>     
+                                </div>     
                           <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                             <table  border="1" class="table">
                                   <thead>
                                     <tr>
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
+                                      <th width="10%">F.R.N</th>
                                       <th width="10%">Colour</th>
                                       <th width="10%">Fabirc</th> 
-                                      <th width="5%">Rolls</th>
-                                      <th width="10%">Qty</th>
-                                      <th width="10%">Rate</th>
-                                      <th width="10%">Tax %</th>
-                                      <th width="10%">Amount</th>
+                                         
+                                      <th  width="8%">  <div id="styleid1" class="form-control">Size 1</div></th>
+                                      <th  width="8%">  <div id="styleid2" class="form-control">Size 2</div></th>
+                                      <th  width="8%">  <div id="styleid3" class="form-control">Size 3</div></th>
+                                      <th  width="8%">  <div id="styleid4" class="form-control">Size 4</div></th>
+                                      <th  width="8%">  <div id="styleid5" class="form-control">Size 5</div></th>
+                                      <th  width="8%">  <div id="styleid6" class="form-control">Size 6</div></th>
+                                      <th  width="8%">  <div id="styleid7" class="form-control">Size 7</div></th>
+                                      <th  width="8%">  <div id="styleid8" class="form-control">Size 8</div></th>
+                                      <th width="10%">Total Pcs</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -79,67 +108,42 @@
                                         <th><input class="case" type="checkbox"/></th>
                                         <th> <INPUT class="form-control" type='text' readonly  id='sno_1'	 value='1'  size='4'  
                                              readonly name='sno[]'/> </th>
-                                     
+                                        <td>
+                                              <select class="jssingle" id='selfrn1' name='selfrn[]'>
+                                                  <option value='0'>-- Select F.R.N --</option>
+                                                    @foreach($rsdepartmentData['frn'] as $department)
+                                                       <option value='{{ $department->frnnumber }}'>{{ $department->frnnumber }}</option>
+                                                  @endforeach
+                                              </select>
+                                          </td>
                                         <td>
                                             <select class="jssingle" id='selcolour1' name='selcolour[]'>
                                                 <option value='0'>-- Select Colour --</option>
                                                   @foreach($rsdepartmentData['colour'] as $department)
-                                                
-                                                <option value='{{ $department->id }}'>{{ $department->name }}</option>
-                                              
+                                                     <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td> 
                                             <select class="jssingle" id='selfabric1' name='selfabric[]'>
                                                 <option value='0'>-- Select Fabric --</option>
-                                              {{ $previousCountry = null}} 
-@foreach($rsfabrics  as $courseCategory) 
-<?php 
-    if ($previousCountry != $courseCategory->fabricgroupname) 
-      {
-          echo "<optgroup label='$courseCategory->fabricgroupname'>";
-      } 
-?>
-  <option value="{{ $courseCategory->id }}">  {{$courseCategory->fabricname }} </option>
-  {{  $previousCountry = $courseCategory->fabricgroupname }}
-    
-  <?php 
-  if ($previousCountry != $courseCategory->fabricgroupname) 
-    {
-    echo '</optgroup>';
-    } 
-?>                                                   
- @endforeach
-</select><br>          <input type="hidden" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
-      <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
-                                        </td>
-                                        <td>
-                                          <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
-                                        </td>
-                                        <td>
-                                            <input type="text" value="" name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                          </td>
+                                               
+                                                @foreach($rsdepartmentData['fabrics'] as $department)
+                                         <option value="{{ $department->id }}">  {{$department->name }} </option>
+                                          @endforeach
+                                         </select>  
+                                         </td>
                                         
+                                         <td>  <input type="number"    name="size1[]" id="size1" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size2[]" id="size2" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size3[]" id="size3" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size4[]" id="size4" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size5[]" id="size5" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size6[]" id="size6" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size7[]" id="size7" class="form-control totalLinePrice"></td>
+                                         <td>  <input type="number"    name="size8[]" id="size8" class="form-control totalLinePrice"></td>
                                         <td>
-                                            <input type="text" value="" name="rate[]" id="rate_1" class="form-control changesNo" 
-                                              autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                        <br>
-                                         
-                                          <input type="text" name="perrateamount[]" id="perrateamount_1" class="form-control totalSubTotal" readonly >
-                                       </td>
-                                      
-                                        <td>
-                                          <input type="text" value="" name="taxper[]" id="taxper_1" class="form-control  changesNo" 
-                                            autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                       <br>
-                                        
-                                        <input type="number" name="taxamt[]" id="taxamt_1" class="form-control totalLinetax"  readonly >
-                                     
-                                     </td>
-                                        <td>
-                                              <input type="number"  readonly name="amount[]" id="amount_1" class="form-control totalLinePrice">
+                                              <input type="number"  readonly name="tot_pcs[]" id="totalpcs_1" class="form-control totalLinePrice">
                                         </td>
                                         </tr>
                                        </tbody>
@@ -155,58 +159,12 @@
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                            <label class="control-label text-left col-md-3"> Total Pcs:.</label>
                               <div class="col-md-3">
-                                  <input type="number" name="total_weight" readonly class="form-control"
-                                   id="total_weight" placeholder="Total Weight" >
+                                  <input type="number" name="total_pcs" readonly class="form-control"
+                                   id="total_pcs" placeholder="Total Pcs" >
                               </div>
                         </div>
-                        <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Subtotal:.</label>
-                              <div class="col-md-3">
-                                    <input type="number" name="sub_total" readonly class="form-control" id="subTotal" placeholder="Subtotal"
-                                     onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-                              </div>
-                        </div>
-
-                        <div  style="margin-left: 0px;" class="form-group row">
-                              <label class="control-label text-left col-md-3">Items Tax Amount %:.</label>
-                               <div class="col-md-3">
-                                  <input type="number"  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
-                                </div>
-                        </div>
-                       
-                        <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-3">Packing Amount-Before Tax:.</label>
-                           <div class="col-md-3">
-                              <input type="number"  name="packingamount"   class="form-control" id="packingamount" placeholder="Packing Amount">
-                            </div>
-                          </div>
-
-                          <div  style="margin-left: 0px;" class="form-group row">
-                         <label class="control-label text-left col-md-3">Packing Tax %:.</label>
-                           <div class="col-md-3">
-                              <input type="number"  name="packingtaxper"   class="form-control" id="packingtaxper" placeholder="Packing Tax">
-                              <input type="number"  name="packingtaxamount"  readonly class="form-control" id="packingtaxamount" placeholder="Packing Tax Amount">
-                            </div>
-                         </div>
-
-                    <div  style="margin-left: 0px;" class="form-group row">
-                      <label class="control-label text-left col-md-3">Packing Amount (With Tax):.</label>
-                       <div class="col-md-3">
-                          <input type="number"  name="totalpackingamount"  readonly class="form-control" id="totalpackingamount" placeholder="Total Packing Amount">
-                        </div>
-                     </div> 
-                            
-                        <div  style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total:.</label>
-                              <div class="col-md-3">
-                                    <input type="number" name="net_value" readonly class="form-control" id="txtTotal" 
-                                      placeholder="Total"
-                                     onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-                              </div>
-                        </div>
-
                        
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
@@ -242,7 +200,114 @@
                 </div>
             </div>
         </div>
+        <script>
+          $('#style_code').on('change',function()
+          {
+                 
+              var total=0;
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+              var styleid=$('#style_code').val();
+              ////////////////////////////////////////////////////////////////////////////////////////
+              selectfrn('selfrn1');
+              var _token = $('input[name="_token"]').val(); 
+              var size1,size2,size3,size4,size5,size6,size7,size8;
+              var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
+              $.ajax({
+                    url:"{{ route('cuttingproduction.fetchsize') }}",
+                    method:"POST", 
+                    data:{_token:_token,styleid:styleid},  
+                    success: function(response){   
+                      $.each(response, function (index, value) {
+                          total=0;
+                          size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
+                          size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
+                          $("#styleid1").html(size1);
+                          $("#styleid2").html(size2);
+                          $("#styleid3").html(size3);
+                          $("#styleid4").html(size4);
+                          $("#styleid5").html(size5);
+                          $("#styleid6").html(size6);
+                          $("#styleid7").html(size7);
+                          $("#styleid8").html(size8);
+                        
+                      })
+                    
+                    }, 
+                    error: function (jqXHR, exception) {
+                          var msg = '';
+                          if (jqXHR.status === 0) {
+                              msg = 'Not connect.\n Verify Network.';
+                          } else if (jqXHR.status == 404) {
+                              msg = 'Requested page not found. [404]';
+                          } else if (jqXHR.status == 500) {
+                              msg = 'Internal Server Error [500].';
+                          } else if (exception === 'parsererror') {
+                              msg = 'Requested JSON parse failed.';
+                          } else if (exception === 'timeout') {
+                              msg = 'Time out error.';
+                          } else if (exception === 'abort') {
+                              msg = 'Ajax request aborted.';
+                          } else {
+                              msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                          }
+                           alert(msg);
+                         },
+                         
+                          headers: {
+                          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                          } 
+                        });
+                       
+                        
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+             
+              
+          });
+      function selectfrn(para)
+         {
 
+          para='#'+para;
+          var _token = $('input[name="_token"]').val();
+          var styleid=$('#style_code').val();
+          $.ajax({
+              url:"{{ route('cuttingproduction.fetchfrn') }}",
+              method:"POST", 
+              data:{_token:_token,styleid:styleid},  
+            
+              success: function(response){                   
+              var len = response.length;
+              alert(response);
+             // $(para).append(response);
+              //$(para).select2();
+              },//sucess
+              error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                     alert(msg);
+                   },
+                   
+                    headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    } 
+                  });
+                 
+                        
+}   
+      </script>        
         <script >
           
             var i=$('table tr').length;
@@ -273,6 +338,7 @@
               setrowvalue();
              
               i++;
+           
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
 function updaterack(para){
   para='#'+para;

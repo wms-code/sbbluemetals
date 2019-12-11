@@ -292,6 +292,7 @@
                           success: function(response){   
                             $.each(response, function (index, value) {
                                 total=0;
+                                alert(response);
                                 size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
                                 size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
                                 $("#size1").val(size1);
