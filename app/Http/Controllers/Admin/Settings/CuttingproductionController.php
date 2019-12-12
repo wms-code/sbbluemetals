@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Settings;
 
 use Illuminate\Http\Request;  
 use App\Model\Cuttingproduction;
+use App\Model\Cuttingproductiondetail;
 use App\Model\Fabric;
 use App\Model\Colour;
 use App\Model\Stockpoint;
@@ -75,7 +76,38 @@ class CuttingproductionController extends Controller
         }
         return $retvalue;
     }
-  
+    public function store(Request $request)
+    {
+        $production_number = $this->getmax(); 
+        $productionnumber = $this->getmaxinwardno();       
+        Cuttingproduction::create(['production_number'=>$production_number,
+                                    'productionnumber'=> $productionnumber ,
+                                    'emp_code'=>$request->emp_code,
+                                    'production_date'=>$request->program_date, 
+                                    'style_code'=>$request->style_code,
+                                    'total_pcs'=>$request->total_pcs,                                   
+                                    'remarks'=>$request->remarks ]);
+
+        Cuttingproductiondetail::create(['productionnumber'=> $productionnumber ,
+                                    'emp_code'=>$request->emp_code,
+                                    'indx'=>1,
+                                    'production_date'=>$request->program_date, 
+                                    'style_code'=>$request->style_code,
+                                    'size1'=>$request->size1,
+                                    'size2'=>$request->size2,
+                                    'size3'=>$request->size3,
+                                    'size4'=>$request->size4,
+                                    'size5'=>$request->size5,
+                                    'size6'=>$request->size6,
+                                    'size7'=>$request->size7,
+                                    'size8'=>$request->size8,
+                                    'totalpcs'=>$request->total_pcs]);                            
+        
+                     
+        $msg = [
+          'message' => 'Cutting Production Entry created successfully!' ];
+        return  redirect('admin/cuttingproduction')->with($msg);
+    }
     public function create()
     {
        $rsdepartmentData['production_number'] = $this->getmax(); 
@@ -96,7 +128,7 @@ class CuttingproductionController extends Controller
     public function savefrn(Request $request)
     {
         $i=0;$output='';
-        //return   $request->frnnumber;
+        return   $request->frnnumber;
         foreach($request->sno as $arrcolour)
            { 
             Knittedfabdetails::where(
@@ -149,51 +181,7 @@ class CuttingproductionController extends Controller
        return view('knitted.edit',compact(['rsdepartmentData','rsfabrics','rscolour']));
     }
 
-    public function store(Request $request)
-    {
-        KnittedFabInward::create(['inward_number'=>$request->inward_number,
-                                    'inwardnumber'=>$request->inwardnumber,
-                                    'party_code'=>$request->pty_code,
-                                    'inward_date'=>$request->inward_date,
-                                    'inwarddate'=>$request->inwarddate,
-                                    'reference'=>$request->reference,
-                                    'sub_total'=>$request->sub_total,
-                                    'total_weight'=>$request->total_weight,
-                                    'tax_amount'=>$request->tax_amount,
-                                    'packingamount'=>$request->packingamount,
-                                    'packingtaxamount'=>$request->packingtaxamount,
-                                    'packingtaxper'=>$request->packingtaxper,
-                                    'totalpackingamount'=>$request->totalpackingamount,
-                                    'round_off'=>$request->round_off,
-                                    'net_value'=>$request->net_value,
-                                    'remarks'=>$request->remarks ]);
-        
-        $i=0;
-        foreach($request->selcolour as $arrcolour)
-            {
-                Knittedfabdetails::create(['knitted_fab_inward_number'=>$request->inward_number,
-                                        'inward_date'=>$request->inward_date,
-                                        'inwardnumber'=>$request->inwardnumber,
-                                        'party_code'=>$request->pty_code,
-                                        'indx'=>$i+1,
-                                        'colour_id'=>$arrcolour,
-                                        'fabric_id'=>$request->selfabric[$i],
-                                        'particulars'=>$request->particulars[$i],
-                                        'hsn'=>$request->hsn[$i],
-                                        'rolls'=>$request->rolls[$i],
-                                        'weight'=>$request->qty[$i],
-                                        'delivery_weight'=>$request->qty[$i],
-                                        'rate'=>$request->rate[$i],
-                                        'amount'=>$request->amount[$i],
-                                        'perrateamount'=>$request->perrateamount[$i],
-                                        'taxper'=>$request->taxper[$i],
-                                        'taxamt'=>$request->taxamt[$i] ]);
-            $i=$i+1;
-            }                            
-        $msg = [
-          'message' => 'Knitted Fabric Entry created successfully!' ];
-        return  redirect('admin/knittedfabric')->with($msg);
-    }
+    
 
    public function fetchsize(Request $request)
    {
@@ -218,13 +206,60 @@ class CuttingproductionController extends Controller
           ->get();         
         return $rsdepartmentData;
    }
-
-   public function fetchfrn(Request $request)
+   public function fetchcolourfabric(Request $request)
    {
-        $colour_code1=0; $colour_code2=0; $colour_code3=0; $colour_code4=0; $colour_code5=0;
-        $fabric_code1=0; $fabric_code2=0; $fabric_code3=0; $fabric_code4=0; $fabric_code5=0;
+        $colour_name1=0; $colour_name2=0; $colour_name3=0; $colour_name4=0; $colour_name5=0;
+        $fabric_name1=''; $fabric_name2=0; $fabric_name3=0; $fabric_name4=0; $fabric_name5=0;
 
-         $styleid= $request->get('styleid');
+       $styleid= $request->get('styleid');
+        if($request->get('styleid'))
+         { 
+           $rsdepartmentData = DB::table('style')      
+           ->leftJoin('fabrics as fabrics1', 'fabrics1.id', '=', 'style.fabric_code1')
+           ->leftJoin('fabrics as fabrics2', 'fabrics2.id', '=', 'style.fabric_code2')
+           ->leftJoin('fabrics as fabrics3', 'fabrics3.id', '=', 'style.fabric_code3')
+           ->leftJoin('fabrics as fabrics4', 'fabrics4.id', '=', 'style.fabric_code4')
+           ->leftJoin('fabrics as fabrics5', 'fabrics5.id', '=', 'style.fabric_code5')
+           ->leftJoin('colours as colours1', 'colours1.id', '=', 'style.colour_code1')
+           ->leftJoin('colours as colours2', 'colours2.id', '=', 'style.colour_code2')
+           ->leftJoin('colours as colours3', 'colours3.id', '=', 'style.colour_code3')
+           ->leftJoin('colours as colours4', 'colours4.id', '=', 'style.colour_code4')
+           ->leftJoin('colours as colours5', 'colours5.id', '=', 'style.colour_code5')
+            ->select('fabrics1.name as  fabricname1','fabrics2.name as  fabricname2',
+                    'fabrics3.name as  fabricname3','fabrics4.name as  fabricname4',
+                    'fabrics5.name as  fabricname5','colours1.name as  colourname1',
+                    'colours2.name as  colourname2','colours3.name as  colourname3',
+                    'colours4.name as  colourname4','colours5.name as  colourname5',
+                    DB::raw("(SELECT SUM(weight)  FROM knitted_fab_details
+                                WHERE knitted_fab_details.colour_id = style.colour_code1 and
+                                knitted_fab_details.fabric_id = style.fabric_code1
+                                GROUP BY knitted_fab_details.colour_id ,knitted_fab_details.fabric_id ) as weight1"),
+                    DB::raw("(SELECT SUM(weight)  FROM knitted_fab_details
+                                WHERE knitted_fab_details.colour_id = style.colour_code2 and
+                                knitted_fab_details.fabric_id = style.fabric_code2
+                                GROUP BY knitted_fab_details.colour_id ,knitted_fab_details.fabric_id ) as weight2"),      
+                    DB::raw("(SELECT SUM(weight)  FROM knitted_fab_details
+                                WHERE knitted_fab_details.colour_id = style.colour_code3 and
+                                knitted_fab_details.fabric_id = style.fabric_code3
+                                GROUP BY knitted_fab_details.colour_id ,knitted_fab_details.fabric_id ) as weight3"),  
+                    DB::raw("(SELECT SUM(weight)  FROM knitted_fab_details
+                                WHERE knitted_fab_details.colour_id = style.colour_code4 and
+                                knitted_fab_details.fabric_id = style.fabric_code4
+                                GROUP BY knitted_fab_details.colour_id ,knitted_fab_details.fabric_id ) as weight4"),  
+                    DB::raw("(SELECT SUM(weight)  FROM knitted_fab_details
+                                WHERE knitted_fab_details.colour_id = style.colour_code5 and
+                                knitted_fab_details.fabric_id = style.fabric_code5
+                                GROUP BY knitted_fab_details.colour_id ,knitted_fab_details.fabric_id ) as weight5")                                      
+                  )
+            ->where('style.id',$styleid)
+            ->get();           
+         } 
+        
+         return  $rsdepartmentData;
+   }
+   public function fetchfrn(Request $request)
+   { 
+        $styleid= $request->get('styleid');
         if($request->get('styleid'))
          { 
            $rsdepartmentData = DB::table('style')      
@@ -235,35 +270,10 @@ class CuttingproductionController extends Controller
             ->where('id',$styleid)
             ->get(); 
 
-            foreach( $rsdepartmentData->all() as $category ) {
-                $colour_code1= $category->colour_code1;
-                $colour_code2= $category->colour_code2;
-                $colour_code3= $category->colour_code3;
-                $colour_code4= $category->colour_code4;
-                $colour_code5= $category->colour_code5;
-                $fabric_code1= $category->fabric_code1;
-                $fabric_code2= $category->fabric_code2;
-                $fabric_code3= $category->fabric_code3;
-                $fabric_code4= $category->fabric_code4;
-                $fabric_code5= $category->fabric_code5;
-            }
+           
           
-         }
-
-         //
-         if ($colour_code1 > 0)
-             {
-                  $rsfrn=$this->fetchfrnloop($colour_code1,$fabric_code1);
-                  foreach( $rsfrn->all() as $category ) {
-                    $colour_code1= $category->frnnumber;
-                  }
-              
-              }
-          
-         // 
-
-
-         return  $colour_code1;
+         } 
+        
    }
 
     public function fetcssh(Request $request)

@@ -34,6 +34,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('cuttingproduction', 'CuttingProductionController');
         Route::post('cuttingproduction/fetchsize', 'CuttingProductionController@fetchsize')->name('cuttingproduction.fetchsize');
         Route::post('cuttingproduction/fetchfrn', 'CuttingProductionController@fetchfrn')->name('cuttingproduction.fetchfrn');
+        Route::post('cuttingproduction/fetchcolourfabric', 'CuttingProductionController@fetchcolourfabric')->name('cuttingproduction.fetchcolourfabric');
 
         Route::post('knittedfabric/fetchfabric', 'KnittedFabInwardController@fetchfabric')->name('knittedfabric.fetchfabric');
         Route::post('knittedfabric/fetchcolour', 'KnittedFabInwardController@fetchcolour')->name('knittedfabric.fetchcolour');

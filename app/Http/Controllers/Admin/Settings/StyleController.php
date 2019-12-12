@@ -127,8 +127,8 @@ class StyleController extends Controller
     public function update(Request $request)
     {
         $cover = $request->file('bookcover');
-      return  $extension = $cover->getClientOriginalExtension();
-        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+      //   $extension = $cover->getClientOriginalExtension();
+       // Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
         Style::where('id', $request->id) ->update(['name'=>$request->name,
         'size_code'=>$request->size_code,
