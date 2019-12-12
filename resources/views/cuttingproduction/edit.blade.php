@@ -5,239 +5,120 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Cutting Production Program-Edit')
- 
+@section('pagetitle','Cutting Program - Edit ')
+  
 @section('content')               
   <div class="row">
             <div class="col-md-12 col-md-offset-2 ">
                 <div class="card card-outline-info">
-                  @foreach( $rsdepartmentData['rsfabrics'] as $fabrics)
+                    @foreach( $rsdepartmentData['rsproduction'] as $production)
                                    
-                  @endforeach
+                        @endforeach
                     <div class="card-body">
-                        <form action="{{ url('admin/knittedfabric') }}" method="post" class="form-horizontal form-bordered">
+                       
+                        <form action="{{ url('admin/cuttingproduction') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf  @method('put')
-                           
                             <div  style="margin-left: 0px;" class="form-group row">
-                                <label class="control-label text-left col-md-2"> Inward No:.</label>
+                                <label class="control-label text-left col-md-2"> Program No:.</label>
                                   <div class="col-md-3">
-                                        <input type="text" name="inward_number" 
-                                        value ={{ $fabrics->inward_number }}
+                                        <input type="text" name="production_number" 
+                                        value ={{ $production->production_number }}
                                         readonly class="form-control">
                                       
-                                        <input type="text" name="inwardnumber" 
-                                        value ={{ $fabrics->inwardnumber }}
+                                        <input type="text" name="productionnumber" 
+                                        value ={{ $production->productionnumber }}
                                         readonly  class="form-control">
                                   </div>
-                                  <label class="control-label text-left col-md-2">Inward Date:.</label>
-                                   <div class="col-md-3">
-                                      <input type="date" name="inward_date"
-                                       value={{ $fabrics->inward_date }}
+                                  <label class="control-label text-left col-md-2">Program Date:.</label>
+                                   <div class="col-md-2">
+                                      <input type="date" name="program_date"
+                                      value ={{ $production->production_date }}
                                        maxlength="12" class="form-control">
                                     </div>
                             </div>
                             
                             <div style="margin-left: 0px;" class="form-group row">
-                                <label class="control-label text-left col-md-2"> Supplier </label>
+                                <label class="control-label text-left col-md-2"> Supervisor </label>
                                  <div class="col-md-3">
-                                    <select readonly class="form-control jssingle" id='pty_code' name='pty_code'>                                        
-                                        @foreach($rsdepartmentData['data'] as $department)
+                                    <select class="form-control jssingle" id='emp_code' name='emp_code'>
+                                        <option value='0'>-- Select Supervisor --</option>
+                                        @foreach($rsstaff as $department)
                                           <option value='{{ $department->id }}'
-                                            {{ $department->id== $fabrics->party_code ? 'selected' : ''}}>
+                                              {{ $department->id== $production->emp_code ? 'selected' : ''}}> 
                                             {{ $department->name }}</option>
                                         @endforeach
                                      </select>
                                   </div>
-                                  
+                                 
                             </div>
     
-                           <div style="margin-left: 0px;" class="form-group row">                                  
-                                <label class="control-label text-left col-md-2"> Supplier Inovice No</label>
-                                <div class="col-md-3">
-                                      <input type="text" name="reference" value={{ $fabrics->reference }} class="form-control">
+                            <div style="margin-left: 0px;" class="form-group row">
+                              <label class="control-label text-left col-md-2"> Style </label>
+                               
+                                  <div class="col-md-3"> 
+                                  <select class="form-control jssingle" id='style_code' name='style_code'>
+                                      <option value='0'>-- Select Style --</option>
+                                      @foreach($rsstyle as $department)
+                                        <option value='{{ $department->id }}'
+                                            {{ $department->id== $production->style_code ? 'selected' : ''}}> 
+                                          {{ $department->name }}</option>
+                                      @endforeach
+                                   </select>
                                 </div>
-                                <label class="control-label text-left col-md-2"> Supplier Inovice Date</label>
-                                <div class="col-md-3s">
-                                      <input type="date" name="inwarddate" value={{ $fabrics->inwarddate }}  class="form-control">
-                                </div>
-                            </div>
-                            
-                          <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                            <table id="myTable"  border="1" class="table">
-                                  <thead>
-                                    <tr>
-                                       <th width="4%">SNo</th>
-                                      <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc</th>
-                                     
-                                      <th width="5%">Rolls</th>
-                                      <th width="10%">Weight</th>
-                                      <th width="10%">Rate</th>
-                                      <th width="10%">Tax %</th>
-                                      <th width="10%">Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php $i=1;?>
-                                        @foreach ($rsdepartmentData['rsdetails'] as $details)
-                                      <tr>
-                                        <th>
-                                            <INPUT class="form-control" type='text' readonly  id='sno_{{$i}}'	 value={{$details->indx}}  size='4'  
-                                            readonly name='sno[]'/>
-                                           </th>
-                                        <td>
+                                
+                          </div>
+                          @foreach( $rsdepartmentData['rsdetail'] as $productiondetails)
+                                   
+                          @endforeach
+                          @foreach( $rsdepartmentData['rsindxdetail'] as $prd)
+                                   
+                          @endforeach
+                          
+                                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                    <table  border="1" class="table">
+                                          <thead>
+                                            <tr> 
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize1" id="indxsize1" value={{$prd->size1}} ></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize2" id="indxsize2" value={{$prd->size2}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize3" id="indxsize3" value={{$prd->size3}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize4" id="indxsize4" value={{$prd->size4}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize5" id="indxsize5" value={{$prd->size5}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize6" id="indxsize6" value={{$prd->size6}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize7" id="indxsize7" value={{$prd->size7}}></th>
+                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize8" id="indxsize8" value={{$prd->size8}}></th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr> 
+                                                 <td>  <input type="number"    name="size1" id="size1"  value={{$productiondetails->size1}} class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size2" id="size2"  value={{$productiondetails->size2}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size3" id="size3"  value={{$productiondetails->size3}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size4" id="size4"  value={{$productiondetails->size4}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size5" id="size5"  value={{$productiondetails->size5}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size6" id="size6"  value={{$productiondetails->size6}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size7" id="size7"  value={{$productiondetails->size7}}  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size8" id="size8"  value={{$productiondetails->size8}} class="form-control totalLinePrice"></td>
+                                                
+                                                </tr>
+                                               </tbody>
                                            
-                                           <select class="jssingle" id='selcolour{{$i}}' name='selcolour[]'>
-                                      
-                                    <option value="0">--Select--</option>                            
-                                    @foreach($rscolour as $department)
-                                    <option value='{{ $department->id }}'
-                                        {{ $department->id== $details->coloursid ? 'selected' : ''}}>
-                                        {{ $department->name }}</option>
-
-                                      
-                                    @endforeach
-                                 </select> 
-                                          </td>
-                                        <td>
-                                            <select class="jssingle" id='selfabric{{$i}}' name='selfabric[]'>
-                                                <option value='0'>-- Select Fabric --</option>
-      
-        @foreach($rsfabrics as $department)
-                                                <option value='{{ $department->id }}'
-                                                    {{ $department->id== $details->fabricsid ? 'selected' : ''}}>
-                                                    {{ $department->fabricname }}</option>
-            
-                                                  
-                                                @endforeach
-                                             </select>                       
-                                         
-                                           <input type="hidden" name="hsn[]"  id='hsn_{{$i}}'
-                                          value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
-                                        
-                                           <input type="hidden" name="particulars[]"
-                                           value='{{$details->particulars}}'  id="particulars_1" class="form-control" >
-                                        </td>
-                                        <td>
-                                          <input type="text"
-                                          value='{{$details->rolls}}'   name="rolls[]" id="rolls_{{$i}}" class="form-control">                                             
-                                        </td>
-                                        <td>
-                                            <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_{{$i}}"
-                                             class="form-control totalWeight changesNo" 
-                                              autocomplete="off"  >
-                                          </td>
-                                        
-                                        <td>
-                                            <input type="text"  value='{{  number_format((float)$details->rate, 2, '.', '') }}' 
-                                            name="rate[]" id="rate_{{$i}}" class="form-control changesNo" 
-                                              autocomplete="off" >
-                                        <br>
-                                         
-                                          <input type="number" value='{{  number_format((float)$details->perrateamount, 2, '.', '') }}' name="perrateamount[]"
-                                           id="perrateamount_{{$i}}" class="form-control totalSubTotal" readonly >
-                                       </td>
-                                      
-                                        <td>
-                                          <input type="number" value='{{ number_format((float)$details->taxper, 2, '.', '') }}'  name="taxper[]" 
-                                          id="taxper_{{$i}}" class="form-control  changesNo" 
-                                            autocomplete="off" onkeypress="return IsNumeric(event);" >
-                                       <br>
-                                        <input type="number" value='{{  number_format((float)$details->taxamt, 2, '.', '') }}' name="taxamt[]" id="taxamt_{{$i}}" class="form-control totalLinetax"  readonly >
-                                       </td>
-                                        <td>
-                                              <input type="number" value='{{  number_format((float)$details->amount, 2, '.', '')}}'  readonly name="amount[]" id="amount_{{$i}}" class="form-control totalLinePrice">
-                                        </td>
-                                        </tr>
-                                       </tbody>
-                                       <?php $i=$i+1;?>
-                                       @endforeach
-                             </table>   
-                            
-                             <div class='row'>
-                                <div class='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                                   
-                                  <button class="btn btn-success addmore" type="button">+ Add More</button>
-                              </div>
-                         </div>
-                         <br> 
-                         <br>
-                         
+                                     </table>   
+                        
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                            <label class="control-label text-left col-md-3"> Total Pcs:.</label>
                               <div class="col-md-3">
-                                  <input type="text" name="total_weight" readonly class="form-control "
-                                   id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} placeholder="Total Weight" >
+                                  <input type="number" name="total_pcs" readonly class="form-control"
+                                   id="total_pcs" placeholder="Total Pcs" >
                               </div>
                         </div>
-                        <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Subtotal:.</label>
-                              <div class="col-md-3">
-                                    <input type="number"value={{ number_format((float)$fabrics->sub_total, 2, '.', '')  }}
-                                      name="sub_total" readonly class="form-control" id="subTotal" placeholder="Subtotal"
-                                     onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-                              </div>
-                        </div>
-
-                        <div  style="margin-left: 0px;" class="form-group row">
-                              <label class="control-label text-left col-md-3">Items Tax Amount %:.</label>
-                               <div class="col-md-3">
-                                  <input type="number" value={{ number_format((float)$fabrics->tax_amount, 2, '.', '')  }}  name="tax_amount"  readonly class="form-control" id="taxAmount" placeholder="Tax">
-                                   
-                                </div>
-                        </div>
-                        <div  style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3">Packing Amount-Before Tax:.</label>
-                             <div class="col-md-3">
-                                <input type="number" 
-                                      value={{ number_format((float)$fabrics->packingamount, 2, '.', '')  }}  name="packingamount"   class="form-control" id="packingamount" placeholder="Packing Amount">
-                              </div>
-                            </div>
-
-                        <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-3">Packing Tax %:.</label>
-                           <div class="col-md-3">
-                              <input type="number"  value={{ number_format((float)$fabrics->packingtaxper, 2, '.', '')  }}  name="packingtaxper"   class="form-control" id="packingtaxper" placeholder="Packing Tax">
-                              <input type="number" 
-                               name="packingtaxamount" 
-                                readonly class="form-control"  value={{ number_format((float)$fabrics->packingtaxamount, 2, '.', '')  }}   id="packingtaxamount" placeholder="Packing Tax Amount">
-                            </div>
-                    </div>
-
-                    <div  style="margin-left: 0px;" class="form-group row">
-                      <label class="control-label text-left col-md-3">Packing  Amount (With Tax):.</label>
-                       <div class="col-md-3">
-                          <input type="number"  value={{ number_format((float)$fabrics->totalpackingamount, 2, '.', '')  }}   name="totalpackingamount" 
-                           readonly class="form-control" id="totalpackingamount" placeholder="Total Packing Amount">
-                        </div>
-                     </div>
-
-                      <div  style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-3">Round Off</label>
-                           <div class="col-md-3">
-                              <input type="number"  value={{ number_format((float)$fabrics->round_off, 2, '.', '')  }}  name="round_off" readonly class="form-control" id="taxroundoff" placeholder="Round Off"> 
-                            </div>
-                      </div>
-
-                      
-                            
-                        <div  style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total:.</label>
-                              <div class="col-md-3">
-                                    <input type="number"  value={{ number_format((float)$fabrics->net_value, 2, '.', '')  }}  name="net_value" readonly class="form-control" id="txtTotal" 
-                                      placeholder="Total"
-                                     onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-                              </div>
-                        </div>
-
                        
 
                        <div style="margin-left: 0px;" class="form-group row">                                  
                             <label class="control-label text-left col-md-3"> Remarks</label>
                             <div class="col-md-5">
-                                  <input type="text"  value='{{ $fabrics->remarks }}'  name="remarks" class="form-control">
+                                  <input type="text" name="remarks"   value ="{{ $production->remarks }}"  maxlength="250" class="form-control">
                             </div>
                         </div>
 
@@ -249,7 +130,7 @@
                                             <div class="offset-sm-3 col-md-7">
                                                
                                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                                <a href="{{ url('admin/knittedfabric') }}" class="btn btn-inverse">Cancel</a>
+                                                <a href="{{ url('admin/cuttingprogram') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
 
@@ -259,318 +140,161 @@
                         </div>
 
 
-
-
+                       
+                        
 
                         </form>
                        </div>
                 </div>
             </div>
         </div>
+  
+        <script>
+          $('#style_code').on('change',function()
+          {
+                 
+              var total=0; 
+              var styleid=$('#style_code').val(); 
+              var _token = $('input[name="_token"]').val(); 
+              var size1,size2,size3,size4,size5,size6,size7,size8;
+              var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
+              $.ajax({
+                    url:"{{ route('cuttingproduction.fetchsize') }}",
+                    method:"POST", 
+                    data:{_token:_token,styleid:styleid},  
+                    success: function(response){   
+                      $.each(response, function (index, value) {
+                          total=0;
+                          size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
+                          size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
+                          $("#styleid1").html(size1);
+                          $("#styleid2").html(size2);
+                          $("#styleid3").html(size3);
+                          $("#styleid4").html(size4);
+                          $("#styleid5").html(size5);
+                          $("#styleid6").html(size6);
+                          $("#styleid7").html(size7);
+                          $("#styleid8").html(size8);
+                        
+                      })
+                    
+                    }, 
+                    error: function (jqXHR, exception) {
+                          var msg = '';
+                          if (jqXHR.status === 0) {
+                              msg = 'Not connect.\n Verify Network.';
+                          } else if (jqXHR.status == 404) {
+                              msg = 'Requested page not found. [404]';
+                          } else if (jqXHR.status == 500) {
+                              msg = 'Internal Server Error [500].';
+                          } else if (exception === 'parsererror') {
+                              msg = 'Requested JSON parse failed.';
+                          } else if (exception === 'timeout') {
+                              msg = 'Time out error.';
+                          } else if (exception === 'abort') {
+                              msg = 'Ajax request aborted.';
+                          } else {
+                              msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                          }
+                           alert(msg);
+                         },
+                         
+                          headers: {
+                          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                          } 
+                        });
+                       
+                        
+              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+             
+              
+          });
+     
+         function selectcolourfabric()
+         {
 
-        <script>  
-          
-            $(".addmore").on('click',function(){
-              var i=$('table tr').length;
-             
-              html = '<tr>';           
-              html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
-              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
-              html += '<input type="hidden" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
-              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
-              html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
-              html += '<td><input type="text" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
-              html += '<td><input type="text" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="text" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
-              html += '<td><input type="text" name="taxper[]" id="taxper_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
-              html += '<input type="number" name="taxamt[]" id="taxamt_'+i+'"  class="form-control totalLinetax" readonly>';
-              html += ' </td>';
-              html += '<td><input type="number" readonly name="amount[]" id="amount_'+i+'" class="form-control totalLinePrice"   ></td>';
-              html += '</tr>';
-             
-              updatecolour('selcolour'+i);
-              updatefabric('selfabric'+i);
-              
-              $('#myTable tr:last').after(html);
-             // $('table').append(html);
-              
-              setrowvalue();
-             
-               i++;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-function updaterack(para){
-  para='#'+para;
-  var _token = $('input[name="_token"]').val();
-    $.ajax({
-              url:"{{ route('knittedfabric.fetchrack') }}",
+          var _token = $('input[name="_token"]').val();
+          var styleid=$('#style_code').val();
+          $("#fabricid1").html("");$("#fabricid2").html("");$("#fabricid3").html("");$("#fabricid4").html("");$("#fabricid5").html("");
+          $("#colourid1").html('');$("#colourid2").html('');$("#colourid3").html('');$("#colourid4").html('');$("#colourid5").html('');
+          $("#weightid1").html('');$("#weightid2").html(''); $("#weightid3").html(''); $("#weightid4").html(''); $("#weightid5").html('');
+          $.ajax({
+              url:"{{ route('cuttingproduction.fetchcolourfabric') }}",
               method:"POST", 
-              data:{_token:_token},  
-              success: function(response){                   
-              var len = response.length;
-              $(para).append(response);
-              $(para).select2();
-              },//sucess
-              error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
+              data:{_token:_token,styleid:styleid},              
+              success: function(response){ 
+                $.each(response, function (index, value) {
+                          total=0;
+                           
+                           $("#fabricid1").html(this.fabricname1);
+                           $("#colourid1").html(this.colourname1);
+                           $("#weightid1").html(this.weight1);
+
+                           $("#fabricid2").html(this.fabricname2);
+                           $("#colourid2").html(this.colourname2);
+                           $("#weightid2").html(this.weight2);
+
+                           $("#fabricid3").html(this.fabricname3);
+                           $("#colourid3").html(this.colourname3);
+                           $("#weightid3").html(this.weight3);
+
+                           $("#fabricid4").html(this.fabricname4);
+                           $("#colourid4").html(this.colourname4);
+                           $("#weightid4").html(this.weight4);
+
+                           $("#fabricid5").html(this.fabricname5);
+                           $("#colourid5").html(this.colourname5);
+                           $("#weightid5").html(this.weight5);
+                      }) 
+                            
                    
-                    headers: {
+              }, 
+             headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     } 
                   });
                  
-            }               
-            
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-              function updatecolour(para){
-                para='#'+para;
-                var _token = $('input[name="_token"]').val();
-                       ///////////////////////////////////
-                       $.ajax({
-                       url:"{{ route('knittedfabric.fetchcolour') }}",
-                       method:"POST", 
-                       data:{_token:_token},  
-                       success: function(response){                   
-                        var len = response.length;
-                        $(para).append(response);
-                        $(para).select2();
-                       },//sucess
-                       error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
-                   
-                    headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    } 
-                  });
-            }               
-            
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-function updatefabric(para){
-                para='#'+para;
-                var _token = $('input[name="_token"]').val();
-                       ///////////////////////////////////
-                       $.ajax({
-                       url:"{{ route('knittedfabric.fetchfabric') }}",
-                       method:"POST", 
-                       data:{_token:_token},  
-                       success: function(response){                   
-                        var len = response.length;
-                        $(para).append(response);
-                        $(para).select2();
-                       },//sucess
-                       error: function (jqXHR, exception) {
-                    var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                     alert(msg);
-                   },
-                   
-                    headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    } 
-                  });
-            }               
-            });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
-            //to check all checkboxes
-            $(document).on('change','#check_all',function(){	
-              $('input[class=case]:checkbox').prop("checked", $(this).is(':checked'));
-              setrowvalue();
-            });
-            
-            //deletes the selected table rows
-            $(".delete").on('click', function() {
-              $('.case:checkbox:checked').parents("tr").remove();
-              $('#check_all').prop("checked", false); 
-              calculateTotal();
-              setrowvalue();
-            });
-            
-             
-            function setrowvalue()
-            {
-              
-              var names = document.getElementsByName('sno[]');
-              for (var j = 0, iLen = names.length; j < iLen; j++) {
-	               names[j].value=j+1;
-                }
-            }
-            $(document).on('change keyup blur','.changesNo',function(){
-              var perrateamount=0.0;
-              var subtotal = 0; var total = 0; 
+                        
+      }   
+</script>        
+<script>  
+$(document).on('change keyup blur','.totalLinePrice',function(){
+  calculateTotal();
+ 
+ });
+ $(document).ready(function() {
+  calculateTotal();
+});           
+ 
+function calculateTotal(){
+    var subTotal = 0 ; 
+    var size1= 0,size2= 0,size3= 0,size4= 0,size5= 0,size6= 0,size7= 0,size8= 0; 
+ 
 
-              id_arr = $(this).attr('id');
-              id = id_arr.split("_");
-              quantity = $('#qty_'+id[1]).val();
-              price = $('#rate_'+id[1]).val();
-              $('#amount_'+id[1]).val(0);
-              $('#perrateamount_'+id[1]).val(0);
-              
-
-              taxper = $('#taxper_'+id[1]).val();
-              taxamt = $('#taxamt_'+id[1]).val();
-              
-              if(quantity!='' && price !='') 
-              {
-                perrateamount= (parseFloat(price)*parseFloat(quantity)).toFixed(2);
-               // console.log(perrateamount);
-               // perrateamount = parseFloat(perrateamount).toFixed(2);
-                $('#perrateamount_'+id[1]).val(perrateamount);
-              }
-              if(taxper != '' && typeof(taxper) != "undefined" )
-              {
-                taxamt = perrateamount * ( parseFloat(taxper) /100 );
-                $('#taxamt_'+id[1]).val(taxamt.toFixed(2)); //$('#taxAmount').val(taxamt.toFixed(2));
-                total=(parseFloat(perrateamount)+parseFloat(taxamt)).toFixed(2); 
-                $('#amount_'+id[1]).val(total); 
-              }
-              else
-              {
-                $('#taxamt_'+id[1]).val(0);
-                total = perrateamount;
-                $('#amount_'+id[1]).val(total);
-              } 
-              calculateTotal();
-            });
-            
-            $(document).on('change keyup blur','#tax',function(){
-              calculateTotal();
-            });
-            $(document).on('change keyup blur','#packingtaxper',function(){
-              calculateTotal();
-            });
-            $(document).on('change keyup blur','#packingamount',function(){
-              calculateTotal();
-            });
-            //total price calculation 
-            function calculateTotal(){
-              subTotal = 0 ; total = 0; taxamtt = 0; 
-              perrateamount=0;
-
-              $('.totalLinePrice').each(function(){
-                if($(this).val() != '' ) subTotal += parseFloat( $(this).val() );
-              });
-
-              //$('#txtTotal').val( subTotal.toFixed(2));
-              
-              $('.totalSubTotal').each(function(){
-                if($(this).val() != '' ) perrateamount += parseFloat( $(this).val() );
-              });
-              $('#subTotal').val( perrateamount.toFixed(2));              
-
-              taxamtt=0;   
-              $('.totalLinetax').each(function(){
-                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
-              });
-              $('#taxAmount').val( taxamtt.toFixed(2));  
-               /////////////////////////////////////////////////////////////
-            
-              packingamount= $('#packingamount').val();
-              packingtaxper = $('#packingtaxper').val();
-              packingtaxamount = $('#packingtaxamount').val();
-              if(packingtaxper != '' && typeof(packingtaxper) != "undefined" )
-              {
-                packingtaxamount = packingamount * ( parseFloat(packingtaxper) /100 );
-                $('#packingtaxamount').val(packingtaxamount.toFixed(2)); 
-                var n1 = parseFloat($('#packingamount').val());
-                var n2 = parseFloat($('#packingtaxamount').val()); 
-                var n3=n1+n2;
-                n3=n3.toFixed(0);
-                $('#totalpackingamount').val(n3); 
-              }
-              else
-              {
-                $('#packingtaxamount').val(0); 
-                $('#totalpackingamount').val(0);              
-              }
-              
-              totalpackingamount = $('#totalpackingamount').val();
-              subTotal +=parseFloat(totalpackingamount);
-              console.log(subTotal);
-              subTotal=subTotal.toFixed(0);
-              $('#txtTotal').val(subTotal);
-              //////////////////////////////////////////////////////////// 
-                 //ROUND OFF 
-                 var round =Math.round(subTotal); 
-                round =subTotal-round; 
-                round =parseFloat(round).toFixed(2);
-                $('#taxroundoff').val(round);  //$('#roundoff_'+id[1]).val(round); 
-                //ROUND OFF    
-
-         
-              
-              
-
-              taxamtt=0;
-              $('.totalWeight').each(function(){
-                if($(this).val() != '' ) taxamtt += parseFloat( $(this).val() );
-              });
-              $('#total_weight').val( taxamtt.toFixed(2));   
-            }
-             
-            
-            //It restrict the non-numbers
-            var specialKeys = new Array();
-            specialKeys.push(8,46); //Backspace
-            function IsNumeric(e) {
-                var keyCode = e.which ? e.which : e.keyCode;
-            //    console.log( keyCode );
+    size1 = parseFloat($('#size1').val());
+    size2 = parseFloat($('#size2').val());
+    size3= parseFloat($('#size3').val());size4 = parseFloat($('#size4').val());
+    size5 = parseFloat($('#size5').val());size6 = parseFloat($('#size6').val());
+    size7= parseFloat($('#size7').val());size8 = parseFloat($('#size8').val());
+    if (size1!==0) {}
+    subTotal=size1+size2+size3+size4+size5+size6+size7+size8;
+    subTotal=subTotal.toFixed(0);
+     $('#total_pcs').val(subTotal);    
+     console.log(subTotal)        
+            } 
+var specialKeys = new Array();
+specialKeys.push(8,46);  
+function IsNumeric(e) {
+                var keyCode = e.which ? e.which : e.keyCode;            
                 var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
                 return ret;
             }
             
  </script>
-<script> 
-  $(document).ready(function() { $('.jssingle').select2();});
-</script>
+ <script>
+  $(document).ready(function() { 
+     $('.jssingle').select2(); 
+ });
+ </script>
                                     
 @endsection

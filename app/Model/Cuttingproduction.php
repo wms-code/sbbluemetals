@@ -13,8 +13,9 @@ class Cuttingproduction extends Model
     {
       return DB::table('cuttingproduction1')
               ->leftJoin('accounts', 'cuttingproduction1.emp_code', '=', 'accounts.id')
-              ->select('productionnumber','production_date','total_pcs',
-               'name','remarks')  
+              ->leftJoin('style', 'style.id', '=', 'cuttingproduction1.style_code')
+              ->select('productionnumber','production_date','total_pcs','accounts.name as accountsname',
+               'remarks','style.name as stylename')  
               ->orderBy('productionnumber', 'asc')
               ->orderBy('production_date', 'asc')
               ->paginate(10);    
@@ -26,6 +27,14 @@ class Cuttingproduction extends Model
         $value=DB::table('accounts') 
          ->select('id','name') 
          ->whereIn('id', array(30,31,32))
+         ->orderBy('name')
+         ->get();
+         return $value;
+     }
+     protected function getstyle()
+     {
+        $value=DB::table('style') 
+         ->select('id','name')  
          ->orderBy('name')
          ->get();
          return $value;

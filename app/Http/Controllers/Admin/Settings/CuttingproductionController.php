@@ -20,7 +20,9 @@ class CuttingproductionController extends Controller
     }
     public function index()
     {
+
         $rsdepartmentData['data'] = Cuttingproduction::getall();
+
         return view('cuttingproduction.list',compact(['rsdepartmentData']));
     }
     private  function getmax()
@@ -87,7 +89,22 @@ class CuttingproductionController extends Controller
                                     'style_code'=>$request->style_code,
                                     'total_pcs'=>$request->total_pcs,                                   
                                     'remarks'=>$request->remarks ]);
-
+        
+                                    
+        Cuttingproductiondetail::create(['productionnumber'=> $productionnumber ,
+                                    'emp_code'=>$request->emp_code,
+                                    'indx'=>0,
+                                    'production_date'=>$request->program_date, 
+                                    'style_code'=>$request->style_code,
+                                    'size1'=>$request->indxsize1,
+                                    'size2'=>$request->indxsize2,
+                                    'size3'=>$request->indxsize3,
+                                    'size4'=>$request->indxsize4,
+                                    'size5'=>$request->indxsize5,
+                                    'size6'=>$request->indxsize6,
+                                    'size7'=>$request->indxsize7,
+                                    'size8'=>$request->indxsize8,
+                                    'totalpcs'=>$request->total_pcs]);                              
         Cuttingproductiondetail::create(['productionnumber'=> $productionnumber ,
                                     'emp_code'=>$request->emp_code,
                                     'indx'=>1,
@@ -120,12 +137,8 @@ class CuttingproductionController extends Controller
        return view('cuttingproduction.create',compact(['rsdepartmentData']));
        
     }
-    public function editfrn($id)
-    {
-         
-    }
-
-    public function savefrn(Request $request)
+    
+    public function saveproduction(Request $request)
     {
         $i=0;$output='';
         return   $request->frnnumber;
@@ -144,41 +157,36 @@ class CuttingproductionController extends Controller
     }
 
   
-    public function edit(KnittedFabInward $knittedFabInward,$id)
+    public function edit($id)
     {
          
-        $rsdepartmentData['data'] = KnittedFabInward::getsupplier();
-
-        $rsdepartmentData['rsdetails'] = DB::table('knitted_fab_details')  
-              ->select( 'fabric_id as fabricsid','colour_id as coloursid',
-                         'hsn',
-                         'indx','particulars','rolls','weight','rate',
-                         'amount','perrateamount','taxper','taxamt','roundoff',
-                         'inwardnumber','inward_number')
-               ->orderBy('indx', 'asc')              
-               ->where('inwardnumber',$id)
-               ->get(); 
-
-        $rsdepartmentData['rsfabrics'] = DB::table('knitted_fab_inwards')        
-               ->join('accounts', 'accounts.id', '=', 'knitted_fab_inwards.party_code')
-               ->select('accounts.name as acname','inward_number',
-                          'reference','remarks','sub_total','net_value','total_weight',
-                          'packingtaxamount','packingtaxper','totalpackingamount','packingamount',
-                         'round_off','inward_date','inwarddate','party_code','tax_amount',
-                          'inwardnumber')
-                ->orderBy('knitted_fab_inwards.inward_date', 'asc')              
-                ->where('inwardnumber',$id)
-                ->get();       
-       
-        $rsfabrics = DB::table('fabrics')        
-                ->leftJoin('fabricgroup', 'fabrics.fabricgroup_code', '=', 'fabricgroup.id')
-                ->select('fabrics.id','remarks','fabrics.name as fabricname', 'fabricgroup.name as fabricgroupname')
-                ->orderBy('fabricgroup.name', 'asc')
-                ->orderBy('fabrics.name', 'asc')
-                ->get(); 
+        $rsstaff= Cuttingproduction::getstaff();
+        $rsstyle = Cuttingproduction::getstyle();
         
-        $rscolour = Colour::getall(); 
-       return view('knitted.edit',compact(['rsdepartmentData','rsfabrics','rscolour']));
+        $rsdepartmentData['rsproduction'] = DB::table('Cuttingproduction1')    
+        ->select('production_number','productionnumber',
+                   'remarks','style_code','total_pcs', 
+                  'emp_code','production_date')
+         ->orderBy('Cuttingproduction1.production_date', 'asc')              
+         ->where('productionnumber',$id)
+         ->get();  
+
+        $rsdepartmentData['rsdetail'] = DB::table('Cuttingproduction2')  
+              ->select( 'size1','size2','size3','size4',
+                         'size5','size6','size7','size8', 
+                         'indx')
+                ->where('indx',1)                
+               ->where('productionnumber',$id)
+               ->get(); 
+        
+        $rsdepartmentData['rsindxdetail'] = DB::table('Cuttingproduction2')  
+               ->select( 'size1','size2','size3','size4',
+                          'size5','size6','size7','size8', 
+                          'indx') 
+                ->where('indx',0)          
+                ->where('productionnumber',$id)
+                ->get();   
+       return view('cuttingproduction.edit',compact(['rsdepartmentData','rsstaff','rsstyle']));
     }
 
     
@@ -207,10 +215,7 @@ class CuttingproductionController extends Controller
         return $rsdepartmentData;
    }
    public function fetchcolourfabric(Request $request)
-   {
-        $colour_name1=0; $colour_name2=0; $colour_name3=0; $colour_name4=0; $colour_name5=0;
-        $fabric_name1=''; $fabric_name2=0; $fabric_name3=0; $fabric_name4=0; $fabric_name5=0;
-
+   { 
        $styleid= $request->get('styleid');
         if($request->get('styleid'))
          { 
@@ -379,87 +384,64 @@ class CuttingproductionController extends Controller
      
    
     
-    public function update(Request $request, KnittedFabInward $knittedFabInward)
+    public function update(Request $request)
     {  
-        KnittedFabInward::where('inwardnumber',$request->inwardnumber)->update([ 
-        'party_code'=>$request->pty_code,
-        'inward_date'=>$request->inward_date,
-        'inwarddate'=>$request->inwarddate,
-        'reference'=>$request->reference,
-        'sub_total'=>$request->sub_total,
-        'total_weight'=>$request->total_weight,
-        'tax_amount'=>$request->tax_amount,
-        'packingamount'=>$request->packingamount,
-        'packingtaxamount'=>$request->packingtaxamount,
-        'packingtaxper'=>$request->packingtaxper,
-        'totalpackingamount'=>$request->totalpackingamount,
-        'round_off'=>$request->round_off,
-        'net_value'=>$request->net_value,
-        'remarks'=>$request->remarks ]);
-       
-        DB::table('knitted_fab_details')->where('inwardnumber',$request->inwardnumber)->delete();
+        Cuttingproduction::where('productionnumber',$request->productionnumber)->update([ 
+        'emp_code'=>$request->emp_code,
+        'style_code'=>$request->style_code,
+        'production_date'=>$request->program_date,  
+        'total_pcs'=>$request->total_pcs,
+        'remarks'=>$request->remarks ]); 
+        
+        DB::table('Cuttingproduction2')->where('productionnumber',$request->productionnumber)->delete();
 
-        $i=0;
-        foreach($request->selcolour as $arrcolour)
-            {
-                Knittedfabdetails::create(['knitted_fab_inward_number'=>$request->inward_number,
-                                        'inward_date'=>$request->inward_date,
-                                        'inwardnumber'=>$request->inwardnumber,
-                                        'party_code'=>$request->pty_code,
-                                        'indx'=>$i+1,
-                                        'colour_id'=>$arrcolour,
-                                        'fabric_id'=>$request->selfabric[$i],
-                                        'particulars'=>$request->particulars[$i],
-                                        'hsn'=>$request->hsn[$i],
-                                        'rolls'=>$request->rolls[$i],
-                                        'weight'=>$request->qty[$i],
-                                        'delivery_weight'=>$request->qty[$i],
-                                        'rate'=>$request->rate[$i],
-                                        'amount'=>$request->amount[$i],
-                                        'perrateamount'=>$request->perrateamount[$i],
-                                        'taxper'=>$request->taxper[$i],
-                                        'taxamt'=>$request->taxamt[$i]  ]);
-            $i=$i+1;
-            }               
-//         $i=0;
-//         foreach($request->selcolour as $arrcolour)
-//             {
-//  Knittedfabdetails::where(
-//      ['inwardnumber'=>$request->inwardnumber,'indx'=>$i+1])->update(
-//          ['inward_date'=>$request->inward_date,
-//                            'party_code'=>$request->pty_code,
-//                                         'colour_id'=>$arrcolour,
-//                                         'fabric_id'=>$request->selfabric[$i],
-//                                         'particulars'=>$request->particulars[$i],
-//                                         'hsn'=>$request->hsn[$i],
-//                                         'rolls'=>$request->rolls[$i],
-//                                         'weight'=>$request->qty[$i],
-//                                         'rate'=>$request->rate[$i],
-//                                         'amount'=>$request->amount[$i],
-//                                         'perrateamount'=>$request->perrateamount[$i],
-//                                         'taxper'=>$request->taxper[$i],
-//                                         'taxamt'=>$request->taxamt[$i],
-//                                         'roundoff'=>$request->roundoff[$i] ]);
-//             $i=$i+1;
-//             }             
+        Cuttingproductiondetail::create(['productionnumber'=> $request->productionnumber,
+                                    'emp_code'=>$request->emp_code,
+                                    'indx'=>0,
+                                    'production_date'=>$request->program_date, 
+                                    'style_code'=>$request->style_code,
+                                    'size1'=>$request->indxsize1,
+                                    'size2'=>$request->indxsize2,
+                                    'size3'=>$request->indxsize3,
+                                    'size4'=>$request->indxsize4,
+                                    'size5'=>$request->indxsize5,
+                                    'size6'=>$request->indxsize6,
+                                    'size7'=>$request->indxsize7,
+                                    'size8'=>$request->indxsize8,
+                                    'totalpcs'=>$request->total_pcs]);  
+
+        Cuttingproductiondetail::create(['productionnumber'=> $request->productionnumber,
+                                    'emp_code'=>$request->emp_code,
+                                    'indx'=>1,
+                                    'production_date'=>$request->program_date, 
+                                    'style_code'=>$request->style_code,
+                                    'size1'=>$request->size1,
+                                    'size2'=>$request->size2,
+                                    'size3'=>$request->size3,
+                                    'size4'=>$request->size4,
+                                    'size5'=>$request->size5,
+                                    'size6'=>$request->size6,
+                                    'size7'=>$request->size7,
+                                    'size8'=>$request->size8,
+                                    'totalpcs'=>$request->total_pcs]);   
 
         $msg = [
-            'message' => 'Knitted Fabric Entry Updated successfully!' ];
-        return  redirect('admin/knittedfabric')->with($msg);
+            'message' => 'Cutting Program Entry Updated successfully!' ];
+        return  redirect('admin/cuttingproduction')->with($msg);
     }
 
   
     public function destroy($id)
     {
        
-       DB::table('knitted_fab_inwards')->where('inwardnumber',$id)->delete();
-       DB::table('knitted_fab_details')->where('inwardnumber',$id)->delete();
+       DB::table('cuttingproduction1')->where('productionnumber',$id)->delete();
+       DB::table('cuttingproduction2')->where('productionnumber',$id)->delete();
        
-        $msg =['message' => 'Inward Fabric Deleted successfully!',
+        $msg =['message' => 'Cutting Program Entry Deleted successfully!',
        'type' => 'warning'];
 
       
-        return  redirect('admin/knittedfabric')->with($msg); 
+        return  redirect('admin/cuttingproduction')->with($msg); 
     }
     
 }

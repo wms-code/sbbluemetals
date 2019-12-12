@@ -35,7 +35,9 @@
                                   </div>
                                   <label class="control-label text-left col-md-2">Program Date:.</label>
                                    <div class="col-md-2">
-                                      <input type="date" name="program_date" maxlength="12" class="form-control">
+                                      <input type="date" 
+                                      value = "{{ date('Y-m-d')}}"
+                                      name="program_date" maxlength="12" class="form-control">
                                     </div>
                             </div>
                             
@@ -115,14 +117,14 @@
                                     <table  border="1" class="table">
                                           <thead>
                                             <tr> 
-                                              <th  width="8%">  <div id="styleid1" class="form-control">Size 1</div></th>
-                                              <th  width="8%">  <div id="styleid2" class="form-control">Size 2</div></th>
-                                              <th  width="8%">  <div id="styleid3" class="form-control">Size 3</div></th>
-                                              <th  width="8%">  <div id="styleid4" class="form-control">Size 4</div></th>
-                                              <th  width="8%">  <div id="styleid5" class="form-control">Size 5</div></th>
-                                              <th  width="8%">  <div id="styleid6" class="form-control">Size 6</div></th>
-                                              <th  width="8%">  <div id="styleid7" class="form-control">Size 7</div></th>
-                                              <th  width="8%">  <div id="styleid8" class="form-control">Size 8</div></th> 
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize1" id="indxsize1" value="Size 1"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize2" id="indxsize2" value="Size 2"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize3" id="indxsize3" value="Size 3"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize4" id="indxsize4" value="Size 4"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize5" id="indxsize5" value="Size 5"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize6" id="indxsize6" value="Size 6"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize7" id="indxsize7" value="Size 7"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize8" id="indxsize8" value="Size 8"></th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -203,14 +205,14 @@
                           total=0;
                           size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
                           size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
-                          $("#styleid1").html(size1);
-                          $("#styleid2").html(size2);
-                          $("#styleid3").html(size3);
-                          $("#styleid4").html(size4);
-                          $("#styleid5").html(size5);
-                          $("#styleid6").html(size6);
-                          $("#styleid7").html(size7);
-                          $("#styleid8").html(size8);
+                          $("#indxsize1").val(size1);
+                          $("#indxsize2").val(size2);
+                          $("#indxsize3").val(size3);
+                          $("#indxsize4").val(size4);
+                          $("#indxsize5").val(size5);
+                          $("#indxsize6").val(size6);
+                          $("#indxsize7").val(size7);
+                          $("#indxsize8").val(size8);
                         
                       })
                     

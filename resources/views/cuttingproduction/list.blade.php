@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Cutting Program ')
+@section('pagetitle','Cutting Program - List')
     
 
 
@@ -31,7 +31,8 @@
                                                 <th>Supervisor</th>
                                                 <th>Style</th>
                                                 <th>Total Pcs</th>                                           
-                                                <th>Remarks</th>                                               
+                                                <th>Remarks</th>   
+                                                <th>Production</th>                                               
                                                 <th class="text-nowrap">Edit</th>
                                             </tr>
                                         </thead>
@@ -41,18 +42,24 @@
                                                 
                                                 <td>{{$d->productionnumber}}</td>
                                                 <td>{{$d->production_date}}</td>
-                                                <td>{{$d->name}}</td>
-                                                <td>{{  number_format((float)$d->total_pcs, 2, '.', '') }}</td>
+                                                <td>{{$d->accountsname}}</td>
+                                                <td>{{$d->stylename}}</td>
+                                                <td>{{  number_format((float)$d->total_pcs, 0, '.', '') }}</td>
                                                 <td>{{$d->remarks}}</td>
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('admin/knittedfabric') }}/{{$d->productionnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                
-                                                   
+                                                        <button type="button" 
+                                                        data-id="{{$d->productionnumber}}"  
+                                                        data-toggle="modal" data-target="#edit-modal"
+                                                        class="btn btn-success" id="edit-item">Update Production 
+                                                    </button> 
+                                                </td>    
+                                                <td class="text-nowrap">
+                                                    <a href="{{ url('admin/cuttingproduction') }}/{{$d->productionnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
-                                                            <form action="{{ url('admin/knittedfabric') }}/{{$d->productionnumber}}" method="post">
+                                                    <form action="{{ url('admin/cuttingproduction') }}/{{$d->productionnumber}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                            </form>
+                                                    </form>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -72,7 +79,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="edit-modal-label">Edit Data</h5>
+              <h5 class="modal-title" id="edit-modal-label">Update Cutting Production</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -83,8 +90,9 @@
                   <div class="card-body">
                     
                         <div class="form-group">
-                                <label for="exampleInputEmail1">Entry No</label> 
-                                <input type="text" class="form-control" id="inw_no" name="inw_no" placeholder="Inward Number" >
+                                <label for="exampleInputEmail1">Production No</label> 
+                                <input type="text" class="form-control" id="prodno" name="prodno"
+                                 placeholder="Production Number" >
                         </div>
                     <div id="welcome">
 
@@ -108,7 +116,7 @@
       {
          
           
-            var id=$('#inw_no').val();	
+            var id=$('#prodno').val();	
             
            // data:{_token:_token,id:id},  
             var sno = $('input[name="sno[]"]').map(function(){ 
