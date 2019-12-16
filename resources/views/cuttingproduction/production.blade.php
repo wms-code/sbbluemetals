@@ -5,37 +5,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Cutting Program - Edit ')
-  
+@section('pagetitle','Cutting Program ')
+ <style>
+   .stock .select2-results__option {
+  padding: 0px 4px;
+}
+</style>
 @section('content')               
   <div class="row">
             <div class="col-md-12 col-md-offset-2 ">
                 <div class="card card-outline-info">
-                    @foreach( $rsdepartmentData['rsproduction'] as $production)
-                                   
-                        @endforeach
+                   
                     <div class="card-body">
-                       
                         <form action="{{ url('admin/cuttingproduction') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
-                            @csrf  @method('put')
+                            @csrf
+                            @method('post')
                             <div  style="margin-left: 0px;" class="form-group row">
                                 <label class="control-label text-left col-md-2"> Program No:.</label>
                                   <div class="col-md-3">
                                         <input type="text" name="production_number" 
-                                        value ={{ $production->production_number }}
+                                        value ={{ $rsdepartmentData['production_number'] }}
                                         readonly class="form-control">
                                       
                                         <input type="text" name="productionnumber" 
-                                        value ={{ $production->productionnumber }}
+                                        value ={{ $rsdepartmentData['productionnumber'] }}
                                         readonly  class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Program Date:.</label>
                                    <div class="col-md-2">
-                                      <input type="date" name="program_date"
-                                      value ={{ $production->production_date }}
-                                       maxlength="12" class="form-control">
+                                      <input type="date" 
+                                      value = "{{ date('Y-m-d')}}"
+                                      name="program_date" maxlength="12" class="form-control">
                                     </div>
                             </div>
                             
@@ -44,10 +46,8 @@
                                  <div class="col-md-3">
                                     <select class="form-control jssingle" id='emp_code' name='emp_code'>
                                         <option value='0'>-- Select Supervisor --</option>
-                                        @foreach($rsstaff as $department)
-                                          <option value='{{ $department->id }}'
-                                              {{ $department->id== $production->emp_code ? 'selected' : ''}}> 
-                                            {{ $department->name }}</option>
+                                        @foreach($rsdepartmentData['staff'] as $department)
+                                          <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                         @endforeach
                                      </select>
                                   </div>
@@ -60,52 +60,89 @@
                                   <div class="col-md-3"> 
                                   <select class="form-control jssingle" id='style_code' name='style_code'>
                                       <option value='0'>-- Select Style --</option>
-                                      @foreach($rsstyle as $department)
-                                        <option value='{{ $department->id }}'
-                                            {{ $department->id== $production->style_code ? 'selected' : ''}}> 
-                                          {{ $department->name }}</option>
+                                      @foreach($rsdepartmentData['style'] as $department)
+                                        <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                       @endforeach
                                    </select>
                                 </div>
                                 
                           </div>
-                          @foreach( $rsdepartmentData['rsdetail'] as $productiondetails)
-                                   
-                          @endforeach
-                          @foreach( $rsdepartmentData['rsindxdetail'] as $prd)
-                                   
-                          @endforeach
-                          
-                                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                           
+                          <div style="margin-left: 0px;" class="form-group row">
+                          <label class="control-label text-left col-md-2"> Fabric & Colour </label> 
+                                  <div class="col-md-6">
+                                    <table  border="1" class="table">
+                                      <thead>
+                                        <tr> 
+                                          <th width="4%">S.No</th>
+                                          <th width="40%">Colour</th>
+                                          <th width="40%">Fabirc</th>
+                                          <th width="30%">Weight</th> 
+                                        </tr>  
+                                      </thead>
+                                        <tr>   
+                                        <td>1</td>
+                                        <td><div id="fabricid1" class="form-control"></div></td>
+                                        <td><div id="colourid1" class="form-control"></div></td>
+                                        <td><div id="weightid1" class="form-control"></div></td>
+                                        </tr>
+                                        <tr>   
+                                          <td>2</td>
+                                          <td><div id="fabricid2" class="form-control"></div></td>
+                                          <td><div id="colourid2" class="form-control"></div></td>
+                                          <td><div id="weightid2" class="form-control"></div></td>
+                                          </tr>
+                                          <tr>   
+                                            <td>3</td>
+                                            <td><div id="fabricid3" class="form-control"></div></td>
+                                            <td><div id="colourid3" class="form-control"></div></td>
+                                            <td><div id="weightid3" class="form-control"></div></td>
+                                            </tr>
+                                            <tr>   
+                                              <td>4</td>
+                                              <td><div id="fabricid4" class="form-control"></div></td>
+                                              <td><div id="colourid4" class="form-control"></div></td>
+                                              <td><div id="weightid4" class="form-control"></div></td>
+                                              </tr>
+                                              <tr>   
+                                                <td>5</td>
+                                                <td><div id="fabricid5" class="form-control"></div></td>
+                                                <td><div id="colourid5" class="form-control"></div></td>
+                                                <td><div id="weightid5" class="form-control"></div></td>
+                                                </tr>
+                                      </table>
+                                  </div>     
+                                </div>     
+                                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                                     <table  border="1" class="table">
                                           <thead>
                                             <tr> 
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize1" id="indxsize1" value={{$prd->size1}} ></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize2" id="indxsize2" value={{$prd->size2}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize3" id="indxsize3" value={{$prd->size3}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize4" id="indxsize4" value={{$prd->size4}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize5" id="indxsize5" value={{$prd->size5}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize6" id="indxsize6" value={{$prd->size6}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize7" id="indxsize7" value={{$prd->size7}}></th>
-                                                <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize8" id="indxsize8" value={{$prd->size8}}></th>
-                                              </tr>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize1" id="indxsize1" value="Size 1"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize2" id="indxsize2" value="Size 2"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize3" id="indxsize3" value="Size 3"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize4" id="indxsize4" value="Size 4"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize5" id="indxsize5" value="Size 5"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize6" id="indxsize6" value="Size 6"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize7" id="indxsize7" value="Size 7"></th>
+                                              <th  width="2%">  <input type="text" class="form-control"  readonly name="indxsize8" id="indxsize8" value="Size 8"></th>
+                                            </tr>
                                           </thead>
                                           <tbody>
                                               <tr> 
-                                                 <td>  <input type="number"    name="size1" id="size1"  value={{$productiondetails->size1}} class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size2" id="size2"  value={{$productiondetails->size2}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size3" id="size3"  value={{$productiondetails->size3}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size4" id="size4"  value={{$productiondetails->size4}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size5" id="size5"  value={{$productiondetails->size5}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size6" id="size6"  value={{$productiondetails->size6}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size7" id="size7"  value={{$productiondetails->size7}}  class="form-control totalLinePrice"></td>
-                                                 <td>  <input type="number"    name="size8" id="size8"  value={{$productiondetails->size8}} class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size1" id="size1"  value="0" class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size2" id="size2"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size3" id="size3"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size4" id="size4"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size5" id="size5"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size6" id="size6"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size7" id="size7"  value="0"  class="form-control totalLinePrice"></td>
+                                                 <td>  <input type="number"    name="size8" id="size8"  value="0"  class="form-control totalLinePrice"></td>
                                                 
                                                 </tr>
                                                </tbody>
                                            
                                      </table>   
-                                    
+                        
                          <div style="margin-left: 0px;" class="form-group row">
                             <label class="control-label text-left col-md-3"> Total Pcs:.</label>
                               <div class="col-md-3">
@@ -118,7 +155,7 @@
                        <div style="margin-left: 0px;" class="form-group row">                                  
                             <label class="control-label text-left col-md-3"> Remarks</label>
                             <div class="col-md-5">
-                                  <input type="text" name="remarks"   value ="{{ $production->remarks }}"  maxlength="250" class="form-control">
+                                  <input type="text" name="remarks" maxlength="250" class="form-control">
                             </div>
                         </div>
 
@@ -155,6 +192,7 @@
                  
               var total=0; 
               var styleid=$('#style_code').val(); 
+              selectcolourfabric();
               var _token = $('input[name="_token"]').val(); 
               var size1,size2,size3,size4,size5,size6,size7,size8;
               var weight_0,weight_1,weight_2,weight_3,weight_4,weight_5,weight_6,weight_7;
@@ -167,14 +205,14 @@
                           total=0;
                           size1=(this.size1);size2=(this.size2);size3=(this.size3);size4=(this.size4);
                           size5=(this.size5);size6=(this.size6);size7=(this.size7);size8=(this.size8);
-                          $("#styleid1").html(size1);
-                          $("#styleid2").html(size2);
-                          $("#styleid3").html(size3);
-                          $("#styleid4").html(size4);
-                          $("#styleid5").html(size5);
-                          $("#styleid6").html(size6);
-                          $("#styleid7").html(size7);
-                          $("#styleid8").html(size8);
+                          $("#indxsize1").val(size1);
+                          $("#indxsize2").val(size2);
+                          $("#indxsize3").val(size3);
+                          $("#indxsize4").val(size4);
+                          $("#indxsize5").val(size5);
+                          $("#indxsize6").val(size6);
+                          $("#indxsize7").val(size7);
+                          $("#indxsize8").val(size8);
                         
                       })
                     
@@ -262,9 +300,7 @@ $(document).on('change keyup blur','.totalLinePrice',function(){
   calculateTotal();
  
  });
- $(document).ready(function() {
-  calculateTotal();
-});           
+            
  
 function calculateTotal(){
     var subTotal = 0 ; 

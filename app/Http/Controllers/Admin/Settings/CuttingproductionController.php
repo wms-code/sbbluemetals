@@ -273,14 +273,52 @@ class CuttingproductionController extends Controller
                      'fabric_code5','colour_code5',
                      )
             ->where('id',$styleid)
-            ->get(); 
-
-           
-          
+            ->get();  
          } 
-        
    }
 
+   public function fetchproduction(Request $request)
+   {
+        $str='';
+
+        $indxvalue= DB::table('Cuttingproduction2')
+                  ->select('size1','size2','size3','size4','size5','size6','size7','size8')
+                  ->where('productionnumber',$request->id)
+                  ->where('indx',0)
+                  ->get(); 
+
+        $retvalue= DB::table('Cuttingproduction2')
+                  ->select('size1','size2','size3','size4','size5','size6','size7','size8')
+                  ->where('productionnumber',$request->id)
+                  ->where('indx',1)
+                  ->get();  
+        foreach($indxvalue  as $rsretvalue) 
+                  {
+                      $indxsize1=$rsretvalue->size1;
+                      $indxsize2=$rsretvalue->size2;
+                      $indxsize3=$rsretvalue->size3;
+                      $indxsize4=$rsretvalue->size4;
+                      $indxsize5=$rsretvalue->size5;
+                      $indxsize6=$rsretvalue->size6;            
+                      $indxsize7=$rsretvalue->size7;
+                      $indxsize8=$rsretvalue->size8;
+                  }           
+       foreach($retvalue  as $rsretvalue) 
+        {
+            $size1=$rsretvalue->size1;
+            $size2=$rsretvalue->size2;
+            $size3=$rsretvalue->size3;
+            $size4=$rsretvalue->size4;
+            $size5=$rsretvalue->size5;
+            $size6=$rsretvalue->size6;            
+            $size7=$rsretvalue->size7;
+            $size8=$rsretvalue->size8;
+        }
+        $rowno=1;
+        if ($size1 >0) {  $str.="<tr><td>".$rowno."</td>"."<td>".$indxsize1."</td>"."<td>".$size1."</td></tr>";}
+        
+        return  $str;
+   }
     public function fetcssh(Request $request)
     {
      if($request->get('query'))
@@ -369,20 +407,12 @@ class CuttingproductionController extends Controller
         else
             return ['name'=>'','sortname'=>''];
     }
-    
-    
-
-    
-   
-
+     
     
     public function show(KnittedFabInward $knittedFabInward)
     {
         
-    }
-
-     
-   
+    } 
     
     public function update(Request $request)
     {  
