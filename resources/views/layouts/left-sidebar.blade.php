@@ -3,36 +3,23 @@
           
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
-                <ul id="sidebarnav"> 
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-select-inverse"></i><span class="hide-menu">Knitted Fabric</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ url('admin/fabricstock')}}">FABRIC STOCK</a></li>
-                            <li><a href="{{ url('admin/knittedfabric')}}">KNITTED FABRIC INWARD</a></li>
-                            <li><a href="{{ url('admin/cuttingproduction')}}">Cutting Production</a></li>
-                            <li><a href="{{ url('admin/cuttinginward')}}">CUTTING-Inward</a></li>
-                       
-                        </ul>
-                    </li>
-                    
+                <ul id="sidebarnav">  
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li>
-                            <li><a href="{{ url('admin/style')}}">Style</a></li> 
-                            <li><a href="{{ url('admin/accessories')}}">Accessories</a></li>               
-                            <li><a href="{{ url('admin/colour')}}">COLOURS</a></li>
-                            <li><a href="{{ url('admin/fabric')}}">FABRIC</a></li>
-                            <li><a href="{{ url('admin/fabricgroup')}}">FABRIC-GROUP</a></li>
-                            <li><a href="{{ url('admin/count')}}">COUNTS</a></li>
-                            <li><a href="{{ url('admin/unit')}}">Unit</a></li>
-                            <li><a href="{{ url('admin/size')}}">Size</a></li>
-                            <li><a href="{{ url('admin/stockpoint')}}">FABRIC Stock Floor</a></li> 
+                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li> 
                             <li><a href="{{ url('admin/stockpoint')}}">Bank Accounts*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Employee Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Vehicle Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Machinary Details*</a></li>
                             
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                            <i class="mdi mdi-select-inverse"></i><span class="hide-menu">Later</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                             
                         </ul>
                     </li>
                     @admin('super')
