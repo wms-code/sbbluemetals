@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to SB Blue  sethuzzxcgit pus sdasd
+                    Welcome to SB Blue  ggg
                 </div>
 
                
