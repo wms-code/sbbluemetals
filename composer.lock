@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c590ae20b95e520c8bc770470deaba4",
+    "content-hash": "a8302db8723956ef363bc26ee66676ea",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -681,17 +681,20 @@
         },
         {
             "name": "laravelzone/admin",
-            "version": "v0.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravelzone/admin.git",
-                "reference": "95800434f091711a04b1dde10bd06cf935fea8e6"
+                "reference": "767a196a56a05111ce8c538838499a4d65332a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravelzone/admin/zipball/95800434f091711a04b1dde10bd06cf935fea8e6",
-                "reference": "95800434f091711a04b1dde10bd06cf935fea8e6",
+                "url": "https://api.github.com/repos/Laravelzone/admin/zipball/767a196a56a05111ce8c538838499a4d65332a74",
+                "reference": "767a196a56a05111ce8c538838499a4d65332a74",
                 "shasum": ""
+            },
+            "require": {
+                "laravelzone/auth": "@dev"
             },
             "type": "library",
             "extra": {
@@ -712,12 +715,52 @@
             ],
             "authors": [
                 {
-                    "name": "satheesh",
+                    "name": "Satheesh",
                     "email": "satheesh@dreamstudio.in"
                 }
             ],
             "description": "Laravel Admin Package",
-            "time": "2019-02-03T08:54:29+00:00"
+            "time": "2019-11-11T18:17:12+00:00"
+        },
+        {
+            "name": "laravelzone/auth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravelzone/auth.git",
+                "reference": "ec5e649f8a32a481b6ca1f5f3ee3b5207764b393"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravelzone/auth/zipball/ec5e649f8a32a481b6ca1f5f3ee3b5207764b393",
+                "reference": "ec5e649f8a32a481b6ca1f5f3ee3b5207764b393",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "laravelzone\\auth\\AuthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "laravelzone\\auth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Satheesh",
+                    "email": "satheesh@dreamstudio.in"
+                }
+            ],
+            "description": "Laravel Auth Package",
+            "time": "2019-11-11T18:35:04+00:00"
         },
         {
             "name": "league/flysystem",
@@ -4699,7 +4742,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "laravelzone/admin": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

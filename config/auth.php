@@ -36,6 +36,11 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver'   => 'session',
+            'provider' => 'admins',
+        ],
+
         
 
         'admin' => [
@@ -73,6 +78,11 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model'  => App\Admin::class,
+        ],
+
         
 
         'admins' => [
@@ -107,6 +117,12 @@ return [
     */
 
     'passwords' => [
+        'admins' => [
+            'provider' => 'admins',
+            'table'    => 'password_resets',
+            'expire'   => 60,
+        ],
+
         
 
         'admins' => [
