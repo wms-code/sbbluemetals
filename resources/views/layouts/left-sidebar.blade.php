@@ -1,13 +1,27 @@
 <aside class="left-sidebar">
          
           
-            <!-- Sidebar navigation-->
+            <!--Sidebar navigation-->
             <nav class="sidebar-nav">
-                <ul id="sidebarnav">  
+              
+                <ul id="sidebarnav"> 
+                    @admin('super')     
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User Management</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                       
+                        <li><a href="{{ url('admin/show')}}">Admins</a></li>
+                        <li><a href="{{ url('admin/roles')}}">Roles</a></li>
+                    </ul>
+                </li>
+                @endadmin 
                     <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Settings</span></a>
+                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i>
+                            <span class="hide-menu">Master</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li> 
+                            <li><a href="{{ url('admin/companies')}}">Our Company</a></li>   
+                            <li><a href="{{ url('admin/accounts')}}">ACCOUNTS</a></li>                             
+                            <li><a href="{{ url('admin/colour')}}">Items</a></li>   
                             <li><a href="{{ url('admin/stockpoint')}}">Bank Accounts*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Employee Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Vehicle Details*</a></li>
@@ -17,21 +31,13 @@
                     </li>
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                            <i class="mdi mdi-select-inverse"></i><span class="hide-menu">Later</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                             
-                        </ul>
+                            <i class="mdi mdi-select-inverse"></i><span class="hide-menu">Purchase&Sales</span></a>
+                        <ul aria-expanded="false" class="collapse"> 
+                            <li><a href="{{ url('admin/knittedfabric')}}">Purchase</a></li> </ul>
                     </li>
-                    @admin('super')
-                    <li>
-                        <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">User Management</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{ url('admin/companies')}}">COMPANY</a></li>   
-                            <li><a href="{{ url('admin/show')}}">Admins</a></li>
-                            <li><a href="{{ url('admin/roles')}}">Roles</a></li>
-                        </ul>
-                    </li>
-                    @endadmin
+                    
+                    
+                 
 
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Others</span></a>

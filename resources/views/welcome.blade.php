@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to SB Blue  222
+                    Welcome to SB Blue Metals
                 </div>
 
                

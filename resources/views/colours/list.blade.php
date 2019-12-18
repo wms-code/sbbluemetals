@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Colours')
+@section('pagetitle','Item')
     
 
 
@@ -12,7 +12,7 @@
                             <div class="card-block">
                                     <div class="row justify-content-between">
                                             <div class="col-4">
-                                                <h4 class="card-title">Colour Name List </h4>
+                                                <h4 class="card-title">Item Name List </h4>
                                             </div>
                                             <div class="col-6">
                                                     <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/colour/create') }}">Add New</a></div>
@@ -26,7 +26,7 @@
                                         <thead>
                                             <tr>
                                                  
-                                                <th>Colour Name</th>
+                                                <th>Item Name</th>
                                             
                                                 <th class="text-nowrap">Action</th>
                                             </tr>

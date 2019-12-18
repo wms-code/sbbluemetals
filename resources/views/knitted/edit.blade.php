@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Knitted Fabric Inward -Edit')
+@section('pagetitle','Purchase -Edit')
  
 @section('content')               
   <div class="row">
@@ -69,11 +69,8 @@
                                   <thead>
                                     <tr>
                                        <th width="4%">SNo</th>
-                                      <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc</th>
-                                     
-                                      <th width="5%">Rolls</th>
-                                      <th width="10%">Weight</th>
+                                      <th width="10%">Item</th>  
+                                      <th width="10%">Qty</th>
                                       <th width="10%">Rate</th>
                                       <th width="10%">Tax %</th>
                                       <th width="10%">Amount</th>
@@ -101,29 +98,14 @@
                                     @endforeach
                                  </select> 
                                           </td>
-                                        <td>
-                                            <select class="jssingle" id='selfabric{{$i}}' name='selfabric[]'>
-                                                <option value='0'>-- Select Fabric --</option>
-      
-        @foreach($rsfabrics as $department)
-                                                <option value='{{ $department->id }}'
-                                                    {{ $department->id== $details->fabricsid ? 'selected' : ''}}>
-                                                    {{ $department->fabricname }}</option>
-            
-                                                  
-                                                @endforeach
-                                             </select>                       
-                                         
-                                           <input type="hidden" name="hsn[]"  id='hsn_{{$i}}'
+                                          <td> 
+                                           <input type="text" name="hsn[]"  id='hsn_{{$i}}'
                                           value='{{$details->hsn}}' class="form-control" ondrop="return false;" >
-                                        
+                                          </td>
                                            <input type="hidden" name="particulars[]"
                                            value='{{$details->particulars}}'  id="particulars_1" class="form-control" >
                                         </td>
-                                        <td>
-                                          <input type="text"
-                                          value='{{$details->rolls}}'   name="rolls[]" id="rolls_{{$i}}" class="form-control">                                             
-                                        </td>
+                                        
                                         <td>
                                             <input type="text"  value='{{  number_format((float)$details->weight, 3, '.', '') }}' name="qty[]" id="qty_{{$i}}"
                                              class="form-control totalWeight changesNo" 
@@ -166,10 +148,11 @@
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                            <label class="control-label text-left col-md-3"> Total Qty:.</label>
                               <div class="col-md-3">
                                   <input type="text" name="total_weight" readonly class="form-control "
-                                   id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} placeholder="Total Weight" >
+                                   id="total_weight" value={{ number_format((float)$fabrics->total_weight, 3, '.', '') }} 
+                                   placeholder="Total Qty" >
                               </div>
                         </div>
                         <div style="margin-left: 0px;" class="form-group row">
@@ -275,11 +258,9 @@
              
               html = '<tr>';           
               html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
-              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
-              html += '<input type="hidden" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
-              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
-              html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
+              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Item-</option></select></td>'; 
+              html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;"></td>';
+              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>'; 
               html += '<td><input type="text" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
               html += '<td><input type="text" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
               html += '<input type="text" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
@@ -290,7 +271,7 @@
               html += '</tr>';
              
               updatecolour('selcolour'+i);
-              updatefabric('selfabric'+i);
+              
               
               $('#myTable tr:last').after(html);
              // $('table').append(html);

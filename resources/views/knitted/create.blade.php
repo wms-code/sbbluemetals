@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Knitted Fabric Inward ')
+@section('pagetitle','Purchase')
  
 @section('content')               
   <div class="row">
@@ -65,9 +65,8 @@
                                     <tr>
                                       <th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
                                       <th width="4%">SNo</th>
-                                      <th width="10%">Colour</th>
-                                      <th width="10%">Fabirc</th> 
-                                      <th width="5%">Rolls</th>
+                                      <th width="10%">Item</th> 
+                                      <th width="5%">H.S.N</th>
                                       <th width="10%">Qty</th>
                                       <th width="10%">Rate</th>
                                       <th width="10%">Tax %</th>
@@ -82,7 +81,7 @@
                                      
                                         <td>
                                             <select class="jssingle" id='selcolour1' name='selcolour[]'>
-                                                <option value='0'>-- Select Colour --</option>
+                                                <option value='0'>-- Select Item --</option>
                                                   @foreach($rsdepartmentData['colour'] as $department)
                                                 
                                                 <option value='{{ $department->id }}'>{{ $department->name }}</option>
@@ -90,33 +89,11 @@
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td> 
-                                            <select class="jssingle" id='selfabric1' name='selfabric[]'>
-                                                <option value='0'>-- Select Fabric --</option>
-                                              {{ $previousCountry = null}} 
-@foreach($rsfabrics  as $courseCategory) 
-<?php 
-    if ($previousCountry != $courseCategory->fabricgroupname) 
-      {
-          echo "<optgroup label='$courseCategory->fabricgroupname'>";
-      } 
-?>
-  <option value="{{ $courseCategory->id }}">  {{$courseCategory->fabricname }} </option>
-  {{  $previousCountry = $courseCategory->fabricgroupname }}
-    
-  <?php 
-  if ($previousCountry != $courseCategory->fabricgroupname) 
-    {
-    echo '</optgroup>';
-    } 
-?>                                                   
- @endforeach
-</select><br>          <input type="hidden" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
+                                        <td>
+                                                   <input type="text" name="hsn[]" id="hsn_1" class="form-control" ondrop="return false;" >
       <input type="hidden" name="particulars[]" id="particulars_1" class="form-control" >
                                         </td>
-                                        <td>
-                                          <input type="text" name="rolls[]" id="rolls_1" class="form-control">                                             
-                                        </td>
+                                        
                                         <td>
                                             <input type="text" value="" name="qty[]" id="qty_1" class="form-control totalWeight changesNo" 
                                               autocomplete="off" onkeypress="return IsNumeric(event);" >
@@ -155,7 +132,7 @@
                          <br>
                          
                          <div style="margin-left: 0px;" class="form-group row">
-                            <label class="control-label text-left col-md-3"> Total Weight:.</label>
+                            <label class="control-label text-left col-md-3"> Total Qty:.</label>
                               <div class="col-md-3">
                                   <input type="number" name="total_weight" readonly class="form-control"
                                    id="total_weight" placeholder="Total Weight" >
@@ -250,11 +227,9 @@
               html = '<tr>';
               html += '<td><input class="case" type="checkbox"/></td>';
               html += '<td> <INPUT class="form-control" type="text" readonly  id="sno_'+i+'" readonly name="sno[]"/>';
-              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Colour-</option></select></td>';
-              html += '<td><select class="form-control jssingle" id="selfabric'+i+'" name="selfabric[]"><option value="0">- Select Fabric-</option></select>';
-              html += '<input type="hidden" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
-              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';
-              html += '<td><input type="text" name="rolls[]"  id="rolls_'+i+'" class="form-control"></td>';
+              html += '<td><select class="form-control jssingle" id="selcolour'+i+'"  name="selcolour[]"><option value="0">- Select Item-</option></select></td>';
+              html += '<td><input type="text" name="hsn[]" id="hsn_'+i+'" class="form-control" ondrop="return false;">';
+              html += '<input type="hidden" name="particulars[]" id="particulars'+i+'" class="form-control"></td>';              
               html += '<td><input type="text" name="qty[]"  id="qty_'+i+'" class="form-control totalWeight changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"   onpaste="return false;"></td>';           
               html += '<td><input type="text" name="rate[]" id="rate_'+i+'"  class="form-control changesNo" onkeypress="return IsNumeric(event);"ondrop="return false;"  onpaste="return false;"><br>';
               html += '<input type="text" name="perrateamount[]" id="perrateamount_'+i+'" class="form-control totalSubTotal" readonly ></td>';
@@ -265,8 +240,7 @@
               html += '</tr>';
              
               updatecolour('selcolour'+i);
-              updatefabric('selfabric'+i);
-              updaterack('selrack'+i);
+            
               
               $('table').append(html);
               

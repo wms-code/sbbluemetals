@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Colour')
+@section('pagetitle','Items')
     
 
 
@@ -20,7 +20,7 @@
                             @csrf
                             @method('post')
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3">Colour Name</label>
+                                    <label class="control-label text-right col-md-3">Items</label>
                                     <div class="col-md-6">
                                         <input type="text" name="name" maxlength="50" class="form-control">
                                     </div>

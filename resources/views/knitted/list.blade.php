@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Knitted Fabric Inward')
+@section('pagetitle','Purchase')
     
 
 
@@ -12,7 +12,7 @@
                             <div class="card-block">
                                     <div class="row justify-content-between">
                                             <div class="col-4">
-                                                <h4 class="card-title">Knitted Fabric Inward </h4>
+                                                <h4 class="card-title">Purchase</h4>
                                             </div>
                                             <div class="col-6">
                                                     <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/knittedfabric/create') }}">Add New</a></div>
@@ -30,10 +30,9 @@
                                                 <th>Inward Date</th>
                                                 <th>Supplier</th>
                                                 <th>Supplier Ref No</th>
-                                                <th>Total Weight</th>
+                                                <th>Total Qty</th>
                                                 <th>Total Amount</th>
-                                                <th>Remarks</th>
-                                                <th class="text-nowrap">FRN</th>
+                                                <th>Remarks</th> 
                                                 <th class="text-nowrap">Edit</th>
                                             </tr>
                                         </thead>
@@ -45,17 +44,10 @@
                                                 <td>{{$d->inward_date}}</td>
                                                 <td>{{$d->name}}</td>
                                                 <td>{{$d->reference}}</td>
-                                                <td> {{  number_format((float)$d->total_weight, 3, '.', '') }}</td>                                                    
-                                                <td>{{  number_format((float)$d->net_value, 2, '.', '') }}</td>
+                                                <td> {{number_format((float)$d->total_weight, 3, '.', '') }}</td>                                                    
+                                                <td>{{number_format((float)$d->net_value, 2, '.', '') }}</td>
                                                 <td>{{$d->remarks}}</td>
-                                                <td>
-
-                                                        <button type="button" 
-                                                        data-id="{{$d->inwardnumber}}"  
-                                                        data-toggle="modal" data-target="#edit-modal"
-                                                        class="btn btn-success" id="edit-item">Edit FRN 
-                                                    </button>
-                                                </td>
+                                                
                                                         <td class="text-nowrap">
                                                     <a href="{{ url('admin/knittedfabric') }}/{{$d->inwardnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                 
@@ -79,42 +71,7 @@
                         </div>
                     </div>
         </div>
-<!-- Attachment Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="edit-modal-label">Edit Data</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" id="attachment-body-content">
-              <form id="edit-form" class="form-horizontal" method="POST" action="">
-                <div class="card text bg-dark mb-0">
-                   
-                  <div class="card-body">
-                    
-                        <div class="form-group">
-                                <label for="exampleInputEmail1">Entry No</label> 
-                                <input type="text" class="form-control" id="inw_no" name="inw_no" placeholder="Inward Number" >
-                        </div>
-                    <div id="welcome">
-
-                    </div>
-                    
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="#save-item"
-                 onClick="savefrn()"  >Done</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /Attachment Modal -->
+ 
 <script>
       function savefrn()
       {
