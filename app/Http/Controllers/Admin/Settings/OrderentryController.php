@@ -61,7 +61,7 @@ class OrderentryController extends Controller
     }
     private  function getmaxinwardno()
     {
-        $retvalue=Orderenty::max('inwardnumner');
+        $retvalue=Orderentry::max('inwardnumner');
         if ($retvalue === null)
         {
             $retvalue=1;
@@ -76,7 +76,7 @@ class OrderentryController extends Controller
     {
         $order_number = $this->getmax(); 
         $ordernumber = $this->getmaxinwardno();       
-        Cuttingproduction::create(['order_number'=>$order_number,
+        Orderentry::create(['order_number'=>$order_number,
                                     'ordernumber'=> $ordernumber ,
                                     'pty_code'=>$request->pty_code,
                                     'order_date'=>$request->order_date, 
@@ -84,6 +84,7 @@ class OrderentryController extends Controller
                                     'driver_code'=>$request->driver_code,
                                     'vehicle_code'=>$request->vehicle_code,
                                     'jcb_code'=>$request->jcb_code,
+                                    'op_code'=>$request->op_code,
                                     'from_code'=>$request->from_code,
                                     'to_code'=>$request->to_code,
                                     'item_code'=>$request->item_code,
@@ -98,14 +99,16 @@ class OrderentryController extends Controller
     }
     public function create()
     {
-       $rsdepartmentData['production_number'] = $this->getmax(); 
-       $rsdepartmentData['productionnumber'] = $this->getmaxinwardno();        
-       $rsdepartmentData['staff'] = Cuttingproduction::getstaff();
-       $rsdepartmentData['fabrics'] = Fabric::getall();      
-       $rsdepartmentData['style'] = Style::getall();     
-       $rsdepartmentData['colour'] = Colour::getall();      
-       $rsdepartmentData['frn'] = Cuttingproduction::getfrn();           
-       return view('cuttingproduction.create',compact(['rsdepartmentData']));
+       $rsdepartmentData['order_number'] = $this->getmax(); 
+       $rsdepartmentData['ordernumber'] = $this->getmaxinwardno();        
+       $rsdepartmentData['customer'] = Orderentry::getcustomer();
+       $rsdepartmentData['vehicle'] = Orderentry::getvehicle();      
+       $rsdepartmentData['driver'] = Orderentry::getdriver();     
+       $rsdepartmentData['jcb'] = Orderentry::getjcb();      
+       $rsdepartmentData['opeartor'] = Orderentry::getopeartor();
+       $rsdepartmentData['place'] = Orderentry::getplace();
+       $rsdepartmentData['item'] = Orderentry::getitem();           
+       return view('orderentry.create',compact(['rsdepartmentData']));
        
     }
     

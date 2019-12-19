@@ -12,10 +12,10 @@
                             <div class="card-block">
                                     <div class="row justify-content-between">
                                             <div class="col-4">
-                                                <h4 class="card-title">Cutting Program</h4>
+                                                <h4 class="card-title">Order Entry</h4>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/cuttingproduction/create') }}">Add New</a></div>
+                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/orderentry/create') }}">Add New</a></div>
                                                 
                                             </div>
                                           </div>
@@ -26,13 +26,14 @@
                                         <thead>
                                             <tr>
                                                  
-                                                <th>Production Number</th>
-                                                <th>Production Date</th>
-                                                <th>Supervisor</th>
-                                                <th>Style</th>
-                                                <th>Total Pcs</th>                                           
-                                                <th>Remarks</th>   
-                                                <th>Production</th>                                               
+                                                <th>Order Number</th>
+                                                <th>Order Date</th>
+                                                <th>Customer</th>
+                                                <th>Vehicle</th>
+                                                <th>Place</th>
+                                                <th>Total Unit</th> 
+                                                <th>Amount</th>                                           
+                                                                                 
                                                 <th class="text-nowrap">Edit</th>
                                             </tr>
                                         </thead>
@@ -40,24 +41,17 @@
                                             @foreach ($rsdepartmentData['data'] as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->productionnumber}}</td>
-                                                <td>{{$d->production_date}}</td>
-                                                <td>{{$d->accountsname}}</td>
-                                                <td>{{$d->stylename}}</td>
-                                                <td>{{  number_format((float)$d->total_pcs, 0, '.', '') }}</td>
+                                                <td>{{$d->ordernumber}}</td>
+                                                <td>{{$d->order_date}}</td>
+                                                <td>{{$d->partyname}}</td>
+                                                <td>{{$d->vehiclename}}</td>
+                                                <td>{{  number_format((float)$d->total_unit, 0, '.', '') }}</td>
                                                 <td>{{$d->remarks}}</td>
+                                                 
                                                 <td class="text-nowrap">
-                                                         
-                                                           <a href="{{ url('admin/fetchproduction') }}/{{$d->productionnumber}}/edit"
-                                                              data-toggle="tooltip" data-original-title="Edit"> 
-                                                              <i class="fa fa-pencil text-inverse m-r-10"></i> 
-                                                            </a>
-                                                     
-                                                </td>    
-                                                <td class="text-nowrap">
-                                                    <a href="{{ url('admin/cuttingproduction') }}/{{$d->productionnumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/orderentry') }}/{{$d->ordernumber}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
-                                                    <form action="{{ url('admin/cuttingproduction') }}/{{$d->productionnumber}}" method="post">
+                                                    <form action="{{ url('admin/orderentry') }}/{{$d->ordernumber}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                     </form>

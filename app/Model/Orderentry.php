@@ -12,12 +12,12 @@ class Orderentry extends Model
      protected function getall()
     {
       return DB::table('orderentry')
-              ->leftJoin('accounts masparty', 'orderentry.pty_code', '=', 'masparty.id')
+              ->leftJoin('accounts as masparty', 'orderentry.pty_code', '=', 'masparty.id')
               ->leftJoin('item', 'item.id', '=', 'orderentry.item_code')
               ->leftJoin('place', 'place.id', '=', 'orderentry.to_code')
-              ->leftJoin('accounts masvehicle', 'orderentry.vehicle_code', '=', 'masvehicle.id')
+              ->leftJoin('accounts as masvehicle', 'orderentry.vehicle_code', '=', 'masvehicle.id')
               ->select('ordernumber','order_date','total_unit','masparty.name as partyname','amount',
-               'place.name as deliveryplace',
+               'place.name as deliveryplace','masvehicle.name as vehiclename',
                'remarks','item.name as itemname')  
               ->orderBy('ordernumber', 'asc')
               ->orderBy('order_date', 'asc')
@@ -74,7 +74,7 @@ class Orderentry extends Model
    
      }
 
-     protected function getfromplace()
+     protected function getplace()
      {
         $value=DB::table('place') 
          ->select('id','name')  

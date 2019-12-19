@@ -17,7 +17,7 @@
                 <div class="card card-outline-info">
                    
                     <div class="card-body">
-                        <form action="{{ url('admin/cuttingproduction') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/orderentry') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -29,8 +29,8 @@
                                         value ={{ $rsdepartmentData['order_number'] }}
                                         readonly class="form-control">
                                       
-                                        <input type="text" name="orderentry" 
-                                        value ={{ $rsdepartmentData['orderentry'] }}
+                                        <input type="text" name="ordernumber" 
+                                        value ={{ $rsdepartmentData['ordernumber'] }}
                                         readonly  class="form-control">
                                   </div>
                                   <label class="control-label text-left col-md-2">Order Date:.</label>
@@ -79,7 +79,7 @@
                         </div>
                         
                         <div style="margin-left: 0px;" class="form-group row">
-                          <label class="control-label text-left col-md-2"> Load By -JCB </l-Loabel>
+                          <label class="control-label text-left col-md-2"> Load By -JCB </label>
                            
                               <div class="col-md-3"> 
                               <select class="form-control jssingle" id='jcb_code' name='jcb_code'>
@@ -111,7 +111,7 @@
                             <div class="col-md-3"> 
                             <select class="form-control jssingle" id='from_code' name='from_code'>
                                 <option value='0'>-- Select From Place --</option>
-                                @foreach($rsdepartmentData['palce'] as $department)
+                                @foreach($rsdepartmentData['place'] as $department)
                                   <option value='{{ $department->id }}'>{{ $department->name }}</option>
                                 @endforeach
                              </select>
@@ -159,7 +159,7 @@
                         <div style="margin-left: 0px;" class="form-group row">
                           <label class="control-label text-left col-md-3"> Per Unit Rate:.</label>
                             <div class="col-md-3">
-                                <input type="number" name="perunitrate" readonly class="form-control"
+                                <input type="number" name="perunitrate"   class="form-control"
                                  id="perunitrate" placeholder="Per Unit Rate" >
                             </div>
                       </div>

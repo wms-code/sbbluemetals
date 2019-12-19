@@ -64,7 +64,7 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cached"></i><span class="hide-menu">Sales</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Order Entry</a></li>
+                            <li><a href="{{ url('admin/orderentry')}}">Order Entry</a></li>
                             <li><a href="#">Invoice</a></li>
                             <li><a href="#">Excel - Auditor</a></li>  
                             <li><a href="#">Outstanding Report</a></li>                           
