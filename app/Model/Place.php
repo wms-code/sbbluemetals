@@ -4,9 +4,9 @@ namespace App\Model;
 use App\Http\Controllers\Admin;
 use Illuminate\Database\Eloquent\Model;
 
-class Stockpoint extends Model
+class Place extends Model
 {
-    protected $table='stockpoints';
+    protected $table='place';
     protected $guarded=['active'];
 
     protected function getall()

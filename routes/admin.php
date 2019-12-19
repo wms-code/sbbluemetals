@@ -17,7 +17,7 @@ Route::group(['namespace' => 'Admin'], function() {
         Route::resource('fabric', 'FabricController');
         Route::resource('count', 'CountController');
         Route::resource('unit', 'UnitController');
-        Route::resource('stockpoint', 'StockpointController');
+        Route::resource('place', 'PlaceController');
         Route::resource('style', 'StyleController');
         Route::post('size/fetchtable', 'SizeController@fetchtable')->name('size.fetchtable');
         Route::resource('accessories', 'AccessoriesController');
