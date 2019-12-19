@@ -47,6 +47,7 @@
                             <li><a href="{{ url('admin/accounts')}}">Accounts</a></li>                             
                             <li><a href="{{ url('admin/item')}}">Items</a></li>   
                             <li><a href="{{ url('admin/place')}}">Place</a></li>
+                            <li><a href="{{ url('admin/unit')}}">Unit</a></li>   
                             <li><a href="{{ url('admin/stockpoint')}}">Employee Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Vehicle Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Machinary Details*</a></li>
