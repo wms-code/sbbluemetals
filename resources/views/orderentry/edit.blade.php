@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 @endpush
 
-@section('pagetitle','Cutting Program - Edit ')
+@section('pagetitle','Order Entry - Edit ')
   
 @section('content')               
   <div class="row">

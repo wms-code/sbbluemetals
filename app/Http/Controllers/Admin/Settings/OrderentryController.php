@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use Illuminate\Http\Request;  
-use App\Model\Cuttingproduction;
-use App\Model\Cuttingproductiondetail;
-use App\Model\Fabric;
-use App\Model\Colour;
-use App\Model\Stockpoint;
-use App\Model\Style;
-use App\Model\Knittedfabdetails;
+use App\Model\Orderentry;
+use App\Model\place;
+use App\Model\item;
 use App\Http\Controllers\Controller;
 use DB;
-class CuttingproductionController extends Controller
+class OrderentryController extends Controller
 {
     public function __construct()
     {
@@ -20,15 +16,13 @@ class CuttingproductionController extends Controller
     }
     public function index()
     {
-
-        $rsdepartmentData['data'] = Cuttingproduction::getall();
-
-        return view('cuttingproduction.list',compact(['rsdepartmentData']));
+        $rsdepartmentData['data'] = Orderentry::getall();
+        return view('orderentry.list',compact(['rsdepartmentData']));
     }
     private  function getmax()
     {
         $str='000000';$stringlen=0;
-        $retvalue=Cuttingproduction::max('productionnumber');
+        $retvalue=Orderentry::max('ordernumber');
         if ($retvalue === null)
         {
             $retvalue=1;
@@ -67,7 +61,7 @@ class CuttingproductionController extends Controller
     }
     private  function getmaxinwardno()
     {
-        $retvalue=Cuttingproduction::max('productionnumber');
+        $retvalue=Orderenty::max('inwardnumner');
         if ($retvalue === null)
         {
             $retvalue=1;
@@ -80,50 +74,27 @@ class CuttingproductionController extends Controller
     }
     public function store(Request $request)
     {
-        $production_number = $this->getmax(); 
-        $productionnumber = $this->getmaxinwardno();       
-        Cuttingproduction::create(['production_number'=>$production_number,
-                                    'productionnumber'=> $productionnumber ,
-                                    'emp_code'=>$request->emp_code,
-                                    'production_date'=>$request->program_date, 
-                                    'style_code'=>$request->style_code,
-                                    'total_pcs'=>$request->total_pcs,                                   
+        $order_number = $this->getmax(); 
+        $ordernumber = $this->getmaxinwardno();       
+        Cuttingproduction::create(['order_number'=>$order_number,
+                                    'ordernumber'=> $ordernumber ,
+                                    'pty_code'=>$request->pty_code,
+                                    'order_date'=>$request->order_date, 
+                                    'vehicle_code'=>$request->vehicle_code,
+                                    'driver_code'=>$request->driver_code,
+                                    'vehicle_code'=>$request->vehicle_code,
+                                    'jcb_code'=>$request->jcb_code,
+                                    'from_code'=>$request->from_code,
+                                    'to_code'=>$request->to_code,
+                                    'item_code'=>$request->item_code,
+                                    'total_unit'=>$request->total_unit,       
+                                    'perunitrate'=>$request->perunitrate,
+                                    'amount'=>$request->amount,                                   
                                     'remarks'=>$request->remarks ]);
         
-                                    
-        Cuttingproductiondetail::create(['productionnumber'=> $productionnumber ,
-                                    'emp_code'=>$request->emp_code,
-                                    'indx'=>0,
-                                    'production_date'=>$request->program_date, 
-                                    'style_code'=>$request->style_code,
-                                    'size1'=>$request->indxsize1,
-                                    'size2'=>$request->indxsize2,
-                                    'size3'=>$request->indxsize3,
-                                    'size4'=>$request->indxsize4,
-                                    'size5'=>$request->indxsize5,
-                                    'size6'=>$request->indxsize6,
-                                    'size7'=>$request->indxsize7,
-                                    'size8'=>$request->indxsize8,
-                                    'totalpcs'=>$request->total_pcs]);                              
-        Cuttingproductiondetail::create(['productionnumber'=> $productionnumber ,
-                                    'emp_code'=>$request->emp_code,
-                                    'indx'=>1,
-                                    'production_date'=>$request->program_date, 
-                                    'style_code'=>$request->style_code,
-                                    'size1'=>$request->size1,
-                                    'size2'=>$request->size2,
-                                    'size3'=>$request->size3,
-                                    'size4'=>$request->size4,
-                                    'size5'=>$request->size5,
-                                    'size6'=>$request->size6,
-                                    'size7'=>$request->size7,
-                                    'size8'=>$request->size8,
-                                    'totalpcs'=>$request->total_pcs]);                            
-        
-                     
         $msg = [
-          'message' => 'Cutting Production Entry created successfully!' ];
-        return  redirect('admin/cuttingproduction')->with($msg);
+          'message' => 'Order Entry created successfully!' ];
+        return  redirect('admin/orderentry')->with($msg);
     }
     public function create()
     {

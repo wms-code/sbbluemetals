@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('pagetitle','Cutting Program - List')
+@section('pagetitle','Order Entry - List')
     
 
 
