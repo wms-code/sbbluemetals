@@ -31,7 +31,21 @@
                                         <input type="text" name="tamil" maxlength="100" class="form-control">
                                     </div>
                                 </div>
-                                
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Unit</label>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">
+                                            <select class="form-control jssingle" id='unit_code' name='unit_code'>
+                                                <option value='0'>-- Select Unit --</option>
+                                                @foreach($rsdepartmentData['data'] as $department)
+                                                  <option value='{{ $department->id }}'>{{ $department->name }}</option>
+                                                @endforeach
+                                             </select>
+                                          </div> 
+                                    </div>
+                                </div>
+
+                               
                     
                             </div>
                             <div class="form-actions">

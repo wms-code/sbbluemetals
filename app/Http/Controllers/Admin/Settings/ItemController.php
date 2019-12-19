@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin\Settings; 
 use App\Model\Item;
+use DB; 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 class ItemController extends Controller
@@ -18,7 +19,9 @@ class ItemController extends Controller
 
     public function create()
     {
-        return view('item.create');   
+        $rsdepartmentData['data'] = Item::getunit();
+        return view('item.create',compact(['rsdepartmentData']));
+        
     }
 
     public function store(Request $request)
@@ -30,14 +33,26 @@ class ItemController extends Controller
         return  redirect('admin/item')->with($msg);
     }
 
-    public function edit(Item $item)
+    public function edit($id)
     {
-       return  view('item.edit',compact('item'));
+          $id;
+        $rsitem= DB::table('item')  
+             ->leftJoin('units', 'units.id', '=', 'item.unit_code')
+              ->select( 'item.id as itemid','unit_code','item.name as itemname','item.tamil as itemtamil')                  
+               ->where('item.id',$id)
+               ->get(); 
+        $rsdepartmentData['data'] = Item::getunit();
+        return view('item.edit',compact(['rsdepartmentData','rsitem']));
+        
+       //return  view('item.edit',compact('item'));
     }
 
     public function update(Request $request)
     {
-        Item::where('id', $request->id)->update(['name'=>$request->name,'tamil'=>$request->tamil ]);       
+        Item::where('id', $request->id)->update([
+            'name'=>$request->name,
+            'unit_code'=>$request->unit_code,
+            'tamil'=>$request->tamil ]);       
         $msg =['message' => 'Item Updated successfully!'];
         return  redirect('admin/item')->with($msg);
     }

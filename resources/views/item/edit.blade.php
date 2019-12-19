@@ -14,7 +14,9 @@
                     <h4 class="m-b-0 text-white">Edit </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('admin/item') }}/{{ $item->id }}" method="post" class="form-horizontal form-bordered">
+                    @foreach($rsitem as $item)
+                    @endforeach
+                    <form action="{{ url('admin/item') }}/{{ $item->itemid }}" method="post" class="form-horizontal form-bordered">
                         <div class="form-body">
                         <br>
                         @csrf
@@ -22,23 +24,36 @@
                         <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Item ID</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="id" readonly value="{{ $item->id }}" class="form-control">
+                                    <input type="text" name="id" readonly value="{{ $item->itemid }}" class="form-control">
                                    
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Item Name</label>
                                 <div class="col-md-6">                                    
-                                    <input type="text" name="name" maxlength="100" value="{{ $item->name }}" class="form-control">
+                                    <input type="text" name="name" maxlength="100" value="{{ $item->itemname }}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Item Name-Tamil</label>
                                 <div class="col-md-6">                                    
-                                    <input type="text" name="tamil" maxlength="100" value="{{ $item->tamil }}" class="form-control">
+                                    <input type="text" name="tamil" maxlength="100" value="{{ $item->itemtamil }}" class="form-control">
                                 </div>
                             </div>
-                            
+
+                          <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Unit</label>
+                                 <div class="col-md-3">
+                                    <select  class="form-control jssingle" id='unit_code' name='unit_code'>                                        
+                                        @foreach($rsdepartmentData['data'] as $department)
+                                          <option value='{{ $department->id }}'
+                                            {{ $department->id== $item->unit_code ? 'selected' : ''}}>
+                                            {{ $department->name }}</option>
+                                        @endforeach
+                                     </select>
+                                  </div>
+                                  
+                            </div>
                         {{--     <div class="form-group row last">
                                 <label class="control-label text-right col-md-3">Country</label>
                                 <div class="col-md-7">
