@@ -45,7 +45,7 @@
                             <span class="hide-menu">Master</span></a>
                         <ul aria-expanded="false" class="collapse"> 
                             <li><a href="{{ url('admin/accounts')}}">Accounts</a></li>                             
-                            <li><a href="{{ url('admin/colour')}}">Items</a></li>   
+                            <li><a href="{{ url('admin/item')}}">Items</a></li>   
                             <li><a href="{{ url('admin/place')}}">Place</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Employee Details*</a></li>
                             <li><a href="{{ url('admin/stockpoint')}}">Vehicle Details*</a></li>

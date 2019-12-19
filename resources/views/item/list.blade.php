@@ -15,7 +15,7 @@
                                                 <h4 class="card-title">Item Name List </h4>
                                             </div>
                                             <div class="col-6">
-                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/colour/create') }}">Add New</a></div>
+                                                    <div class="float-right"><a class="btn btn-sm  btn-primary" href="{{ url('admin/item/create') }}">Add New</a></div>
                                                 
                                             </div>
                                           </div>
@@ -27,19 +27,21 @@
                                             <tr>
                                                  
                                                 <th>Item Name</th>
+                                                <th>Tamil Name</th>
                                             
                                                 <th class="text-nowrap">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($colours as $d)
+                                            @foreach ($item as $d)
                                             <tr>
                                                 
-                                                <td>{{$d->name}}</td>                                               
+                                                <td>{{$d->name}}</td>  
+                                                <td>{{$d->tamil}}</td>                                               
                                                 <td class="text-nowrap">
-                                                    <a href="{{ url('admin/colour') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                    <a href="{{ url('admin/item') }}/{{$d->id}}/edit" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                     <a href="javascript:void(0);" onclick="$(this).find('form').submit();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i>
-                                                            <form action="{{ url('admin/colour') }}/{{$d->id}}" method="post">
+                                                            <form action="{{ url('admin/item') }}/{{$d->id}}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
@@ -51,7 +53,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $colours->links() }}
+                                    {{ $item->links() }}
                                 </div>
                             </div>
                         </div>

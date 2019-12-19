@@ -13,7 +13,7 @@ Route::group(['namespace' => 'Admin'], function() {
     Route::group(['namespace' => 'Settings'], function() {
         Route::resource('accounts', 'AccountsController');
         Route::put('accounts', 'AccountsController@update');
-        Route::resource('colour', 'ColourController');
+        Route::resource('item', 'ItemController');
         Route::resource('fabric', 'FabricController');
         Route::resource('count', 'CountController');
         Route::resource('unit', 'UnitController');

@@ -14,7 +14,7 @@
                         <h4 class="m-b-0 text-white">New </h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('admin/colour') }}" method="post" class="form-horizontal form-bordered">
+                        <form action="{{ url('admin/item') }}" method="post" class="form-horizontal form-bordered">
                             <div class="form-body">
                             <br>
                             @csrf
@@ -22,7 +22,13 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Items</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="name" maxlength="50" class="form-control">
+                                        <input type="text" name="name" maxlength="100" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Tamil</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="tamil" maxlength="100" class="form-control">
                                     </div>
                                 </div>
                                 
@@ -35,7 +41,7 @@
                                             <div class="offset-sm-3 col-md-7">
                                                
                                                 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                                                <a href="{{ url('admin/colour') }}" class="btn btn-inverse">Cancel</a>
+                                                <a href="{{ url('admin/item') }}" class="btn btn-inverse">Cancel</a>
                                             </div>
                                         </div>
 

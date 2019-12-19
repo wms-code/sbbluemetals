@@ -11,7 +11,7 @@ class Place extends Model
 
     protected function getall()
     {
-        return $this->select('id','name')        
+        return $this->select('id','name','tamil')        
         ->orderBy('name')
         ->get();
     }

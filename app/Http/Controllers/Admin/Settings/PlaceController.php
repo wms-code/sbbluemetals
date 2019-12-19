@@ -36,7 +36,7 @@ class PlaceController extends Controller
 
     public function update(Request $request)
     {
-        Place::where('id', $request->id) ->update(['name'=>$request->name ]);       
+        Place::where('id', $request->id) ->update(['name'=>$request->name,'tamil'=>$request->tamil ]);       
         $msg =['message' => 'Place Updated successfully!'];
          return  redirect('admin/place')->with($msg);
     }
